@@ -1,3 +1,6 @@
+//Luke Valentine
+//Brianna Gaede
+
 package experiment;
 
 public class BoardCell {

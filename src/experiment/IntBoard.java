@@ -1,56 +1,89 @@
+//Luke Valentine
+//Brianna Gaede
+
 package experiment;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public class IntBoard {
-
 	private Map<BoardCell, Set<BoardCell>> adjtMtx1;
-	
-	//BoardCell cells[] = new BoardCell[4]; 
+	public BoardCell cells[][] = new BoardCell[4][4]; 
 	
 	public IntBoard() {
 		super();
-		
-		//hardcode in cells????
-		//[0][1], [1][2], [2][1], [3][0]
-		/*
-		cells[0].column = 0;
-		cells[0].row = 1;
-		
-		cells[0].column = 1;
-		cells[0].row = 2;
-		
-		cells[0].column = 2;
-		cells[0].row = 1;
-		
-		cells[0].column = 3;
-		cells[0].row = 0;
-		*/
+		for (int i = 0; i < 4; i++) {
+			for (int j=0; j < 4; j++) {
+				cells[i][j]=  new BoardCell();
+				cells[i][j].column = i;
+				cells[i][j].column = j;
+			}
+		}
+		calcAdjacencies();
 		
 	}
 	
-	Set<BoardCell> calcAdjacencies() {
-		//for (int i = 0; i < cells.size())
-		return null;
+	public void calcAdjacencies() {
+		//check each cell and add valid adjacent cells to the adjmtx
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+			BoardCell cell = cells[i][j];
+			Set<BoardCell> adjSet = null;
+			if (cell.row + 1 < 4) {
+				//BoardCell cell1 = new BoardCell();
+				cell.row += 1;
+				adjSet.add(cell);
+			}
+			else if(cell.row - 1 >= 0) {
+				//BoardCell cell1 = new BoardCell();
+				cell.row -= 1;
+				adjSet.add(cell);
+			}
+			else if(cell.column + 1 < 4) {
+				//BoardCell cell1 = new BoardCell();
+				cell.column += 1;
+				adjSet.add(cell);
+			}
+			else if(cell.column - 1 > 4) {
+				//BoardCell cell1 = new BoardCell();
+				cell.column -= 1;
+				adjSet.add(cell);
+				}
+			adjtMtx1.put(cell,adjSet);
+		}
+		}
 	}
 	
 	public BoardCell getCell(int i, int j) {
-		return null;
-		
-	}
-
-	Set<BoardCell> getAdjList() {
-		return null;
+		return cells[i][j];
 		
 	}
 	
 	public Set<BoardCell> getAdjList(BoardCell cell) {
-		return null;
+		return adjtMtx1.get(cell);
 	}
 	
-	public void calcTargets(BoardCell startCell, int pathLength) {
-		
+	public Set<BoardCell> calcTargets(BoardCell startCell, int pathLength) {
+		Set<BoardCell> targets = null;
+		for(BoardCell cell: adjtMtx1.get(startCell)) {
+			Set<BoardCell> visited = null;
+			targets.add(findAllTargets(startCell,pathLength,visited));
+		}
+		return targets;
+	}
+	
+	public BoardCell findAllTargets(BoardCell curr, int numSteps, Set<BoardCell> visited) {
+		for (BoardCell cell: adjtMtx1.get(curr)) {
+			if (visited.contains(curr)) {
+				continue;
+			}
+			else if(numSteps == 1) {
+					return cell;
+				}
+					return(findAllTargets(cell, numSteps-1, visited));		
+		}
+		return null;
 	}
 	
 	public Set<BoardCell> getTargets() {
