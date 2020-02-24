@@ -1,19 +1,20 @@
-package tests;
+package experiment;
 
 import java.util.Map;
 import java.util.Set;
-
-import experiment.BoardCell;
 
 public class IntBoard {
 
 	private Map<BoardCell, Set<BoardCell>> adjtMtx1;
 	
+	//BoardCell cells[] = new BoardCell[4]; 
+	
 	public IntBoard() {
 		super();
-		BoardCell cells[] = new BoardCell[4]; 
+		
 		//hardcode in cells????
 		//[0][1], [1][2], [2][1], [3][0]
+		/*
 		cells[0].column = 0;
 		cells[0].row = 1;
 		
@@ -25,22 +26,35 @@ public class IntBoard {
 		
 		cells[0].column = 3;
 		cells[0].row = 0;
+		*/
 		
 	}
 	
-	void calcAdjacencies() {
-		
-	}
-	
-	BoardCell getAdjList(BoardCell cell) {
+	Set<BoardCell> calcAdjacencies() {
+		//for (int i = 0; i < cells.size())
 		return null;
 	}
 	
-	void calcTargets(BoardCell startCell, int pathLength) {
+	public BoardCell getCell(int i, int j) {
+		return null;
+		
+	}
+
+	Set<BoardCell> getAdjList() {
+		return null;
 		
 	}
 	
-	void getTargets() {
+	public Set<BoardCell> getAdjList(BoardCell cell) {
+		return null;
+	}
+	
+	public void calcTargets(BoardCell startCell, int pathLength) {
+		
+	}
+	
+	public Set<BoardCell> getTargets() {
+		return null;
 		
 	}
 
