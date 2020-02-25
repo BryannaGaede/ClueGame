@@ -1,0 +1,29 @@
+commit 1bcd6eccea32f6934bd97310510207bbc62e91b8
+Author: Luke Valentine <lukevalentine@csm-wl-dhcp-199-64.mines.edu>
+Date:   Mon Feb 24 14:52:01 2020 -0700
+
+    I want these tests to pass
+
+commit b3c677fb79429707b22ed932d6e0c69b84abcdb8
+Author: Luke Valentine <lukevalentine@csm-wl-dhcp-199-64.mines.edu>
+Date:   Mon Feb 24 14:51:21 2020 -0700
+
+    I want these tests to pass
+
+commit 8baa42950c6c4af28bd3ea9537803d3a155fd7f9
+Author: Luke Valentine <lukevalentine@csm-wl-dhcp-199-64.mines.edu>
+Date:   Mon Feb 24 12:15:03 2020 -0700
+
+    All tests failing
+
+commit 725e7a05c3518a561101bdc26afb12b2033ec937
+Author: Luke Valentine <lukevalentine@csm-wl-dhcp-199-64.mines.edu>
+Date:   Mon Feb 24 11:30:35 2020 -0700
+
+    Hello
+
+commit ca087f8433be8ce15df7516428c299b84b3182a8
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Mon Feb 24 11:00:02 2020 -0700
+
+    first commit

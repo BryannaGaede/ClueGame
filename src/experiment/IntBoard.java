@@ -3,91 +3,115 @@
 
 package experiment;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public class IntBoard {
-	private Map<BoardCell, Set<BoardCell>> adjtMtx1;
-	public BoardCell cells[][] = new BoardCell[4][4]; 
-	
+	private Map<BoardCell, Set<BoardCell>> adjtMtx1 = new HashMap<>();
+	private BoardCell cells[][] = new BoardCell[4][4]; 
+	HashSet<BoardCell> targets = new HashSet<BoardCell>();
+	HashSet<BoardCell> visited = new HashSet<BoardCell>();
+	protected int num_rows = 4;
+	protected int num_columns = 4;
+
 	public IntBoard() {
 		super();
+		//creating the cells
 		for (int i = 0; i < 4; i++) {
-			for (int j=0; j < 4; j++) {
+			for (int j= 0; j < 4; j++) {
 				cells[i][j]=  new BoardCell();
-				cells[i][j].column = i;
+				cells[i][j].row = i;
 				cells[i][j].column = j;
 			}
 		}
+		//call the calc adj once and then get them 
 		calcAdjacencies();
-		
 	}
 	
+	@Override
+	public String toString() {
+		return "IntBoard [adjtMtx1=" + adjtMtx1 + ", cells=" + Arrays.toString(cells) + ", targets=" + targets + "]";
+	}
+
 	public void calcAdjacencies() {
-		//check each cell and add valid adjacent cells to the adjmtx
-		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j < 4; j++) {
-			BoardCell cell = cells[i][j];
-			Set<BoardCell> adjSet = null;
-			if (cell.row + 1 < 4) {
-				//BoardCell cell1 = new BoardCell();
-				cell.row += 1;
-				adjSet.add(cell);
-			}
-			else if(cell.row - 1 >= 0) {
-				//BoardCell cell1 = new BoardCell();
-				cell.row -= 1;
-				adjSet.add(cell);
-			}
-			else if(cell.column + 1 < 4) {
-				//BoardCell cell1 = new BoardCell();
-				cell.column += 1;
-				adjSet.add(cell);
-			}
-			else if(cell.column - 1 > 4) {
-				//BoardCell cell1 = new BoardCell();
-				cell.column -= 1;
-				adjSet.add(cell);
+		for (int i = 0; i < num_rows; i++) {
+			for (int j = 0; j < num_columns; j++) {
+				HashSet<BoardCell> adjSet = new HashSet<BoardCell>();
+				//up
+				if (i > 0) {
+					adjSet.add(cells[i-1][j]);
 				}
-			adjtMtx1.put(cell,adjSet);
-		}
+				//down
+				if (num_columns-1 > i) {
+					adjSet.add(cells[i+1][j]);
+				}
+				//right
+				if (j < num_rows-1) {
+					adjSet.add(cells[i][j+1]);
+				}
+				//left
+				if (j >0) {
+					adjSet.add(cells[i][j-1]);
+				}
+				//push the adj list and corresponding cell to map
+				adjtMtx1.put(getCell(i, j), adjSet);
+			}
 		}
 	}
 	
 	public BoardCell getCell(int i, int j) {
+		//return the corresponding2D array
 		return cells[i][j];
-		
 	}
 	
 	public Set<BoardCell> getAdjList(BoardCell cell) {
+		//get the corresponding adjList (to the given cell)
 		return adjtMtx1.get(cell);
 	}
 	
-	public Set<BoardCell> calcTargets(BoardCell startCell, int pathLength) {
-		Set<BoardCell> targets = null;
-		for(BoardCell cell: adjtMtx1.get(startCell)) {
-			Set<BoardCell> visited = null;
-			targets.add(findAllTargets(startCell,pathLength,visited));
-		}
-		return targets;
+	public HashSet<BoardCell> calcTargets(BoardCell startCell, int pathLength) {
+		//create new hashset
+		HashSet<BoardCell> c= new HashSet<BoardCell>();
+		//clear the old one
+		targets.clear();
+		//remove the startCell if it exists (illegal move)
+		c = findAllTargets(startCell, pathLength);
+		c.remove(startCell);
+		return (c);
 	}
 	
-	public BoardCell findAllTargets(BoardCell curr, int numSteps, Set<BoardCell> visited) {
-		for (BoardCell cell: adjtMtx1.get(curr)) {
-			if (visited.contains(curr)) {
+	public HashSet<BoardCell> findAllTargets(BoardCell curr, int numSteps) {
+		visited.clear();
+		//go through every adj cell
+		for (BoardCell b : getAdjList(curr)) {
+			//if visited loop
+			if (visited.contains(b)) {
 				continue;
 			}
-			else if(numSteps == 1) {
-					return cell;
-				}
-					return(findAllTargets(cell, numSteps-1, visited));		
+			//add to visited
+			visited.add(b);
+			//if numsteps are 1 we have reached are target
+			if (numSteps == 1) {
+				targets.add(b);
+			}
+			//else call recursive
+			else {
+				findAllTargets(b, numSteps-1);
+			}
+			visited.remove(b);
 		}
-		return null;
+		//return them targets
+		return(targets);
 	}
 	
 	public Set<BoardCell> getTargets() {
-		return null;
+		return targets;
 		
 	}
 
