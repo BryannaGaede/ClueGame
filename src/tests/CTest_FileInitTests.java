@@ -64,6 +64,8 @@ public class CTest_FileInitTests {
 	// These cells are white on the planning spreadsheet
 	@Test
 	public void FourDoorDirections() {
+		
+		//checking room 
 		BoardCell room = board.getCellAt(4, 3);
 		assertTrue(room.isDoorway());
 		assertEquals(DoorDirection.RIGHT, room.getDoorDirection());

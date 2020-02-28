@@ -1,0 +1,6 @@
+We tested the correct entries to room E, A, H, C, and tested that the cells that weren't doors
+are not recognized as doors. We also tested that walkways are not recognized as doors. This should ensure
+the subtleties in the enumeration definitions.  We also tested the walkways/closets/rooms. Making sure to test
+edges to ensure that functions work properly. Additionally testing the last/first cell was used to ensure
+accurate functions. We selected cells by thinking about the most challenging pieces of the functions searching
+for cells. Telling between doorway/walkway/closet, edges, different characters, and door directions.
