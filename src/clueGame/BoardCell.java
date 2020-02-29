@@ -6,7 +6,16 @@ package clueGame;
 public class BoardCell  {
 	private int row;
 	private int column;
+	public String Initial;
 	private DoorDirection doorDirection;
+	
+	public String getInitial() {
+		return Initial;
+	}
+	public void setInitial(String letter) {
+		this.Initial = letter;
+	}
+
 	public int getRow() {
 		return row;
 	}
@@ -36,24 +45,36 @@ public class BoardCell  {
 		}
 		public int getCol() {
 			return y;
-		}
-		
+		}	
 	};
 	
+	
 	public boolean isDoorway() {
+		if (Initial.length() == 2) {
+			if (Initial.charAt(1) == 'U')
+				doorDirection = DoorDirection.UP;
+			else if (Initial.charAt(1) == 'D')
+				doorDirection = DoorDirection.DOWN;
+			else if (Initial.charAt(1) == 'R')
+				doorDirection = DoorDirection.RIGHT;
+			else if (Initial.charAt(1) == 'L')
+				doorDirection = DoorDirection.LEFT;
+			else
+				doorDirection = DoorDirection.NONE;
+		}
+		System.out.println(doorDirection);
 		if (doorDirection == DoorDirection.NONE)
 			return false;
 		else
 			return true;
 	}
+	
+	
 	public Object getDoorDirection() {
 		
 		return (doorDirection);
 	}
-	public Object getInitial() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 	
 
 	

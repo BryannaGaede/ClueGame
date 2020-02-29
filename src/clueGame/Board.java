@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
@@ -13,18 +15,21 @@ import java.util.Set;
 import clueGame.BoardCell;
 
 public class Board {
-	private int numRows;
-	private int numColumns;
-	private BoardCell cells[][] = new BoardCell[numRows][numColumns]; 
+	private Map<BoardCell, Set<BoardCell>> adjtMtx1 = new HashMap<>();
+	HashSet<BoardCell> targets = new HashSet<BoardCell>();
+	HashSet<BoardCell> visited = new HashSet<BoardCell>();
+	
+	private int numRows = 23;
+	private int numColumns = 24;
+	public BoardCell cells[][] = new BoardCell[numRows][numColumns]; 
 	
 	public final int MAX_BOARD_SIZE = 25;
 	private BoardCell[][] board;
 	
-	//private Map<Character, String> rooms;
 	private Map<Character,String> legend;
 	
 	private Map<BoardCell,Set<BoardCell>> adjMatrix;
-	private Set<BoardCell> targets;
+
 	private String boardConfigFile;
 	private String roomConfigFile;
 	
@@ -40,58 +45,48 @@ public class Board {
 	
 	
 	public void initialize() {
+		//creating the cells
+		for (int i = 0; i < 4; i++) {
+			for (int j= 0; j < 4; j++) {
+				cells[i][j]=  new BoardCell();
+				cells[i][j].setRow(i);
+				cells[i][j].setColumn(j);
+			}
+		}
+		//call the calc adj once and then get them 
+		calcAdjacencies();
 		
 	}
 	
+	
+	
 	//needs to get changed
 	public void loadRoomConfig(String legend_txt) throws IOException {
-		
+		//initialize();
 		
 		//BufferedReader br = null;
         String line = "";
-        String cvsSplitBy = ",";
-
-        
+        String cvsSplitBy = ", ";
+        String[] csv_line;
+        legend = new HashMap<Character, String>();
         
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(legend_txt), "UTF-8"))) {
             while ((line = br.readLine()) != null) {
                 // use comma as separator
-                String[] csv_line = line.split(cvsSplitBy);
-                System.out.println(csv_line[0].charAt(0));
-                System.out.println(csv_line[1]);
-                legend.put(csv_line[0].charAt(0), csv_line[1]);
-            }
-            if (line == null) {
-            	System.out.println("why?");
+            	//System.out.println(line);
+            	
+                csv_line = line.split(cvsSplitBy);
+                
+                //System.out.println(csv_line[0].charAt(0));
+                //System.out.println(csv_line[1]);
+                char x = csv_line[0].charAt(0);
+                legend.put(x, csv_line[1]);
             }
         }
             catch (IOException e) {
                 e.printStackTrace();
             } 
 	}
-      
-           
-            
-		/*FileReader legRead = new FileReader(legend_txt);
-		Scanner legIn = new Scanner(legRead);
-		String line;
-		// While the file has another line...
-		while (legIn.hasNextLine()) {
-			line = legIn.nextLine();
-			char c = line.charAt(0);
-			String s = line.substring(3);
-			
-			// Checks to make sure that the legend file is correctly formatted
-			
-			//if (!(Character.isLetter(c) && line.charAt(1) == ',' && line.charAt(2) == ' ') || s.indexOf(',') >= 0) {
-			//	System.out.println("Error in the legend file.");
-			//}
-			
-			// Puts the character of the room and the name of the room in the Map containing all the rooms
-			legend.put(c, s);
-		}
-	}*/
-	
 	
 	public void loadBoardConfig(String layout) throws FileNotFoundException {
 		FileReader layRead = new FileReader(layout);
@@ -110,10 +105,10 @@ public class Board {
 					continue;
 				String s = line.charAt(i)+"";
 				// Throws an error if there is not a room at the next character
-				/*if (rooms.get(line.charAt(i)) == null) {
-					logger.write("Error in the legend file.");
-					throw new BadConfigFormatException("Error in the layout file.");
-				}*/
+				if (legend.get(line.charAt(i)) == null) {
+					System.out.println("Error in the legend file.");
+					
+				}
 				// Accounts for multiple characters (doorways)
 				if (i+1 < line.length() && line.charAt(i+1) != ',') {
 					s += line.charAt(i+1);
@@ -122,20 +117,20 @@ public class Board {
 				// creates a new boardcell at that row and col with the string s that contains
 				// either a room character, a walkway character, or a doorway
 				//BoardCell temp = createBoardCell(row,col,s);
-				BoardCell temp = new BoardCell();
-				temp.setRow(row);
-				temp.setColumn(col);
-				cells[temp.getRow()][temp.getColumn()] = temp;
-				//cells.add(createBoardCell(row,col,s));
-				//cells.get(calcIndex(row, col)).setRow(row);
-				//cells.get(calcIndex(row, col)).setCol(col);
+				cells[row][col] = new BoardCell();
+				cells[row][col].setRow(row);
+				cells[row][col].setColumn(col);
+				cells[row][col].setInitial(s);
+				System.out.println(s + " " +cells[row][col].getInitial() +
+				cells[row][col].getRow()+
+				cells[row][col].getColumn());
+				
 				col++;
 			}
 			// Throws an error if the columns are not all the same size
-			/*if (prevCol >= 0 && prevCol != col) {
-				logger.write("Error in the legend file.");
-				throw new BadConfigFormatException("Error in the layout file.");
-			}*/
+			if (prevCol >= 0 && prevCol != col) {
+				System.out.println("Error in the legend file.");
+			}
 			prevCol = col;
 			row++;
 		}
@@ -150,22 +145,79 @@ public class Board {
 	}
 	
 	public void calcAdjacencies() {
-		
+		for (int i = 0; i < numRows; i++) {
+			for (int j = 0; j < numColumns; j++) {
+				HashSet<BoardCell> adjSet = new HashSet<BoardCell>();
+				//up
+				if (i > 0) {
+					adjSet.add(cells[i-1][j]);
+				}
+				//down
+				if (numColumns-1 > i) {
+					adjSet.add(cells[i+1][j]);
+				}
+				//right
+				if (j < numRows-1) {
+					adjSet.add(cells[i][j+1]);
+				}
+				//left
+				if (j >0) {
+					adjSet.add(cells[i][j-1]);
+				}
+				//push the adj list and corresponding cell to map
+				adjtMtx1.put(getCellAt(i, j), adjSet);
+			}
+		}
 	}
-	public void calcTargets(BoardCell cell, int pathLength) {
-		
+	public HashSet<BoardCell> calcTargets(BoardCell startCell, int pathLength) {
+		//create new hashset
+				HashSet<BoardCell> c= new HashSet<BoardCell>();
+				//clear the old one
+				targets.clear();
+				//remove the startCell if it exists (illegal move)
+				c = findAllTargets(startCell, pathLength);
+				c.remove(startCell);
+				return (c);
 	}
+			
+	public HashSet<BoardCell> findAllTargets(BoardCell curr, int numSteps) {
+		visited.clear();
+		//go through every adj cell
+				for (BoardCell b : getAdjList(curr)) {
+					//if visited loop
+					if (visited.contains(b)) {
+						continue;
+					}
+					//add to visited
+					visited.add(b);
+					//if numsteps are 1 we have reached are target
+					if (numSteps == 1) {
+						targets.add(b);
+					}
+					//else call recursive
+					else {
+						findAllTargets(b, numSteps-1);
+					}
+					visited.remove(b);
+				}
+				//return them targets
+				return(targets);
+			}
+			
 	public void setConfigFiles(String string, String string2) throws IOException {
 		try {
-			loadRoomConfig(string);
-			loadBoardConfig(string2);
+			loadRoomConfig(string2); //csv
+			loadBoardConfig(string);  //text
 			
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
 			
 		}
 	}
-
+	public Set<BoardCell> getAdjList(BoardCell cell) {
+		//get the corresponding adjList (to the given cell)
+		return adjtMtx1.get(cell);
+	}
 	
 	//getters and setters
 	public int getNumRows() {
@@ -201,9 +253,7 @@ public class Board {
 	public Set<BoardCell> getTargets() {
 		return targets;
 	}
-	public void setTargets(Set<BoardCell> targets) {
-		this.targets = targets;
-	}
+	
 	public String getBoardConfigFile() {
 		return boardConfigFile;
 	}

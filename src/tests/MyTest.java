@@ -2,6 +2,7 @@ package tests;
 
 import static org.junit.Assert.*;
 
+
 import java.io.IOException;
 import java.util.Map;
 
@@ -11,7 +12,7 @@ import org.junit.Test;
 
 import clueGame.Board;
 import clueGame.BoardCell;
-import clueGame.DoorDirection;
+import clueGame.BoardCell.DoorDirection;
 
 public class MyTest {
 

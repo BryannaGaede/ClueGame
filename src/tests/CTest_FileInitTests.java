@@ -17,7 +17,8 @@ import org.junit.Test;
 
 import clueGame.Board;
 import clueGame.BoardCell;
-import clueGame.DoorDirection;
+import clueGame.BoardCell.DoorDirection;
+
 
 public class CTest_FileInitTests {
 	// Constants that I will use to test whether the file was loaded correctly
@@ -34,7 +35,7 @@ public class CTest_FileInitTests {
 		// Board is singleton, get the only instance
 		board = Board.getInstance();
 		// set the file names to use my config files
-		board.setConfigFiles("/Users/lukevalentine/eclipse-workspace/ClueGame/src/CTest_ClueLayout.csv", "Users/lukevalentine/eclipse-workspace/ClueGame/src/CTest_ClueLegend.txt");		
+		board.setConfigFiles("/Users/lukevalentine/eclipse-workspace/ClueGame/src/CTest_ClueLayout.csv", "/Users/lukevalentine/eclipse-workspace/ClueGame/src/CTest_ClueLegend.txt");		
 		// Initialize will load BOTH config files 
 		board.initialize();
 	}
@@ -44,7 +45,7 @@ public class CTest_FileInitTests {
 		Map<Character, String> legend = board.getLegend();
 		// Ensure we read the correct number of rooms
 		
-		System.out.println(legend.size());
+		//System.out.println(legend.size());
 		
 		assertEquals(LEGEND_SIZE, legend.size());
 		// To ensure data is correctly loaded, test retrieving a few rooms 
@@ -102,13 +103,16 @@ public class CTest_FileInitTests {
 				if (cell.isDoorway())
 					numDoors++;
 			}
+		System.out.println(numDoors);
 		Assert.assertEquals(16, numDoors);
 	}
+	
 
 	// Test a few room cells to ensure the room initial is correct.
 	@Test
 	public void testRoomInitials() {
 		// Test first cell in room
+		System.out.println(board.getCellAt(0, 0).getInitial());
 		assertEquals('C', board.getCellAt(0, 0).getInitial());
 		assertEquals('R', board.getCellAt(4, 8).getInitial());
 		assertEquals('B', board.getCellAt(9, 0).getInitial());
