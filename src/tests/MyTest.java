@@ -2,6 +2,7 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
 import java.util.Map;
 
 import org.junit.Assert;
@@ -10,6 +11,7 @@ import org.junit.Test;
 
 import clueGame.Board;
 import clueGame.BoardCell;
+import clueGame.DoorDirection;
 
 public class MyTest {
 
@@ -23,11 +25,11 @@ public class MyTest {
 	private static Board board;
 	
 	@BeforeClass
-	public static void setUp() {
+	public static void setUp() throws IOException {
 		// Board is singleton, get the only instance
 		board = Board.getInstance();
 		// set the file names to use my config files
-		board.setConfigFiles("CLUE_BOARD.csv", "ClueRooms.txt");		
+		board.setConfigFiles("/Users/lukevalentine/eclipse-workspace/ClueGame/CLUE_BOARD.csv", "/Users/lukevalentine/eclipse-workspace/ClueGame/ClueRooms.txt");		
 		// Initialize will load BOTH config files 
 		board.initialize();
 	}
@@ -47,7 +49,7 @@ public class MyTest {
 		assertEquals("Coolbuagh", legend.get('C'));
 		assertEquals("Dungeon", legend.get('D'));
 		assertEquals("Stariway", legend.get('S'));
-		ssertEquals("Berthoud", legend.get('B'));
+		assertEquals("Berthoud", legend.get('B'));
 	}
 	
 	@Test

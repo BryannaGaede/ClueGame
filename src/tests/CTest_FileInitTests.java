@@ -8,6 +8,7 @@ package tests;
 // Assert.assertEquals
 import static org.junit.Assert.*;
 
+import java.io.IOException;
 import java.util.Map;
 
 import org.junit.Assert;
@@ -29,11 +30,11 @@ public class CTest_FileInitTests {
 	private static Board board;
 	
 	@BeforeClass
-	public static void setUp() {
+	public static void setUp() throws IOException {
 		// Board is singleton, get the only instance
 		board = Board.getInstance();
 		// set the file names to use my config files
-		board.setConfigFiles("CTest_ClueLayout.csv", "CTest_ClueLegend.txt");		
+		board.setConfigFiles("/Users/lukevalentine/eclipse-workspace/ClueGame/src/CTest_ClueLayout.csv", "Users/lukevalentine/eclipse-workspace/ClueGame/src/CTest_ClueLegend.txt");		
 		// Initialize will load BOTH config files 
 		board.initialize();
 	}
@@ -42,6 +43,9 @@ public class CTest_FileInitTests {
 		// Get the map of initial => room 
 		Map<Character, String> legend = board.getLegend();
 		// Ensure we read the correct number of rooms
+		
+		System.out.println(legend.size());
+		
 		assertEquals(LEGEND_SIZE, legend.size());
 		// To ensure data is correctly loaded, test retrieving a few rooms 
 		// from the hash, including the first and last in the file and a few others
@@ -59,14 +63,14 @@ public class CTest_FileInitTests {
 		assertEquals(NUM_COLUMNS, board.getNumColumns());		
 	}
 	
-	// Test a doorway in each direction (RIGHT/LEFT/UP/DOWN), plus 
+	// Test a doorwa y in each direction (RIGHT/LEFT/UP/DOWN), plus 
 	// two cells that are not a doorway.
 	// These cells are white on the planning spreadsheet
 	@Test
 	public void FourDoorDirections() {
 		
 		//checking room 
-		BoardCell room = board.getCellAt(4, 3);
+		clueGame.BoardCell room = board.getCellAt(4, 3);
 		assertTrue(room.isDoorway());
 		assertEquals(DoorDirection.RIGHT, room.getDoorDirection());
 		room = board.getCellAt(4, 8);

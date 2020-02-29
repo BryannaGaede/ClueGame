@@ -2,9 +2,9 @@ A, Auditorium, Card
 F, Closet, Card
 E, Elevator, Card
 G, Garage, Card
-H, Hill Hall, Card
-M, Mines Market, Card
-C, Coolbuagh 209, Card
+H, Hill, Card
+M, Mines, Card
+C, Coolbuagh, Card
 D, Dungeon, Card
 S, Stairway, Card
 B, Berthoud, Card

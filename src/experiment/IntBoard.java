@@ -26,8 +26,8 @@ public class IntBoard {
 		for (int i = 0; i < 4; i++) {
 			for (int j= 0; j < 4; j++) {
 				cells[i][j]=  new BoardCell();
-				cells[i][j].row = i;
-				cells[i][j].column = j;
+				cells[i][j].setRow(i);
+				cells[i][j].setColumn(j);
 			}
 		}
 		//call the calc adj once and then get them 
