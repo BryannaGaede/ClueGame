@@ -103,7 +103,7 @@ public class CTest_FileInitTests {
 				if (cell.isDoorway())
 					numDoors++;
 			}
-		System.out.println(numDoors);
+		//System.out.println(numDoors);
 		Assert.assertEquals(16, numDoors);
 	}
 	

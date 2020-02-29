@@ -48,9 +48,9 @@ public class Board {
 		//creating the cells
 		for (int i = 0; i < 4; i++) {
 			for (int j= 0; j < 4; j++) {
-				cells[i][j]=  new BoardCell();
-				cells[i][j].setRow(i);
-				cells[i][j].setColumn(j);
+				cells[i][j]=  new BoardCell(i,j, "");
+				//cells[i][j].setRow(i);
+				//cells[i][j].setColumn(j);
 			}
 		}
 		//call the calc adj once and then get them 
@@ -117,13 +117,11 @@ public class Board {
 				// creates a new boardcell at that row and col with the string s that contains
 				// either a room character, a walkway character, or a doorway
 				//BoardCell temp = createBoardCell(row,col,s);
-				cells[row][col] = new BoardCell();
-				cells[row][col].setRow(row);
-				cells[row][col].setColumn(col);
-				cells[row][col].setInitial(s);
-				System.out.println(s + " " +cells[row][col].getInitial() +
-				cells[row][col].getRow()+
-				cells[row][col].getColumn());
+				cells[row][col] = new BoardCell(row, col, s);
+				//cells[row][col].setRow(row);
+				///cells[row][col].setColumn(col);
+				//cells[row][col].setInitial(s);
+				//System.out.println(s + " " +cells[row][col].getInitial() +cells[row][col].getRow()+cells[row][col].getColumn());
 				
 				col++;
 			}
