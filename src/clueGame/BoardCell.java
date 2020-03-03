@@ -3,15 +3,19 @@
 
 package clueGame;
 
-public class BoardCell  {
+public class BoardCell {
 	private int row;
 	private int column;
 	private  String Initial;
 	private DoorDirection doorDirection;
 	
-	public String getInitial() {
+	public char getInitial() {
+		return Initial.charAt(0);
+	}
+	public String getInitialFull() {
 		return Initial;
 	}
+	
 	public void setInitial(String letter) {
 		this.Initial = new String();
 		this.Initial = letter;
@@ -34,20 +38,23 @@ public class BoardCell  {
 		super();
 		this.row = row;
 		this.column = column;
-		Initial = initial;
-		if (Initial.length() == 2) {
-			if (Initial.charAt(1) == 'U')
+		this.Initial = initial;
+		
+		if (getInitialFull().length() == 2) {
+			if (getInitialFull().charAt(1) == 'U')
 				doorDirection = DoorDirection.UP;
-			else if (Initial.charAt(1) == 'D')
+			else if (getInitialFull().charAt(1) == 'D')
 				doorDirection = DoorDirection.DOWN;
-			else if (Initial.charAt(1) == 'R')
+			else if (getInitialFull().charAt(1) == 'R')
 				doorDirection = DoorDirection.RIGHT;
 			else if (Initial.charAt(1) == 'L')
 				doorDirection = DoorDirection.LEFT;
 			else
 				doorDirection = DoorDirection.NONE;
 		}
+		
 	}
+	
 
 	public static enum DoorDirection {
 

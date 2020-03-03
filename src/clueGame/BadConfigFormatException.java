@@ -5,7 +5,7 @@ public class BadConfigFormatException {
 	private String message;
 	
 	public BadConfigFormatException(String s) {
-		message = s;
+		message = "BadConfig FromatException";
 	}
 
 }

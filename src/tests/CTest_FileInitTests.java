@@ -35,7 +35,7 @@ public class CTest_FileInitTests {
 		// Board is singleton, get the only instance
 		board = Board.getInstance();
 		// set the file names to use my config files
-		board.setConfigFiles("/Users/lukevalentine/eclipse-workspace/ClueGame/src/CTest_ClueLayout.csv", "/Users/lukevalentine/eclipse-workspace/ClueGame/src/CTest_ClueLegend.txt");		
+		board.setConfigFiles("src/CTest_ClueLayout.csv", "src/CTest_ClueLegend.txt");		
 		// Initialize will load BOTH config files 
 		board.initialize();
 	}
@@ -112,8 +112,12 @@ public class CTest_FileInitTests {
 	@Test
 	public void testRoomInitials() {
 		// Test first cell in room
+		System.out.println("XXXXXX");
+		
 		System.out.println(board.getCellAt(0, 0).getInitial());
+		System.out.println(board.getCellAt(4, 8).getInitial());
 		assertEquals('C', board.getCellAt(0, 0).getInitial());
+		
 		assertEquals('R', board.getCellAt(4, 8).getInitial());
 		assertEquals('B', board.getCellAt(9, 0).getInitial());
 		// Test last cell in room

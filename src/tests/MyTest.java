@@ -17,9 +17,9 @@ import clueGame.BoardCell.DoorDirection;
 public class MyTest {
 
 	// Constants that I will use to test whether the file was loaded correctly
-	public static final int LEGEND_SIZE = 9;
-	public static final int NUM_ROWS = 25;
-	public static final int NUM_COLUMNS = 25;
+	public static final int LEGEND_SIZE = 10;
+	public static final int NUM_ROWS = 26;
+	public static final int NUM_COLUMNS = 26;
 
 	// NOTE: I made Board static because I only want to set it up one 
 	// time (using @BeforeClass), no need to do setup before each test.
@@ -30,7 +30,7 @@ public class MyTest {
 		// Board is singleton, get the only instance
 		board = Board.getInstance();
 		// set the file names to use my config files
-		board.setConfigFiles("/Users/lukevalentine/eclipse-workspace/ClueGame/CLUE_BOARD.csv", "/Users/lukevalentine/eclipse-workspace/ClueGame/ClueRooms.txt");		
+		board.setConfigFiles("src/CLUE_BOARD.csv", "src/ClueRooms.txt");		
 		// Initialize will load BOTH config files 
 		board.initialize();
 	}
@@ -45,11 +45,11 @@ public class MyTest {
 		assertEquals("Closet", legend.get('F'));
 		assertEquals("Elevator", legend.get('E'));
 		assertEquals("Garage", legend.get('G'));
-		assertEquals("Hill Hall", legend.get('H'));
-		assertEquals("Mines Market", legend.get('M'));
+		assertEquals("Hill", legend.get('H'));
+		assertEquals("Mines", legend.get('M'));
 		assertEquals("Coolbuagh", legend.get('C'));
 		assertEquals("Dungeon", legend.get('D'));
-		assertEquals("Stariway", legend.get('S'));
+		assertEquals("Stairway", legend.get('S'));
 		assertEquals("Berthoud", legend.get('B'));
 	}
 	
@@ -105,10 +105,11 @@ public class MyTest {
 		for (int row=0; row<board.getNumRows(); row++)
 			for (int col=0; col<board.getNumColumns(); col++) {
 				BoardCell cell = board.getCellAt(row, col);
-				if (cell.isDoorway())
+				if (cell != null && cell.isDoorway())
 					numDoors++;
 			}
-		Assert.assertEquals(20, numDoors);
+		//didn't count doors right the first time
+		Assert.assertEquals(23, numDoors);
 	}
 
 	// Test a few room cells to ensure the room initial is correct.
