@@ -255,4 +255,14 @@ public class Board {
 		return MAX_BOARD_SIZE;
 	}
 
+	public Set<BoardCell> getAdjList(int i, int j) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void calcTargets(int i, int j, int k) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
