@@ -154,12 +154,60 @@ public class Board {
 		HashSet<BoardCell> c = new HashSet<BoardCell>();
 		// clear the old one
 		targets.clear();
-		// remove the startCell if it exists (illegal move)
+		//if we don't start at a doorway
+		if(!startCell.isDoorway()) {
 		c = findAllTargets(startCell, k);
+		// remove illegal moves;
 		c.remove(startCell);
+		//make sure the doors are the correct direction
+		for(BoardCell cell: c) {
+			if(!isGoodDoor(cell,startCell) && cell.isDoorway()&&!startCell.isDoorway()) {
+				c.remove(cell);
+			}
+		}
+		} 
+		//otherwise, only add the exit square
+		else {
+			switch(startCell.getDoorDirection()) {
+			case UP:
+				BoardCell up = getCellAt(i+1, j);
+				if(isExitSquare(up,startCell))
+					c.add(up);
+				break;
+			case DOWN:
+				BoardCell down = getCellAt(i+1, j);
+				if(isExitSquare(down,startCell))
+					c.add(down);
+				break;
+			case LEFT:
+				BoardCell left = getCellAt(i+1, j);
+				if(isExitSquare(left,startCell))
+					c.add(left);
+				break;
+			case RIGHT:
+				BoardCell right = getCellAt(i+1, j);
+				if(isExitSquare(right,startCell))
+					c.add(right);
+				break;
+			default:
+				break;
+			}
+		}
 		return (c);
 		
 	}
+	public boolean isExitSquare(BoardCell target, BoardCell origin) {
+		if(origin.getRow() > target.getRow() && target.getDoorDirection()==DoorDirection.UP) 
+			return true;
+		else if(origin.getRow() < target.getRow() && target.getDoorDirection()==DoorDirection.DOWN)
+			return true;
+		else if(origin.getColumn() > target.getColumn() && target.getDoorDirection()==DoorDirection.LEFT)
+			return true;
+		else if(origin.getColumn() < target.getColumn() && target.getDoorDirection()==DoorDirection.RIGHT)
+			return true;
+		else return false;
+	}
+	
 	public boolean isGoodDoor(BoardCell target, BoardCell origin) {
 		if(origin.getRow() < target.getRow() && target.getDoorDirection()==DoorDirection.UP) 
 				return true;
@@ -171,42 +219,81 @@ public class Board {
 				return true;
 		else return false;
 	}
-
+	
+	public boolean sameRoom(BoardCell target, BoardCell origin){
+	// 	for now this is not allowing movement within rooms, only walkways
+		if(origin.getInitial() == target.getInitial() && origin.getInitial() == 'W')
+			return true;
+		else return false;
+	}
+	
+	public boolean isCloset(BoardCell target) {
+		if(target.getInitialFull() == "X")
+			return true;
+		else return false;
+	}
+	public void p(String mssg) {
+		System.out.println(mssg);
+	}
+	
+	public boolean exitCell(BoardCell target, BoardCell origin) {
+		p("exit door" + origin);
+		switch(origin.getDoorDirection()) {
+		case UP:
+			if(origin.getRow()+1 == target.getRow() && origin.getColumn() == target.getColumn()) {
+				p("good"+target);
+				return true;
+			}
+			break;
+		case DOWN:
+			if(origin.getRow()-1 == target.getRow() && origin.getColumn() == target.getColumn()){
+				p("good"+target);
+				return true;
+			}
+			break;
+		case LEFT:
+			if(origin.getRow() == target.getRow() && origin.getColumn()-1 == target.getColumn()){
+				p("good"+target);
+				return true;
+			}
+			break;
+		case RIGHT:
+			if(origin.getRow() == target.getRow() && origin.getColumn()+1 == target.getColumn()){
+				p("good"+target);
+				return true;
+			}
+			break;
+		default:
+			return false;
+			}
+		return false;
+	}
+	
 	public HashSet<BoardCell> findAllTargets(BoardCell curr, int numSteps) {
 		visited.clear();
 		// go through every adj cell
-		for (BoardCell b : getAdjList(curr.getRow(), curr.getColumn())) {
-			char curr_initial = curr.getInitial();
-			//System.out.println(curr_initial + " " + b.getInitialFull());
-			//System.out.println(b.getInitialFull().length());
-			
-			//check if a door is an access point to a room
-			boolean goodDoor = true;
-			if(b.getInitialFull().length()==2) {
-				goodDoor = isGoodDoor(b,curr);
-			}
-			//stay in walkway
-			boolean walk = true;
-			if (curr.getInitial() == 'W' && b.getInitial() != 'W') {
-				walk = false;
-			}
-		
+		for (BoardCell b : getAdjList(curr.getRow(), curr.getColumn())) {		
 			// if visited loop
-			if (visited.contains(b) || b.getInitial() == 'X'|| (curr_initial == b.getInitial() && curr_initial != 'W') || !goodDoor || !walk) {
+			if (visited.contains(b)) {
 				continue;
 			}
+			// if it is a closet, skip, or if it's not a walkway
+			if(curr.getInitialFull().length() == 1 && isCloset(b))
+				continue;
+			if(curr.getInitialFull().length() == 1 && b.getInitialFull().length() == 1 && !sameRoom(b,curr))
+				continue;
 			
 			// add to visited
 		
 			visited.add(b);
 			// if numsteps are 1 we have reached are target
-			if (numSteps == 1 /*&& b.getInitial() != 'X'*/) {
-				//System.out.println(b.getInitialFull());
+			if (numSteps == 1) {
 				targets.add(b);
 			}
-			else if (b.isDoorway()) {
+			//if we reached a doorway before the die roll was over
+			else if (b.isDoorway())
 				targets.add(b);
-			}
+					
 			// else call recursive
 			else {
 				findAllTargets(b, numSteps - 1);

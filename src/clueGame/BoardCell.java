@@ -91,9 +91,21 @@ public class BoardCell {
 	}
 	
 	
-	public Object getDoorDirection() {
-		
+	public DoorDirection getDoorDirection() {
+		if (doorDirection == DoorDirection.UP)
+			return DoorDirection.UP;
+		else if(doorDirection == DoorDirection.DOWN)
+			return DoorDirection.DOWN;
+		else if(doorDirection == DoorDirection.LEFT)
+			return DoorDirection.LEFT;
+		else if(doorDirection == DoorDirection.RIGHT)
+			return DoorDirection.RIGHT;
 		return (doorDirection);
+	}
+	@Override
+	public String toString() {
+		return "BoardCell [row=" + row + ", column=" + column + ", Initial=" + Initial + ", doorDirection="
+				+ doorDirection + "]";
 	}
 	
 	
