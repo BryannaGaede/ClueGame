@@ -56,6 +56,11 @@ public class BoardCell {
 	}
 	
 
+	public BoardCell() {
+		// TODO Auto-generated constructor stub
+	}
+
+
 	public static enum DoorDirection {
 
 		NONE(0,0),UP(-1,0),DOWN(1,0),LEFT(0,-1),RIGHT(0,1);
