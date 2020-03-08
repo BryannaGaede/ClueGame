@@ -35,7 +35,7 @@ public class CTest_FileInitTests {
 		// Board is singleton, get the only instance
 		board = Board.getInstance();
 		// set the file names to use my config files
-		board.setConfigFiles("src/CTest_ClueLayout.csv", "src/CTest_ClueLegend.txt");		
+		board.setConfigFiles("CTest_ClueLayout.csv", "CTest_ClueLegend.txt");		
 		// Initialize will load BOTH config files 
 		board.initialize();
 	}
@@ -114,19 +114,19 @@ public class CTest_FileInitTests {
 		// Test first cell in room
 		System.out.println("XXXXXX");
 		
-		System.out.println(board.getCellAt(0, 0).getInitial());
-		System.out.println(board.getCellAt(4, 8).getInitial());
-		assertEquals('C', board.getCellAt(0, 0).getInitial());
+		System.out.println(board.getCellAt(0, 0).getFirstInitial());
+		System.out.println(board.getCellAt(4, 8).getFirstInitial());
+		assertEquals('C', board.getCellAt(0, 0).getFirstInitial());
 		
-		assertEquals('R', board.getCellAt(4, 8).getInitial());
-		assertEquals('B', board.getCellAt(9, 0).getInitial());
+		assertEquals('R', board.getCellAt(4, 8).getFirstInitial());
+		assertEquals('B', board.getCellAt(9, 0).getFirstInitial());
 		// Test last cell in room
-		assertEquals('O', board.getCellAt(21, 22).getInitial());
-		assertEquals('K', board.getCellAt(21, 0).getInitial());
+		assertEquals('O', board.getCellAt(21, 22).getFirstInitial());
+		assertEquals('K', board.getCellAt(21, 0).getFirstInitial());
 		// Test a walkway
-		assertEquals('W', board.getCellAt(0, 5).getInitial());
+		assertEquals('W', board.getCellAt(0, 5).getFirstInitial());
 		// Test the closet
-		assertEquals('X', board.getCellAt(9,13).getInitial());
+		assertEquals('X', board.getCellAt(9,13).getFirstInitial());
 	}
 	
 

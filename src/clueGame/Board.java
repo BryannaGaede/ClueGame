@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -16,186 +17,132 @@ import clueGame.BoardCell;
 import clueGame.BoardCell.DoorDirection;
 
 public class Board {
-	private Map<BoardCell, Set<BoardCell>> adjtMtx1 = new HashMap<>();
-	HashSet<BoardCell> targets = new HashSet<BoardCell>();
-	HashSet<BoardCell> visited = new HashSet<BoardCell>();
-
+	public final int MAX_BOARD_SIZE = 25;
 	private int numRows = 30;
 	private int numColumns = 30;
-	public BoardCell cells[][] = new BoardCell[numRows][numColumns];
-
-	public final int MAX_BOARD_SIZE = 25;
-	private BoardCell[][] board;
-
-	private Map<Character, String> legend;
-
-	private Map<BoardCell, Set<BoardCell>> adjMatrix;
-
 	private String boardConfigFile;
 	private String roomConfigFile;
 
+	private Map<BoardCell, Set<BoardCell>> adjMatrix = new HashMap<>();
+	private HashSet<BoardCell> targets = new HashSet<BoardCell>();
+	private HashSet<BoardCell> visited = new HashSet<BoardCell>();
+	private Map<Character, String> legend;
+	public BoardCell board[][] = new BoardCell[numRows][numColumns];
+
 	// variable used for singleton pattern
 	private static Board theInstance = new Board();
-
-	// constructor is private to ensure only one can be created
-	private Board() {
-	}
-
+	//constructor is private to ensure only one copy
+	private Board() {}
 	// this method returns the only Board
 	public static Board getInstance() {
 		return theInstance;
 	}
 
 	public void initialize() {
-		//creating the cells
-		/*for (int i = 0; i < 4; i++) {
-			for (int j= 0; j < 4; j++) {
-				cells[i][j]=  new BoardCell();
-				cells[i][j].setRow(i);
-				cells[i][j].setColumn(j);
+			try {
+				loadRoomConfig(roomConfigFile);
+			} catch (IOException e) {
+				System.out.println("Trouble loading roomConfigFile - txt");
 			}
-		}
-		*/
-		
+			try {
+				loadBoardConfig(boardConfigFile);
+			} catch (IOException e) {
+				System.out.println("Trouble loading boardConfigFile - csv");
+			}
 		calcAdjacencies();
 	}
 
-	// needs to get changed
-	public void loadRoomConfig(String legend_txt) throws IOException {
-		String line = "";
-		String cvsSplitBy = ", ";
-		String[] csv_line;
-		legend = new HashMap<Character, String>();
-		try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(legend_txt), "UTF-8"))) {
-			while ((line = br.readLine()) != null) {
-				//split csv up
-				csv_line = line.split(cvsSplitBy);
-				char x = csv_line[0].charAt(0);
-				legend.put(x, csv_line[1]);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void loadBoardConfig(String layout) throws FileNotFoundException {
-		// set up file reader for csv
-		FileReader layRead = new FileReader(layout);
-		Scanner layIn = new Scanner(layRead);
-		String line;
-		int row = 0;
-		int prevCol = -1;
-		while (layIn.hasNextLine()) {
-			int col = 0;
-			line = layIn.nextLine();
-			// Goes through each line of the file character by character
-			for (int i = 0; i < line.length(); i++) {
-				char c = line.charAt(i);
-				// Passes over commas
-				if (c == ',')
-					continue;
-				String s = line.charAt(i) + "";
-				// gets multiple characters (doorways)
-				if (i + 1 < line.length() && line.charAt(i + 1) != ',') {
-					s += line.charAt(i + 1);
-					i++;
-				}
-				//System.out.println(row + " " + col + " " + s);
-				cells[row][col] = new BoardCell(row, col, s);
-				col++;
-			}
-			// Throws an error if the columns are not all the same size
-			if (prevCol >= 0 && prevCol != col) {
-				System.out.println("Error in the legend file.");
-			}
-			prevCol = col;
-			row++;
-		}
-		// Sets the number of rows and columns
-		setNumRows(row);
-		numRows = row;
-		setNumColumns(prevCol);
-		numColumns = prevCol;
-	}
-
-	public BoardCell getCellAt(int i, int j) {
-		// return the corresponding2D array
-		return cells[i][j];
-	}
-
 	public void calcAdjacencies() {
-		for (int i = 0; i < numRows; i++) {
-			for (int j = 0; j < numColumns; j++) {
+		for (int row = 0; row < numRows; row++) {
+			for (int col = 0; col < numColumns; col++) {
 				HashSet<BoardCell> adjSet = new HashSet<BoardCell>();
 				// up
-				if (i > 0) {
-					adjSet.add(cells[i - 1][j]);
+				if (row > 0) {
+					adjSet.add(board[row - 1][col]);
 				}
 				// down
-				if (numColumns - 1 > i) {
-					adjSet.add(cells[i + 1][j]);
+				if (numRows - 1 > row) {
+					adjSet.add(board[row + 1][col]);
 				}
 				// right
-				if (j < numRows - 1) {
-					adjSet.add(cells[i][j + 1] );
+				if (col < numColumns - 1) {
+					adjSet.add(board[row][col + 1] );
 				}
 				// left
-				if (j > 0) {
-					adjSet.add(cells[i][j - 1]);
+				if (col > 0) {
+					adjSet.add(board[row][col - 1]);
 				}
 				// push the adj list and corresponding cell to map
-				adjtMtx1.put(getCellAt(i, j), adjSet);
+				adjMatrix.put(getCellAt(row, col), adjSet);
 			}
 		}
 	}
-	public HashSet<BoardCell> calcTargets(int i, int j, int k) {
+	
+	public HashSet<BoardCell> calcTargets(int row, int col, int dieRoll) {
 		// create new hashset
-		BoardCell startCell = getCellAt(i, j);
-		HashSet<BoardCell> c = new HashSet<BoardCell>();
+		BoardCell startCell = getCellAt(row, col);
+		HashSet<BoardCell> foundTargets = new HashSet<BoardCell>();
 		// clear the old one
 		targets.clear();
-		//if we don't start at a doorway
-		if(!startCell.isDoorway()) {
-		c = findAllTargets(startCell, k);
-		// remove illegal moves;
-		c.remove(startCell);
-		//make sure the doors are the correct direction
-		for(BoardCell cell: c) {
-			if(!isGoodDoor(cell,startCell) && cell.isDoorway()&&!startCell.isDoorway()) {
-				c.remove(cell);
-			}
-		}
-		} 
-		//otherwise, only add the exit square
-		else {
-			switch(startCell.getDoorDirection()) {
-			case UP:
-				BoardCell up = getCellAt(i+1, j);
-				if(isExitSquare(up,startCell))
-					c.add(up);
-				break;
-			case DOWN:
-				BoardCell down = getCellAt(i+1, j);
-				if(isExitSquare(down,startCell))
-					c.add(down);
-				break;
-			case LEFT:
-				BoardCell left = getCellAt(i+1, j);
-				if(isExitSquare(left,startCell))
-					c.add(left);
-				break;
-			case RIGHT:
-				BoardCell right = getCellAt(i+1, j);
-				if(isExitSquare(right,startCell))
-					c.add(right);
-				break;
-			default:
-				break;
-			}
-		}
-		return (c);
-		
+		foundTargets = findAllTargets(startCell, dieRoll);
+		// remove the startCell if it exists (illegal move)
+		foundTargets.remove(startCell);
+		return (foundTargets);	
 	}
+	
+	public HashSet<BoardCell> findAllTargets(BoardCell startCell, int stepsRemaining) {
+		visited.clear();
+		//if we are starting from a door, there is only one target
+		if(startCell.isDoorway()){
+			for (BoardCell testCell : getAdjList(startCell.getRow(), startCell.getColumn())) {
+			if(isExitSquare(testCell, startCell)) {
+				targets.add(testCell);
+				return targets;
+			}
+			}
+		}
+		// go through every adj cell
+		for (BoardCell testCell : getAdjList(startCell.getRow(), startCell.getColumn())) {
+			
+			//check if a door is an access point to a room
+			if(testCell.isDoorway() && isGoodDoor(testCell,startCell)) {
+				targets.add(testCell);
+			}
+			//stay in walkway
+			boolean walk = true;
+			if (startCell.getFirstInitial() == 'W' && testCell.getFirstInitial() != 'W') {
+				walk = false;
+			}
+			
+			// if visited or closet
+			if (visited.contains(testCell) || 
+					(isSameRoom(testCell,startCell) && startCell.getFirstInitial() != 'W') || 
+					!walk) {
+				continue;
+			}		
+			
+			// add to visited
+			visited.add(testCell);
+			// if numsteps are 1 we have reached are target
+			if (stepsRemaining == 1) {
+				//System.out.println(b.getInitialFull());
+				targets.add(testCell);
+			}
+			// else call recursive
+			else if(!testCell.isDoorway()){
+				findAllTargets(testCell, stepsRemaining - 1);
+			}
+			visited.remove(testCell);
+		}
+		// return them targets
+		return (targets);
+	}
+
+	/*
+	 * *************************HELPER FUNCTIONS******************************************
+	 */
+
+	//checks if target is the right placement to exit based on starting origin being a door and it's direction
 	public boolean isExitSquare(BoardCell target, BoardCell origin) {
 		if(origin.getRow() > target.getRow() && target.getDoorDirection()==DoorDirection.UP) 
 			return true;
@@ -208,6 +155,7 @@ public class Board {
 		else return false;
 	}
 	
+	//checks if the target is good to enter from origin
 	public boolean isGoodDoor(BoardCell target, BoardCell origin) {
 		if(origin.getRow() < target.getRow() && target.getDoorDirection()==DoorDirection.UP) 
 				return true;
@@ -220,147 +168,116 @@ public class Board {
 		else return false;
 	}
 	
-	public boolean sameRoom(BoardCell target, BoardCell origin){
-	// 	for now this is not allowing movement within rooms, only walkways
-		if(origin.getInitial() == target.getInitial() && origin.getInitial() == 'W')
+	public boolean isSameRoom(BoardCell target, BoardCell origin){
+		if(origin.getFirstInitial() == target.getFirstInitial())
 			return true;
 		else return false;
 	}
 	
 	public boolean isCloset(BoardCell target) {
-		if(target.getInitialFull() == "X")
+		if(target.getFirstInitial() == 'X')
 			return true;
 		else return false;
 	}
-	public void p(String mssg) {
-		System.out.println(mssg);
+	public void p(String msg) {
+		System.out.println(msg);
+	}
+
+	/*
+	 * ********************CONFIGURATION METHODS********************************
+	 */
+
+	public void setConfigFiles(String csv, String txt){
+		boardConfigFile = csv;
+		roomConfigFile = txt;
+	}
+	// needs to get changed
+	public void loadRoomConfig(String legend_txt) throws IOException {
+
+		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(legend_txt), "UTF-8"));
+	}	
+	
+	public void loadBoardConfig(String layout_csv) throws IOException {
+		// set up file reader for csv
+		BufferedReader in = new BufferedReader(new FileReader(layout_csv));
+		String line;
+		int row = 0;
+		int col = 0;
+		// used to make sure there are the same number of columns in each row
+		int checked = 0;
+		int cols_seen = 0;
+		while((line = in.readLine()) != null) {
+			String[] initials = line.split(",");
+			for(String i: initials) {
+				board[row][col] = new BoardCell(row, col, i);
+				col++;
+			}
+			if(col != cols_seen) {
+				if(checked == 0) {
+					cols_seen = col;
+					checked += 1;
+				} else {
+					System.out.println("CSV file has columns of uneven length");
+				}
+			}
+			col = 0;
+			row++;
+		}
+
+		numRows = row;
+		numColumns = cols_seen;
 	}
 	
-	public boolean exitCell(BoardCell target, BoardCell origin) {
-		p("exit door" + origin);
-		switch(origin.getDoorDirection()) {
-		case UP:
-			if(origin.getRow()+1 == target.getRow() && origin.getColumn() == target.getColumn()) {
-				p("good"+target);
-				return true;
-			}
-			break;
-		case DOWN:
-			if(origin.getRow()-1 == target.getRow() && origin.getColumn() == target.getColumn()){
-				p("good"+target);
-				return true;
-			}
-			break;
-		case LEFT:
-			if(origin.getRow() == target.getRow() && origin.getColumn()-1 == target.getColumn()){
-				p("good"+target);
-				return true;
-			}
-			break;
-		case RIGHT:
-			if(origin.getRow() == target.getRow() && origin.getColumn()+1 == target.getColumn()){
-				p("good"+target);
-				return true;
-			}
-			break;
-		default:
-			return false;
-			}
-		return false;
-	}
+	/*
+	 ************************** GETTERS AND SETTERS *********************************
+	 */
 	
-	public HashSet<BoardCell> findAllTargets(BoardCell curr, int numSteps) {
-		visited.clear();
-		// go through every adj cell
-		for (BoardCell b : getAdjList(curr.getRow(), curr.getColumn())) {		
-			// if visited loop
-			if (visited.contains(b)) {
-				continue;
-			}
-			// if it is a closet, skip, or if it's not a walkway
-			if(curr.getInitialFull().length() == 1 && isCloset(b))
-				continue;
-			if(curr.getInitialFull().length() == 1 && b.getInitialFull().length() == 1 && !sameRoom(b,curr))
-				continue;
-			
-			// add to visited
-		
-			visited.add(b);
-			// if numsteps are 1 we have reached are target
-			if (numSteps == 1) {
-				targets.add(b);
-			}
-			//if we reached a doorway before the die roll was over
-			else if (b.isDoorway())
-				targets.add(b);
-					
-			// else call recursive
-			else {
-				findAllTargets(b, numSteps - 1);
-			}
-			visited.remove(b);
-		}
-		// return them targets
-		return (targets);
+	public Set<BoardCell> getAdjList(int row, int col) {
+		return adjMatrix.get(getCellAt(row,col));
 	}
 
-	public void setConfigFiles(String string, String string2) throws IOException {
-		try {
-			// try to load the rooms
-			loadRoomConfig(string2); // csv
-			loadBoardConfig(string); // text
-		}
-		// catch file not found error
-		catch (FileNotFoundException e) {
-			System.out.println(e.getMessage());
-		}
+	public BoardCell getCellAt(int row, int col) {
+		// return the corresponding2D array
+		return board[row][col];
 	}
-
-
-
-	public Set<BoardCell> getAdjList(int i, int j) {
-		return adjtMtx1.get(getCellAt(i,j));
-	}
-	
-	// getters and setters
 		public int getNumRows() {
 			return numRows;
 		}
 
-		public void setNumRows(int numRows) {
-			this.numRows = numRows;
+		public void setNumRows(int newNumRows) {
+			this.numRows = newNumRows;
 		}
 
 		public int getNumColumns() {
 			return numColumns;
 		}
 
-		public void setNumColumns(int numColumns) {
-			this.numColumns = numColumns;
+		public void setNumColumns(int newNumColumns) {
+			this.numColumns = newNumColumns;
 		}
 
 		public BoardCell[][] getBoard() {
 			return board;
 		}
 
-		public void setBoard(BoardCell[][] board) {
-			this.board = board;
+		public void setBoard(BoardCell[][] newBoard) {
+			this.board = newBoard;
 		}
 
 		public Map<Character, String> getLegend() {
 			return legend;
 		}
 
-		public void setLegend(Map<Character, String> legend) {
-			this.legend = legend;
+		public void setLegend(Map<Character, String> newLegend) {
+			this.legend = newLegend;
 		}
 
 		public Map<BoardCell, Set<BoardCell>> getAdjMatrix() {
 			return adjMatrix;
 		}
 
-		public void setAdjMatrix(Map<BoardCell, Set<BoardCell>> adjMatrix) {
-			this.adjMatrix = adjMatrix;
+		public void setAdjMatrix(Map<BoardCell, Set<BoardCell>> newAdjMatrix) {
+			this.adjMatrix = newAdjMatrix;
 		}
 
 		public Set<BoardCell> getTargets() {
@@ -371,16 +288,16 @@ public class Board {
 			return boardConfigFile;
 		}
 
-		public void setBoardConfigFile(String boardConfigFile) {
-			this.boardConfigFile = boardConfigFile;
+		public void setBoardConfigFile(String newBoardConfigFile) {
+			this.boardConfigFile = newBoardConfigFile;
 		}
 
 		public String getRoomConfigFile() {
 			return roomConfigFile;
 		}
 
-		public void setRoomConfigFile(String roomConfigFile) {
-			this.roomConfigFile = roomConfigFile;
+		public void setRoomConfigFile(String newRoomConfigFile) {
+			this.roomConfigFile = newRoomConfigFile;
 		}
 
 		public int getMAX_BOARD_SIZE() {

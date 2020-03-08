@@ -116,15 +116,15 @@ public class MyTest {
 	@Test
 	public void testRoomInitials() {
 		// Test first cell in room 
-		assertEquals('C', board.getCellAt(17, 0).getInitial());
-		assertEquals('B', board.getCellAt(9, 0).getInitial());
-		assertEquals('A', board.getCellAt(3, 1).getInitial());
+		assertEquals('C', board.getCellAt(17, 0).getFirstInitial());
+		assertEquals('B', board.getCellAt(9, 0).getFirstInitial());
+		assertEquals('A', board.getCellAt(3, 1).getFirstInitial());
 		// Test last cell in room
-		assertEquals('D', board.getCellAt(25, 10).getInitial());
+		assertEquals('D', board.getCellAt(25, 10).getFirstInitial());
 		// Test a walkway
-		assertEquals('W', board.getCellAt(16, 13).getInitial());
+		assertEquals('W', board.getCellAt(16, 13).getFirstInitial());
 		// Test the closet
-		assertEquals('F', board.getCellAt(10,10).getInitial());
+		assertEquals('F', board.getCellAt(10,10).getFirstInitial());
 	}
 
 }
