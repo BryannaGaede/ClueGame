@@ -1,3 +1,77 @@
+Lukes-MacBook-Pro-3:ClueGame lukevalentine$ git log
+commit 8d158be408c09499bf8f69fc68e2b6e85a004f11 (HEAD -> master)
+Author: Luke Valentine <lukevalentine@csm-wl-dhcp-202-39.mines.edu>
+Date:   Thu Mar 5 12:15:29 2020 -0700
+
+    Failing Tests
+
+commit 99b29cf0ebfcae3a448c588c8abf1376d0670a2a
+Merge: af2337e 78f88f7
+Author: Luke Valentine <lukevalentine@Lukes-MacBook-Pro-3.local>
+Date:   Wed Mar 4 17:09:14 2020 -0700
+
+    Failing Tests
+
+commit af2337e87fc80152b2500d2d5bda1fc6ed08a8d1
+Author: Luke Valentine <lukevalentine@Lukes-MacBook-Pro-3.local>
+Date:   Wed Mar 4 17:00:38 2020 -0700
+
+    Failing tests
+
+commit 78f88f7780431537fa0f503d741aeab96bd236e8 (origin/master, origin/HEAD)
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Wed Mar 4 16:58:08 2020 -0700
+
+    Failing tests done for part 1 of assignment 14, testing adjacencies
+
+commit af564850ad358147596bac066e88a255b6d212a7
+Author: Luke Valentine <lukevalentine@csm-wl-dhcp-200-242.mines.edu>
+Date:   Tue Mar 3 13:16:06 2020 -0700
+
+    C13 green
+
+commit 0922c34832132ffc6232dc62b2b60756fc35f235
+Author: Luke Valentine <lukevalentine@Lukes-MBP-3.hitronhub.home>
+Date:   Fri Feb 28 22:52:36 2020 -0700
+
+    everything working except one test
+
+commit 9dd7de25c04c28cbd34173a3080922b65a31f890
+Author: Luke Valentine <lukevalentine@Lukes-MBP-3.hitronhub.home>
+Date:   Fri Feb 28 22:28:32 2020 -0700
+
+    try to get testNumberOfDoorways to work
+
+commit 5da800a2f5c6ce579c36c8b91cc3ecc056f10a68
+Author: Luke Valentine <lukevalentine@Lukes-MBP-3.hitronhub.home>
+Date:   Fri Feb 28 20:40:55 2020 -0700
+
+    Updated
+
+commit 77113621164127530e36893ed8868542391b359c
+Author: Luke Valentine <lukevalentine@Lukes-MBP-3.hitronhub.home>
+Date:   Thu Feb 27 22:55:08 2020 -0700
+
+    part 1
+
+commit 46dc519807da753babbcf699217a8ccce59cba8f
+Author: Luke Valentine <lukevalentine@csm-wl-dhcp-199-64.mines.edu>
+Date:   Tue Feb 25 13:49:46 2020 -0700
+
+    Board updated
+
+commit 8c4f3174dd85bae15dc285357f901ae3277075a9
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Tue Feb 25 13:43:40 2020 -0700
+
+    unknown changes
+
+commit f782b563611a60725f519fa011b3dd1045dcf175
+Author: Luke Valentine <lukevalentine@csm-wl-dhcp-199-64.mines.edu>
+Date:   Tue Feb 25 13:33:24 2020 -0700
+
+    Updated
+
 commit 1bcd6eccea32f6934bd97310510207bbc62e91b8
 Author: Luke Valentine <lukevalentine@csm-wl-dhcp-199-64.mines.edu>
 Date:   Mon Feb 24 14:52:01 2020 -0700
@@ -15,15 +89,3 @@ Author: Luke Valentine <lukevalentine@csm-wl-dhcp-199-64.mines.edu>
 Date:   Mon Feb 24 12:15:03 2020 -0700
 
     All tests failing
-
-commit 725e7a05c3518a561101bdc26afb12b2033ec937
-Author: Luke Valentine <lukevalentine@csm-wl-dhcp-199-64.mines.edu>
-Date:   Mon Feb 24 11:30:35 2020 -0700
-
-    Hello
-
-commit ca087f8433be8ce15df7516428c299b84b3182a8
-Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Mon Feb 24 11:00:02 2020 -0700
-
-    first commit
