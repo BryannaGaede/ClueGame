@@ -28,6 +28,7 @@ public class Board {
 	private HashSet<BoardCell> visited = new HashSet<BoardCell>();
 	private Map<Character, String> legend;
 	public BoardCell board[][] = new BoardCell[numRows][numColumns];
+	//BoardCell start = new BoardCell();
 
 	// variable used for singleton pattern
 	private static Board theInstance = new Board();
@@ -49,78 +50,80 @@ public class Board {
 			} catch (IOException e) {
 				System.out.println("Trouble loading boardConfigFile - csv");
 			}
+		
 		calcAdjacencies();
 	}
+	
+	
 
 	public void calcAdjacencies() {
 		for (int row = 0; row < numRows; row++) {
 			for (int col = 0; col < numColumns; col++) {
 				HashSet<BoardCell> adjSet = new HashSet<BoardCell>();
-				// up
+				BoardCell testCell = new BoardCell();
+				BoardCell startCell = new BoardCell();
+				startCell = board[row][col];
+				//up
 				if (row > 0) {
-					adjSet.add(board[row - 1][col]);
+					testCell = board[row - 1][col];
+					if (adjHelp(testCell, startCell))
+						adjSet.add(board[row - 1][col]);
 				}
 				// down
 				if (numRows - 1 > row) {
-					adjSet.add(board[row + 1][col]);
+					testCell = board[row + 1][col];
+					if (adjHelp(testCell, startCell))
+						adjSet.add(board[row + 1][col]);
 				}
 				// right
 				if (col < numColumns - 1) {
-					adjSet.add(board[row][col + 1] );
+					testCell = board[row][col + 1];
+					if (adjHelp(testCell, startCell))
+						adjSet.add(board[row][col + 1] );
 				}
 				// left
 				if (col > 0) {
-					adjSet.add(board[row][col - 1]);
+					testCell = board[row][col - 1];
+					if (adjHelp(testCell, startCell))
+						adjSet.add(board[row][col - 1]);
 				}
 				// push the adj list and corresponding cell to map
 				adjMatrix.put(getCellAt(row, col), adjSet);
 			}
 		}
+		
+		
 	}
 	
 	public HashSet<BoardCell> calcTargets(int row, int col, int dieRoll) {
 		// create new hashset
 		BoardCell startCell = getCellAt(row, col);
+		BoardCell start_og = new BoardCell();
+		start_og = getCellAt(row, col);
 		HashSet<BoardCell> foundTargets = new HashSet<BoardCell>();
 		// clear the old one
 		targets.clear();
-		foundTargets = findAllTargets(startCell, dieRoll);
+		
+		foundTargets = findAllTargets(startCell, dieRoll, start_og);
 		// remove the startCell if it exists (illegal move)
 		foundTargets.remove(startCell);
 		return (foundTargets);	
 	}
 	
-	public HashSet<BoardCell> findAllTargets(BoardCell startCell, int stepsRemaining) {
-		visited.clear();
-		//if we are starting from a door, there is only one target
-		if(startCell.isDoorway()){
-			for (BoardCell testCell : getAdjList(startCell.getRow(), startCell.getColumn())) {
-			if(isExitSquare(testCell, startCell)) {
-				targets.add(testCell);
-				return targets;
-			}
-			}
-		}
+	public HashSet<BoardCell> findAllTargets(BoardCell startCell, int stepsRemaining, BoardCell start_og) {
 		// go through every adj cell
 		for (BoardCell testCell : getAdjList(startCell.getRow(), startCell.getColumn())) {
-			
-			//check if a door is an access point to a room
+			if (testCell.getRow() == start_og.getRow() && testCell.getColumn() == start_og.getColumn()) {
+				visited.add(start_og);
+				continue;
+			}
 			if(testCell.isDoorway() && isGoodDoor(testCell,startCell)) {
 				targets.add(testCell);
-			}
-			//stay in walkway
-			boolean walk = true;
-			if (startCell.getFirstInitial() == 'W' && testCell.getFirstInitial() != 'W') {
-				walk = false;
-			}
-			
-			// if visited or closet
-			if (visited.contains(testCell) || 
-					(isSameRoom(testCell,startCell) && startCell.getFirstInitial() != 'W') || 
-					!walk) {
 				continue;
-			}		
-			
+			}
+			if (visited.contains(testCell)) {
+				continue;
+			}
 			// add to visited
 			visited.add(testCell);
 			// if numsteps are 1 we have reached are target
@@ -130,7 +133,7 @@ public class Board {
 			}
 			// else call recursive
 			else if(!testCell.isDoorway()){
-				findAllTargets(testCell, stepsRemaining - 1);
+				findAllTargets(testCell, stepsRemaining - 1, start_og);
 			}
 			visited.remove(testCell);
 		}
@@ -141,16 +144,36 @@ public class Board {
 	/*
 	 * *************************HELPER FUNCTIONS******************************************
 	 */
+	
+	
+	public boolean adjHelp(BoardCell testCell, BoardCell startCell) {
+		if (
+				(!(testCell.isDoorway() && isGoodDoor(testCell,startCell)) && testCell.getInitials().length() == 2) 
+				|| 
+				((!isExitSquare(testCell, startCell)) && startCell.getInitials().length() == 2)
+				|| 
+				((isSameRoom(testCell,startCell) && startCell.getFirstInitial() != 'W'))
+				||
+				(startCell.getFirstInitial() == 'W' && testCell.getFirstInitial() != 'W' && testCell.getInitials().length() !=2)
+				||
+				(startCell.getFirstInitial() != 'W' && testCell.getFirstInitial() == 'W' && testCell.getInitials().length() !=2 && startCell.getInitials().length() != 2)) {
+			return false;
+		}
+	
+		else {
+			return true;
+		}
+	}
 
 	//checks if target is the right placement to exit based on starting origin being a door and it's direction
 	public boolean isExitSquare(BoardCell target, BoardCell origin) {
-		if(origin.getRow() > target.getRow() && target.getDoorDirection()==DoorDirection.UP) 
+		if(origin.getRow() > target.getRow() && origin.getDoorDirection()==DoorDirection.UP) 
 			return true;
-		else if(origin.getRow() < target.getRow() && target.getDoorDirection()==DoorDirection.DOWN)
+		else if(origin.getRow() < target.getRow() && origin.getDoorDirection()==DoorDirection.DOWN)
 			return true;
-		else if(origin.getColumn() > target.getColumn() && target.getDoorDirection()==DoorDirection.LEFT)
+		else if(origin.getColumn() > target.getColumn() && origin.getDoorDirection()==DoorDirection.LEFT)
 			return true;
-		else if(origin.getColumn() < target.getColumn() && target.getDoorDirection()==DoorDirection.RIGHT)
+		else if(origin.getColumn() < target.getColumn() && origin.getDoorDirection()==DoorDirection.RIGHT)
 			return true;
 		else return false;
 	}
@@ -223,7 +246,6 @@ public class Board {
 			col = 0;
 			row++;
 		}
-
 		numRows = row;
 		numColumns = cols_seen;
 	}

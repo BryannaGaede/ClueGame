@@ -50,7 +50,7 @@ public class BoardCell {
 			return y;
 		}	
 	};
-	
+
 	public boolean isDoorway() {
 		
 		//System.out.println(doorDirection);
