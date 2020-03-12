@@ -34,5 +34,12 @@ public class Player {
 				// Not defined     
 				}   
 		return color; 
-		} 
+		}
+
+	/*
+	 * ********************USED FOR TESTING*************************************
+	 */
+	public String getName() {
+		return this.playerName;
+	} 
 	}
