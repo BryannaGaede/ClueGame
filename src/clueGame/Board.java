@@ -57,8 +57,6 @@ public class Board {
 		calcAdjacencies();
 	}
 	
-	
-
 	public void calcAdjacencies() {
 		for (int row = 0; row < numRows; row++) {
 			for (int col = 0; col < numColumns; col++) {
@@ -93,9 +91,7 @@ public class Board {
 				// push the adj list and corresponding cell to map
 				adjMatrix.put(getCellAt(row, col), adjSet);
 			}
-		}
-		
-		
+		}	
 	}
 	
 	public HashSet<BoardCell> calcTargets(int row, int col, int dieRoll) {
@@ -106,7 +102,6 @@ public class Board {
 		HashSet<BoardCell> foundTargets = new HashSet<BoardCell>();
 		// clear the old one
 		targets.clear();
-		
 		foundTargets = findAllTargets(startCell, dieRoll, start_og);
 		// remove the startCell if it exists (illegal move)
 		foundTargets.remove(startCell);
@@ -148,7 +143,6 @@ public class Board {
 	 * *************************HELPER FUNCTIONS******************************************
 	 */
 	
-	
 	public boolean adjHelp(BoardCell testCell, BoardCell startCell) {
 		if (
 				(!(testCell.isDoorway() && isGoodDoor(testCell,startCell)) && testCell.getInitials().length() == 2) 
@@ -162,7 +156,6 @@ public class Board {
 				(startCell.getFirstInitial() != 'W' && testCell.getFirstInitial() == 'W' && testCell.getInitials().length() !=2 && startCell.getInitials().length() != 2)) {
 			return false;
 		}
-	
 		else {
 			return true;
 		}
@@ -217,6 +210,7 @@ public class Board {
 		boardConfigFile = csv;
 		roomConfigFile = txt;
 	}
+	
 	// needs to get changed
 	public void loadRoomConfig(String legend_txt) throws IOException {
 
