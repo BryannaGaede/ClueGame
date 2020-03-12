@@ -1,0 +1,147 @@
+
+Before: (too many getters and setters)
+
+
+		public void setNumRows(int newNumRows) {
+			this.numRows = newNumRows;
+		}
+
+
+		public void setNumColumns(int newNumColumns) {
+			this.numColumns = newNumColumns;
+		}
+
+		public BoardCell[][] getBoard() {
+			return board;
+		}
+
+		public void setBoard(BoardCell[][] newBoard) {
+			this.board = newBoard;
+		}
+		public void setLegend(Map<Character, String> newLegend) {
+			this.legend = newLegend;
+		}
+
+		public Map<BoardCell, Set<BoardCell>> getAdjMatrix() {
+			return adjMatrix;
+		}
+
+		public void setAdjMatrix(Map<BoardCell, Set<BoardCell>> newAdjMatrix) {
+			this.adjMatrix = newAdjMatrix;
+		}
+
+		public Set<BoardCell> getTargets() {
+			return targets;
+		}
+
+		public String getBoardConfigFile() {
+			return boardConfigFile;
+		}
+
+		public void setBoardConfigFile(String newBoardConfigFile) {
+			this.boardConfigFile = newBoardConfigFile;
+		}
+
+		public String getRoomConfigFile() {
+			return roomConfigFile;
+		}
+
+		public void setRoomConfigFile(String newRoomConfigFile) {
+			this.roomConfigFile = newRoomConfigFile;
+		}
+
+		public int getMAX_BOARD_SIZE() {
+			return MAX_BOARD_SIZE;
+		}
+
+After: 	(way less getters and settersand still passes tests)
+	public Set<BoardCell> getAdjList(int row, int col) {
+		return adjMatrix.get(getCellAt(row,col));
+	}
+
+	public BoardCell getCellAt(int row, int col) {
+		// return the corresponding2D array
+		return board[row][col];
+	}
+		
+	public Set<BoardCell> getTargets() {
+		return targets;
+	}
+
+	public int getNumRows() {
+		return numRows;
+	}
+
+	public int getNumColumns() {
+		return numColumns;
+	}
+
+	public Map<Character, String> getLegend() {
+		return legend;
+	}
+
+
+Before: public HashSet<BoardCell> findAllTargets(BoardCell startCell, int stepsRemaining, BoardCell start_og)
+
+After: public HashSet<BoardCell> findAllTargets(BoardCell startCell, int stepsRemaining, BoardCell startingSquare)
+
+Before: less descriptive comments:
+	//checks if target is the right placement to exit based on starting origin being a door and it's direction
+	public boolean isExitSquare(BoardCell target, BoardCell origin) {
+		if(origin.getRow() > target.getRow() && origin.getDoorDirection() == DoorDirection.UP) 
+			return true;
+		else if(origin.getRow() < target.getRow() && origin.getDoorDirection() == DoorDirection.DOWN)
+			return true;
+		else if(origin.getColumn() > target.getColumn() && origin.getDoorDirection() == DoorDirection.LEFT)
+			return true;
+		else if(origin.getColumn() < target.getColumn() && origin.getDoorDirection() == DoorDirection.RIGHT)
+			return true;
+		else return false;
+	}
+After: more descriptive comments:
+	//checks if target is the right placement to exit based on starting origin being a door and it's direction
+	public boolean isExitSquare(BoardCell target, BoardCell origin) {
+		//a walkway above a door with direction up
+		if(origin.getRow() > target.getRow() && origin.getDoorDirection() == DoorDirection.UP) 
+			return true;
+		//a walkway below a door with direction down
+		else if(origin.getRow() < target.getRow() && origin.getDoorDirection() == DoorDirection.DOWN)
+			return true;
+		//a walkway to the left of a door with direction left
+		else if(origin.getColumn() > target.getColumn() && origin.getDoorDirection() == DoorDirection.LEFT)
+			return true;
+		//a walkway to the right of a door with direction right
+		else if(origin.getColumn() < target.getColumn() && origin.getDoorDirection() == DoorDirection.RIGHT)
+			return true;
+		else return false;
+	}
+
+Before: no brackets
+	public DoorDirection getDoorDirection() {
+		if (doorDirection == DoorDirection.UP)
+			return DoorDirection.UP;
+		else if(doorDirection == DoorDirection.DOWN)
+			return DoorDirection.DOWN;
+		else if(doorDirection == DoorDirection.LEFT)
+			return DoorDirection.LEFT;
+		else if(doorDirection == DoorDirection.RIGHT)
+			return DoorDirection.RIGHT;
+		return (doorDirection);
+	}
+
+After: brackets on all if statements
+	public DoorDirection getDoorDirection() {
+		if (doorDirection == DoorDirection.UP) {
+			return DoorDirection.UP;
+		}
+		else if(doorDirection == DoorDirection.DOWN) {
+			return DoorDirection.DOWN;
+		}
+		else if(doorDirection == DoorDirection.LEFT) {
+			return DoorDirection.LEFT;
+		}
+		else if(doorDirection == DoorDirection.RIGHT) {
+			return DoorDirection.RIGHT;
+		}
+		return (doorDirection);
+	}
