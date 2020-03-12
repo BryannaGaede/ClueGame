@@ -140,7 +140,7 @@ public class Board {
 	}
 
 	/*
-	 * *************************HELPER FUNCTIONS******************************************
+	 * *************************HELPER FUNCTIONS*************************************
 	 */
 	
 	public boolean adjHelp(BoardCell testCell, BoardCell startCell) {
@@ -179,14 +179,18 @@ public class Board {
 		else return false;
 	}
 	
-	//checks if the target is good to enter from origin
+	//checks door direction and adds to targets if it works
 	public boolean isGoodDoor(BoardCell target, BoardCell origin) {
-		if(origin.getRow() < target.getRow() && target.getDoorDirection() == DoorDirection.UP) 
+		// a cell under a door, door should be down
+		if(origin.getRow() < target.getRow() && target.getDoorDirection() == DoorDirection.DOWN) 
 				return true;
-		else if(origin.getRow() > target.getRow() && target.getDoorDirection() == DoorDirection.DOWN)
+		//if walkway is above door and door direction is up
+		else if(origin.getRow() > target.getRow() && target.getDoorDirection() == DoorDirection.UP)
 				return true;
+		//walkway is to the left of door and door direction is left
 		else if(origin.getColumn() < target.getColumn() && target.getDoorDirection() == DoorDirection.LEFT)
 				return true;
+		//walkway is to the right of door and door direction is right
 		else if(origin.getColumn() > target.getColumn() && target.getDoorDirection() == DoorDirection.RIGHT)
 				return true;
 		else return false;
@@ -267,6 +271,18 @@ public class Board {
 		
 	public Set<BoardCell> getTargets() {
 		return targets;
+	}
+
+	public int getNumRows() {
+		return numRows;
+	}
+
+	public int getNumColumns() {
+		return numColumns;
+	}
+
+	public Map<Character, String> getLegend() {
+		return legend;
 	}
 
 
