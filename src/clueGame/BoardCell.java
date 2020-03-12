@@ -7,7 +7,6 @@ public class BoardCell {
 	private int row;
 	private int column;
 	private  String initial;
-	private static BoardCell instance = new BoardCell();
 	private DoorDirection doorDirection;
 	
 	public BoardCell(int row, int column, String initial) {
@@ -18,21 +17,26 @@ public class BoardCell {
 		
 		if (initial.length() == 2) {
 			if (initial.charAt(1) == 'U') {
-				this.doorDirection = DoorDirection.UP;}
+				this.doorDirection = DoorDirection.UP;
+				}
 			else if (initial.charAt(1) == 'D') {
-				this.doorDirection = DoorDirection.DOWN;}
+				this.doorDirection = DoorDirection.DOWN;
+				}
 			else if (initial.charAt(1) == 'R') {
-				this.doorDirection = DoorDirection.RIGHT;}
+				this.doorDirection = DoorDirection.RIGHT;
+				}
 			else if (initial.charAt(1) == 'L') {
-				this.doorDirection = DoorDirection.LEFT;}
+				this.doorDirection = DoorDirection.LEFT;
+				}
 			else {
-				this.doorDirection = DoorDirection.NONE;}
+				this.doorDirection = DoorDirection.NONE;
+				}
 		} else {
-			this.doorDirection = DoorDirection.NONE;}
+			this.doorDirection = DoorDirection.NONE;
+			}
 	}
 	
 	public BoardCell() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public static enum DoorDirection {
@@ -52,12 +56,12 @@ public class BoardCell {
 	};
 
 	public boolean isDoorway() {
-		
-		//System.out.println(doorDirection);
-		if (doorDirection == DoorDirection.NONE)
+		if (doorDirection == DoorDirection.NONE) {
 			return false;
-		else
+		}
+		else {
 			return true;
+		}
 	}
 	
 	@Override
@@ -71,9 +75,26 @@ public class BoardCell {
 	 */
 	
 
+	public DoorDirection getDoorDirection() {
+		if (doorDirection == DoorDirection.UP) {
+			return DoorDirection.UP;
+		}
+		else if(doorDirection == DoorDirection.DOWN) {
+			return DoorDirection.DOWN;
+		}
+		else if(doorDirection == DoorDirection.LEFT) {
+			return DoorDirection.LEFT;
+		}
+		else if(doorDirection == DoorDirection.RIGHT) {
+			return DoorDirection.RIGHT;
+		}
+		return (doorDirection);
+	}
+	
 	public char getFirstInitial() {
 		return initial.charAt(0);
 	}
+	
 	public String getInitials() {
 		return initial;
 	}
@@ -82,36 +103,13 @@ public class BoardCell {
 		this.initial = new String();
 		this.initial = letter;
 	}
-
+	
 	public int getRow() {
 		return row;
 	}
-	public void setRow(int row) {
-		this.row = row;
-	}
+	
 	public int getColumn() {
 		return column;
 	}
-	public void setColumn(int column) {
-		this.column = column;
-	}
-	
-	public DoorDirection getDoorDirection() {
-		if (doorDirection == DoorDirection.UP)
-			return DoorDirection.UP;
-		else if(doorDirection == DoorDirection.DOWN)
-			return DoorDirection.DOWN;
-		else if(doorDirection == DoorDirection.LEFT)
-			return DoorDirection.LEFT;
-		else if(doorDirection == DoorDirection.RIGHT)
-			return DoorDirection.RIGHT;
-		return (doorDirection);
-	}
-	
-	//output testing command
-	public void p(String msg) {
-		System.out.println(msg);
-	}
-	
 }
 	
