@@ -2,15 +2,12 @@ package clueGame;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.Set;
 
 //checking to see if you are able to see recent changes by me
@@ -144,10 +141,10 @@ public class Board {
 	 */
 	
 	public boolean adjHelp(BoardCell testCell, BoardCell startCell) {
-		//if the the cell is not a doorway and it has two initials don't enter
+		//if the cell is not a doorway and it has two initials don't enter
 		//if it is not an exit and don't leave the room
 		//if you are on a walkway only enter if door
-		//if it is a walkway you can keep waling on the walkway
+		//if it is a walkway you can keep walking on the walkway
 		if (
 				(!(testCell.isDoorway() && isGoodDoor(testCell,startCell)) && testCell.getInitials().length() == 2) 
 				|| 
