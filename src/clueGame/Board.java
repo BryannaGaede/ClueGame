@@ -144,6 +144,10 @@ public class Board {
 	 */
 	
 	public boolean adjHelp(BoardCell testCell, BoardCell startCell) {
+		//if the the cell is not a doorway and it has two initials don't enter
+		//if it is not an exit and don't leave the room
+		//if you are on a walkway only enter if door
+		//if it is a walkway you can keep waling on the walkway
 		if (
 				(!(testCell.isDoorway() && isGoodDoor(testCell,startCell)) && testCell.getInitials().length() == 2) 
 				|| 
@@ -156,6 +160,7 @@ public class Board {
 				(startCell.getFirstInitial() != 'W' && testCell.getFirstInitial() == 'W' && testCell.getInitials().length() !=2 && startCell.getInitials().length() != 2)) {
 			return false;
 		}
+		//otherwise you can not move
 		else {
 			return true;
 		}
