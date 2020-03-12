@@ -108,11 +108,11 @@ public class Board {
 		return (foundTargets);	
 	}
 	
-	public HashSet<BoardCell> findAllTargets(BoardCell startCell, int stepsRemaining, BoardCell start_og) {
+	public HashSet<BoardCell> findAllTargets(BoardCell startCell, int stepsRemaining, BoardCell startingSquare) {
 		// go through every adj cell
 		for (BoardCell testCell : getAdjList(startCell.getRow(), startCell.getColumn())) {
-			if (testCell.getRow() == start_og.getRow() && testCell.getColumn() == start_og.getColumn()) {
-				visited.add(start_og);
+			if (testCell.getRow() == startingSquare.getRow() && testCell.getColumn() == startingSquare.getColumn()) {
+				visited.add(startingSquare);
 				continue;
 			}
 			if(testCell.isDoorway() && isGoodDoor(testCell,startCell)) {
@@ -131,7 +131,7 @@ public class Board {
 			}
 			// else call recursive
 			else if(!testCell.isDoorway()){
-				findAllTargets(testCell, stepsRemaining - 1, start_og);
+				findAllTargets(testCell, stepsRemaining - 1, startingSquare);
 			}
 			visited.remove(testCell);
 		}
