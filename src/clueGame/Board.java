@@ -226,9 +226,18 @@ public class Board {
 	
 	// needs to get changed
 	public void loadRoomConfig(String legend_txt) throws IOException {
-
-		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(legend_txt), "UTF-8"));
-	}	
+		String line = "";
+        String splitBy = ", ";
+        String[] lines;
+        legend = new HashMap<Character, String>();
+        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(legend_txt), "UTF-8"));
+        while ((line = br.readLine()) != null) {
+            lines = line.split(splitBy);
+            char x = lines[0].charAt(0);
+            legend.put(x, lines[1]);
+            }
+        br.close();
+        }	
 	
 	public void loadBoardConfig(String layout_csv) throws IOException {
 		// set up file reader for csv
@@ -256,6 +265,7 @@ public class Board {
 			col = 0;
 			row++;
 		}
+		in.close();
 		numRows = row;
 		numColumns = cols_seen;
 	}
