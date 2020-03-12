@@ -81,10 +81,6 @@ After: 	(way less getters and settersand still passes tests)
 	}
 
 
-Before: public HashSet<BoardCell> findAllTargets(BoardCell startCell, int stepsRemaining, BoardCell start_og)
-
-After: public HashSet<BoardCell> findAllTargets(BoardCell startCell, int stepsRemaining, BoardCell startingSquare)
-
 Before: less descriptive comments:
 	//checks if target is the right placement to exit based on starting origin being a door and it's direction
 	public boolean isExitSquare(BoardCell target, BoardCell origin) {
