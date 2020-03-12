@@ -45,8 +45,6 @@ public class CTest_FileInitTests {
 		Map<Character, String> legend = board.getLegend();
 		// Ensure we read the correct number of rooms
 		
-		//System.out.println(legend.size());
-		
 		assertEquals(LEGEND_SIZE, legend.size());
 		// To ensure data is correctly loaded, test retrieving a few rooms 
 		// from the hash, including the first and last in the file and a few others
@@ -64,7 +62,7 @@ public class CTest_FileInitTests {
 		assertEquals(NUM_COLUMNS, board.getNumColumns());		
 	}
 	
-	// Test a doorwa y in each direction (RIGHT/LEFT/UP/DOWN), plus 
+	// Test a doorway in each direction (RIGHT/LEFT/UP/DOWN), plus 
 	// two cells that are not a doorway.
 	// These cells are white on the planning spreadsheet
 	@Test

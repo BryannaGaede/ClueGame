@@ -2,6 +2,8 @@ package clueGame;
 
 import java.awt.Color;
 
+import java.lang.reflect.Field;
+
 public class Player {
 	protected String playerName;
 	protected int row;
@@ -10,7 +12,27 @@ public class Player {
 	protected Card[] myCards;
 	protected Card[] seenCards;
 	
+	public Player(String name, int row2, int col, String color) {
+		this.playerName = name;
+		this.row = row2;
+		this.column = col;
+		this.color = convertColor(color);
+	}
+
 	public Card disproveSuggestion(Solution suggestion) {
 		return null;
 	}
-}
+	
+	public Color convertColor(String strColor) {     
+		Color color;      
+		try {              
+			// We can use reflection to convert the string to a color         
+			Field field = Class.forName("java.awt.Color").getField(strColor.trim());         
+			color = (Color)field.get(null);    
+			} catch (Exception e) {           
+				color = null; 
+				// Not defined     
+				}   
+		return color; 
+		} 
+	}

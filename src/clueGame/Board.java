@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -27,6 +28,8 @@ public class Board {
 	private HashSet<BoardCell> visited = new HashSet<BoardCell>();
 	private Map<Character, String> legend;
 	public BoardCell board[][] = new BoardCell[numRows][numColumns];
+	
+	private ArrayList<Player> players = new ArrayList<Player>();
 
 	// variable used for singleton pattern
 	private static Board theInstance = new Board();
@@ -267,7 +270,38 @@ public class Board {
 	}
 	
 	public void loadPlayerConfig(String player_txt) throws IOException{
+		String line = "";
+		String name = "";
+		String color = "";
+		int row = 0;
+		int col = 0;
 		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(player_txt), "UTF-8"));
+		int numPlayers = 0;
+		while((line= br.readLine()) != null) {
+		//player name
+			name = line;
+		//player color
+			if((line = br.readLine()) == null) {
+				System.out.println("File formatted wrong");
+			} else {
+				color = line;
+			}
+		//player start row
+			if((line = br.readLine()) == null) {
+				System.out.println("File formatted wrong");
+			} else {
+				row = Integer.parseInt(line);
+			}
+		//player start column
+			if((line = br.readLine()) == null) {
+				System.out.println("File formatted wrong");
+			} else {
+				col = Integer.parseInt(line);
+			}
+		//create that player object store in players array list
+			Player player = new Player(name,row,col,color);
+			players.add(player);
+		}
 	}
 	
 	public void loadWeaponConfig(String weapon_txt) throws IOException{
@@ -335,6 +369,10 @@ public class Board {
 	public Set<BoardCell> getTargets() {
 		return targets;
 	}
+	
+	/*
+	 * ***********************USED FOR TESTING***************************************
+	 */
 
 	public int getNumRows() {
 		return numRows;
@@ -346,6 +384,10 @@ public class Board {
 
 	public Map<Character, String> getLegend() {
 		return legend;
+	}
+
+	public ArrayList<Player> getPlayers() {
+		return players;
 	}
 
 }
