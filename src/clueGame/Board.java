@@ -163,26 +163,26 @@ public class Board {
 
 	//checks if target is the right placement to exit based on starting origin being a door and it's direction
 	public boolean isExitSquare(BoardCell target, BoardCell origin) {
-		if(origin.getRow() > target.getRow() && origin.getDoorDirection()==DoorDirection.UP) 
+		if(origin.getRow() > target.getRow() && origin.getDoorDirection() == DoorDirection.UP) 
 			return true;
-		else if(origin.getRow() < target.getRow() && origin.getDoorDirection()==DoorDirection.DOWN)
+		else if(origin.getRow() < target.getRow() && origin.getDoorDirection() == DoorDirection.DOWN)
 			return true;
-		else if(origin.getColumn() > target.getColumn() && origin.getDoorDirection()==DoorDirection.LEFT)
+		else if(origin.getColumn() > target.getColumn() && origin.getDoorDirection() == DoorDirection.LEFT)
 			return true;
-		else if(origin.getColumn() < target.getColumn() && origin.getDoorDirection()==DoorDirection.RIGHT)
+		else if(origin.getColumn() < target.getColumn() && origin.getDoorDirection() == DoorDirection.RIGHT)
 			return true;
 		else return false;
 	}
 	
 	//checks if the target is good to enter from origin
 	public boolean isGoodDoor(BoardCell target, BoardCell origin) {
-		if(origin.getRow() < target.getRow() && target.getDoorDirection()==DoorDirection.UP) 
+		if(origin.getRow() < target.getRow() && target.getDoorDirection() == DoorDirection.UP) 
 				return true;
-		else if(origin.getRow() > target.getRow() && target.getDoorDirection()==DoorDirection.DOWN)
+		else if(origin.getRow() > target.getRow() && target.getDoorDirection() == DoorDirection.DOWN)
 				return true;
-		else if(origin.getColumn() < target.getColumn() && target.getDoorDirection()==DoorDirection.LEFT)
+		else if(origin.getColumn() < target.getColumn() && target.getDoorDirection() == DoorDirection.LEFT)
 				return true;
-		else if(origin.getColumn() > target.getColumn() && target.getDoorDirection()==DoorDirection.RIGHT)
+		else if(origin.getColumn() > target.getColumn() && target.getDoorDirection() == DoorDirection.RIGHT)
 				return true;
 		else return false;
 	}
