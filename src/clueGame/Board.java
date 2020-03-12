@@ -270,6 +270,10 @@ public class Board {
 		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(player_txt), "UTF-8"));
 	}
 	
+	public void loadWeaponConfig(String weapon_txt) throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(weapon_txt), "UTF-8"));	
+	}
+	
 	public void loadRoomConfig(String legend_txt) throws IOException {
 		String line = "";
 		String splitBy = ", ";
