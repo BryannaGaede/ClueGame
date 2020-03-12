@@ -259,68 +259,10 @@ public class Board {
 		// return the corresponding2D array
 		return board[row][col];
 	}
-		public int getNumRows() {
-			return numRows;
-		}
+		
+	public Set<BoardCell> getTargets() {
+		return targets;
+	}
 
-		public void setNumRows(int newNumRows) {
-			this.numRows = newNumRows;
-		}
-
-		public int getNumColumns() {
-			return numColumns;
-		}
-
-		public void setNumColumns(int newNumColumns) {
-			this.numColumns = newNumColumns;
-		}
-
-		public BoardCell[][] getBoard() {
-			return board;
-		}
-
-		public void setBoard(BoardCell[][] newBoard) {
-			this.board = newBoard;
-		}
-
-		public Map<Character, String> getLegend() {
-			return legend;
-		}
-
-		public void setLegend(Map<Character, String> newLegend) {
-			this.legend = newLegend;
-		}
-
-		public Map<BoardCell, Set<BoardCell>> getAdjMatrix() {
-			return adjMatrix;
-		}
-
-		public void setAdjMatrix(Map<BoardCell, Set<BoardCell>> newAdjMatrix) {
-			this.adjMatrix = newAdjMatrix;
-		}
-
-		public Set<BoardCell> getTargets() {
-			return targets;
-		}
-
-		public String getBoardConfigFile() {
-			return boardConfigFile;
-		}
-
-		public void setBoardConfigFile(String newBoardConfigFile) {
-			this.boardConfigFile = newBoardConfigFile;
-		}
-
-		public String getRoomConfigFile() {
-			return roomConfigFile;
-		}
-
-		public void setRoomConfigFile(String newRoomConfigFile) {
-			this.roomConfigFile = newRoomConfigFile;
-		}
-
-		public int getMAX_BOARD_SIZE() {
-			return MAX_BOARD_SIZE;
-		}
 
 }
