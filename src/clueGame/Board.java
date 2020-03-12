@@ -10,14 +10,11 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-//checking to see if you are able to see recent changes by me
-
-
 import clueGame.BoardCell;
 import clueGame.BoardCell.DoorDirection;
 
 public class Board {
-	public final int MAX_BOARD_SIZE = 25;
+	public final int MAX_BOARD_SIZE = 50;
 	private int numRows = 30;
 	private int numColumns = 30;
 	private String boardConfigFile;
@@ -28,7 +25,6 @@ public class Board {
 	private HashSet<BoardCell> visited = new HashSet<BoardCell>();
 	private Map<Character, String> legend;
 	public BoardCell board[][] = new BoardCell[numRows][numColumns];
-	//BoardCell start = new BoardCell();
 
 	// variable used for singleton pattern
 	private static Board theInstance = new Board();
@@ -94,12 +90,12 @@ public class Board {
 	public HashSet<BoardCell> calcTargets(int row, int col, int dieRoll) {
 		// create new hashset
 		BoardCell startCell = getCellAt(row, col);
-		BoardCell start_og = new BoardCell();
-		start_og = getCellAt(row, col);
+		BoardCell originalStart = new BoardCell();
+		originalStart = getCellAt(row, col);
 		HashSet<BoardCell> foundTargets = new HashSet<BoardCell>();
 		// clear the old one
 		targets.clear();
-		foundTargets = findAllTargets(startCell, dieRoll, start_og);
+		foundTargets = findAllTargets(startCell, dieRoll, originalStart);
 		// remove the startCell if it exists (illegal move)
 		foundTargets.remove(startCell);
 		return (foundTargets);	
@@ -166,50 +162,67 @@ public class Board {
 	//checks if target is the right placement to exit based on starting origin being a door and it's direction
 	public boolean isExitSquare(BoardCell target, BoardCell origin) {
 		//a walkway above a door with direction up
-		if(origin.getRow() > target.getRow() && origin.getDoorDirection() == DoorDirection.UP) 
+		if(origin.getRow() > target.getRow() && origin.getDoorDirection() == DoorDirection.UP) {
 			return true;
+		}
 		//a walkway below a door with direction down
-		else if(origin.getRow() < target.getRow() && origin.getDoorDirection() == DoorDirection.DOWN)
+		else if(origin.getRow() < target.getRow() && origin.getDoorDirection() == DoorDirection.DOWN) {
 			return true;
+		}
 		//a walkway to the left of a door with direction left
-		else if(origin.getColumn() > target.getColumn() && origin.getDoorDirection() == DoorDirection.LEFT)
+		else if(origin.getColumn() > target.getColumn() && origin.getDoorDirection() == DoorDirection.LEFT) {
 			return true;
+		}
 		//a walkway to the right of a door with direction right
-		else if(origin.getColumn() < target.getColumn() && origin.getDoorDirection() == DoorDirection.RIGHT)
+		else if(origin.getColumn() < target.getColumn() && origin.getDoorDirection() == DoorDirection.RIGHT) {
 			return true;
-		else return false;
+		}
+		else {
+			return false;
+		}
 	}
 	
 	//checks door direction and adds to targets if it works
 	public boolean isGoodDoor(BoardCell target, BoardCell origin) {
 		// a cell under a door, and door direction is up
-		if(origin.getRow() < target.getRow() && target.getDoorDirection() == DoorDirection.UP) 
+		if(origin.getRow() < target.getRow() && target.getDoorDirection() == DoorDirection.UP) {
 				return true;
+		}
 		//walkway is above door and door direction is down
-		else if(origin.getRow() > target.getRow() && target.getDoorDirection() == DoorDirection.DOWN)
+		else if(origin.getRow() > target.getRow() && target.getDoorDirection() == DoorDirection.DOWN) {
 				return true;
+		}
 		//walkway is to the left of door and door direction is left
-		else if(origin.getColumn() < target.getColumn() && target.getDoorDirection() == DoorDirection.LEFT)
+		else if(origin.getColumn() < target.getColumn() && target.getDoorDirection() == DoorDirection.LEFT) {
 				return true;
+		}
 		//walkway is to the right of door and door direction is right
-		else if(origin.getColumn() > target.getColumn() && target.getDoorDirection() == DoorDirection.RIGHT)
+		else if(origin.getColumn() > target.getColumn() && target.getDoorDirection() == DoorDirection.RIGHT) {
 				return true;
-		else return false;
+		}
+		else {
+			return false;
+		}
 	}
 	
+	//checks to see if the target haas the same initial as the origin cell
 	public boolean isSameRoom(BoardCell target, BoardCell origin){
-		if(origin.getFirstInitial() == target.getFirstInitial())
+		if(origin.getFirstInitial() == target.getFirstInitial()) {
 			return true;
-		else return false;
+		}
+		else {
+			return false;
+		}
 	}
 	
+	//checks if the symbol is a closet
 	public boolean isCloset(BoardCell target) {
-		if(target.getFirstInitial() == 'X')
+		if(target.getFirstInitial() == 'X') {
 			return true;
-		else return false;
-	}
-	public void p(String msg) {
-		System.out.println(msg);
+		}
+		else { 
+			return false;
+		}
 	}
 
 	/*
@@ -221,7 +234,6 @@ public class Board {
 		roomConfigFile = txt;
 	}
 	
-	// needs to get changed
 	public void loadRoomConfig(String legend_txt) throws IOException {
 		String line = "";
         String splitBy = ", ";
