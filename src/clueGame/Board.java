@@ -68,12 +68,12 @@ public class Board {
 		
 	}
 	
-	public void handleSuggestion() {
-		
+	public Card handleSuggestion() {
+		return null;
 	}
 	
-	public void checkAccusation() {
-		
+	public boolean checkAccusation(Solution accusation) {
+		return true;
 	}
 	
 
