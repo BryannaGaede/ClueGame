@@ -19,6 +19,8 @@ public class Board {
 	private int numColumns = 30;
 	private String boardConfigFile;
 	private String roomConfigFile;
+	private String playerConfigFile;
+	private String weaponConfigFile;
 
 	private Map<BoardCell, Set<BoardCell>> adjMatrix = new HashMap<>();
 	private HashSet<BoardCell> targets = new HashSet<BoardCell>();
@@ -49,9 +51,35 @@ public class Board {
 		} catch (IOException e) {
 			System.out.println("Trouble loading boardConfigFile - csv");
 		}
+		try {
+			loadPlayerConfig(playerConfigFile);
+		} catch (IOException e) {
+			System.out.println("Trouble loading playerConfigFile");
+		}
 
 		calcAdjacencies();
 	}
+	
+	/*
+	 * ***********************SET UP CARDS AND PLAYERS***********************
+	 */
+	
+	public void selectAnswer() {
+		
+	}
+	
+	public void handleSuggestion() {
+		
+	}
+	
+	public void checkAccusation() {
+		
+	}
+	
+
+	/*
+	 * ***********************SET UP BOARD*****************************
+	 */
 
 	public void calcAdjacencies() {
 		for (int row = 0; row < numRows; row++) {
@@ -136,8 +164,7 @@ public class Board {
 	}
 
 	/*
-	 * *************************HELPER
-	 * FUNCTIONS*************************************
+	 * *************************HELPER FUNCTIONS*************************************
 	 */
 
 	public boolean adjHelp(BoardCell testCell, BoardCell startCell) {
@@ -227,11 +254,22 @@ public class Board {
 	 * ********************CONFIGURATION METHODS********************************
 	 */
 
+	public void setAllConfigFiles(String csv, String txtRoom, String txtPlayer, String txtWeapon) {
+		boardConfigFile = csv;
+		roomConfigFile = txtRoom;
+		playerConfigFile = txtPlayer;
+		weaponConfigFile = txtWeapon;
+	}
+	//used for earlier testing
 	public void setConfigFiles(String csv, String txt) {
 		boardConfigFile = csv;
 		roomConfigFile = txt;
 	}
-
+	
+	public void loadPlayerConfig(String player_txt) throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(player_txt), "UTF-8"));
+	}
+	
 	public void loadRoomConfig(String legend_txt) throws IOException {
 		String line = "";
 		String splitBy = ", ";
