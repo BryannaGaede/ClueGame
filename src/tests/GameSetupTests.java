@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import clueGame.Board;
 import clueGame.Player;
+import clueGame.Status;
 
 public class GameSetupTests {
 	// Constants that I will use to test whether the file was loaded correctly
@@ -69,4 +70,14 @@ public class GameSetupTests {
 		assertEquals(players.get(2).getColor(), Color.GREEN);
 	}
 
+	@Test
+	public void testPlayerStatus() {
+		ArrayList<Player> players = board.getPlayers();
+		//the first player is Yue, who is orange and starts at 25,22 - HUMAN PLAYER
+		assertEquals(players.get(0).getStatus(), Status.HUMAN);
+		//the last player is Baldwin, who is yellow and starts at 25,4
+		assertEquals(players.get(NUM_PLAYERS-1).getStatus(), Status.HUMAN);
+		//the third player is Mehta, who is green and starts at 0,6
+		assertEquals(players.get(2).getStatus(), Status.COMPUTER);
+	}
 }

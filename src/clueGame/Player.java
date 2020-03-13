@@ -11,6 +11,7 @@ public class Player {
 	protected Color color;
 	protected Card[] myCards;
 	protected Card[] seenCards;
+	protected Status status = Status.NONE;
 	
 	public Player(String name, int row2, int col, String color) {
 		this.playerName = name;
@@ -53,5 +54,9 @@ public class Player {
 
 	public Color getColor() {
 		return color;
+	}
+
+	public Status getStatus() {
+		return status;
 	} 
 	}
