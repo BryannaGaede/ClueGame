@@ -299,7 +299,7 @@ public class Board {
 				col = Integer.parseInt(line);
 			}
 		//create that player object store in players array list
-			Player player = new Player(name,0,0,color);
+			Player player = new Player(name,row,col,color);
 			players.add(player);
 		}
 	}
