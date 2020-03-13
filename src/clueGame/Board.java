@@ -8,7 +8,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -32,7 +31,7 @@ public class Board {
 	
 	private ArrayList<Player> players = new ArrayList<Player>();
 	private ArrayList<Weapon> weapons = new ArrayList<Weapon>();
-	private HashSet<Card> allCards = new HashSet<Card>();
+	private ArrayList<Card> allCards = new ArrayList<Card>();
 
 	// variable used for singleton pattern
 	private static Board theInstance = new Board();
@@ -70,7 +69,7 @@ public class Board {
 
 		calcAdjacencies();
 		buildDeck();
-		//dealCards();
+		dealCards();
 	}
 	
 	/*
@@ -88,6 +87,12 @@ public class Board {
 			Card card = new Card(CardType.WEAPON, weapon.getName());
 			allCards.add(card);
 		}
+	}
+	
+	public void dealCards() {
+		HashSet<Integer> usedIndex = new HashSet<Integer>();
+		//give card at random index to players until all cards are used
+		
 	}
 	
 	public void selectAnswer() {
@@ -441,7 +446,7 @@ public class Board {
 		return weapons;
 	}
 
-	public HashSet<Card> getCards() {
+	public ArrayList<Card> getCards() {
 		return allCards;
 	}
 
@@ -462,6 +467,10 @@ public class Board {
 			}
 		}
 		return counter;
+	}
+
+	public boolean noDuplicates(Card card) {
+		return false;
 	}
 
 }

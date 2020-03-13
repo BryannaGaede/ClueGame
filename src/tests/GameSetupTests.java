@@ -121,7 +121,7 @@ public class GameSetupTests {
 	//CHECK THE NUMBER OF CARDS IS ACCURATE
 	@Test
 	public void testDeckSize() {
-		HashSet<Card> cards = board.getCards();
+		ArrayList<Card> cards = board.getCards();
 		//make sure the right number of cards is being noticed
 		assertEquals(NUM_CARDS, cards.size());
 	}	
@@ -147,8 +147,22 @@ public class GameSetupTests {
 	 * *********TEST TO SEE THAT THE CARDS ARE DELT CORRECTLY****************
 	 */
 	
-	//CHECK THAT NO CARD IS DEALT TWICE
-	
-	//CHECK THAT ALL CARDS ARE DEALT
+	//CHECK THAT ALL CARDS ARE DEALT AND ONLY ONCE
+	@Test
+	public void testDeal() {
+		//check multiple cards to see status as being dealt
+		ArrayList<Card> cards = board.getCards();
+		assertTrue(cards.get(0).getStatus());
+		assertTrue(cards.get(NUM_CARDS-1).getStatus());
+		assertTrue(cards.get(NUM_CARDS/2 -4).getStatus());
+		assertTrue(cards.get(NUM_CARDS/2 +4).getStatus());
 		
+		//check that cards aren't dealt more than once
+		assertTrue(board.noDuplicates(cards.get(0)));
+		assertTrue(board.noDuplicates(cards.get(NUM_CARDS-1)));
+		assertTrue(board.noDuplicates(cards.get(NUM_CARDS/2 -4)));
+		assertTrue(board.noDuplicates(cards.get(NUM_CARDS/2 +4)));
+	}
+
+	//CHECK THAT NO CARD IS DEALT TWICE
 }
