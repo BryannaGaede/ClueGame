@@ -78,11 +78,6 @@ public class Board {
 	 */
 	
 	public void buildDeck() {
-		//make cards for all rooms
-		for(String key : legend.values()) {
-			Card card = new Card();
-			allCards.add(card);
-		}
 		//make cards for all players
 		for(Player player: players) {
 			Card card = new Card();
@@ -363,6 +358,12 @@ public class Board {
 			lines = line.split(splitBy);
 			char x = lines[0].charAt(0);
 			legend.put(x, lines[1]);
+			String type = lines[2];
+			if(type.equals("Card")) {
+				System.out.println(type);
+				Card card = new Card();
+				allCards.add(card);
+			}
 		}
 		br.close();
 	}

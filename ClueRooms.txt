@@ -1,5 +1,5 @@
 A, Auditorium, Card
-F, Closet, Card
+F, Closet, Other
 E, Elevator, Card
 G, Garage, Card
 H, Hill, Card
