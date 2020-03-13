@@ -2,6 +2,7 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -34,26 +35,38 @@ public class GameSetupTests {
 		ArrayList<Player> players = board.getPlayers();
 		//make sure the right number of player is being noticed
 		assertEquals(NUM_PLAYERS, players.size());
-		//the first player is Plum, who is purple and starts at 25,22
-		assertEquals(players.get(0).getName(), "PROFESSOR PLUM");
-		//the last player is Mustart, who is yellow and starts at 25,4
-		assertEquals(players.get(NUM_PLAYERS-1).getName(), "COLONEL MUSTARD");
-		//the third player is Green, who is green and starts at 0,6
-		assertEquals(players.get(2).getName(), "MR. GREEN");
+		//the first player is Yue, who is orange and starts at 25,22
+		assertEquals(players.get(0).getName(), "DR. HUAN YUE");
+		//the last player is Baldwin, who is yellow and starts at 25,4
+		assertEquals(players.get(NUM_PLAYERS-1).getName(), "PROFESSOR BALDWIN");
+		//the third player is Mehta, who is green and starts at 0,6
+		assertEquals(players.get(2).getName(), "PROFESSOR DINESH MEHTA");
 	}
 
 	@Test
 	public void testPlayerLocations() {
 		ArrayList<Player> players = board.getPlayers();
-		//the first player is Plum, who is purple and starts at 25,22
+		//the first player is Yue, who is orange and starts at 25,22
 		assertEquals(players.get(0).getRow(), 25);
 		assertEquals(players.get(0).getCol(), 22);
-		//the last player is Mustart, who is yellow and starts at 25,4
+		//the last player is Baldwin, who is yellow and starts at 25,4
 		assertEquals(players.get(NUM_PLAYERS-1).getRow(), 25);
 		assertEquals(players.get(NUM_PLAYERS-1).getCol(), 4);
-		//the third player is Green, who is green and starts at 0,6
+		//the third player is Mehta, who is green and starts at 0,6
 		assertEquals(players.get(2).getRow(), 0);
 		assertEquals(players.get(2).getCol(), 6);
+	}
+	
+
+	@Test
+	public void testPlayerColor() {
+		ArrayList<Player> players = board.getPlayers();
+		//the first player is Yue, who is orange and starts at 25,22
+		assertEquals(players.get(0).getColor(), Color.ORANGE);
+		//the last player is Baldwin, who is yellow and starts at 25,4
+		assertEquals(players.get(NUM_PLAYERS-1).getColor(), Color.YELLOW);
+		//the third player is Mehta, who is green and starts at 0,6
+		assertEquals(players.get(2).getColor(), Color.GREEN);
 	}
 
 }

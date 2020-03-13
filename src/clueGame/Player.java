@@ -30,9 +30,9 @@ public class Player {
 			Field field = Class.forName("java.awt.Color").getField(strColor.trim());         
 			color = (Color)field.get(null);    
 			} catch (Exception e) {           
-				color = null; 
-				// Not defined     
-				}   
+				color = null;
+				// Not defined, but we'll call it purple     
+				}
 		return color; 
 		}
 
@@ -49,5 +49,9 @@ public class Player {
 
 	public int getCol() {
 		return column;
+	}
+
+	public Color getColor() {
+		return color;
 	} 
 	}

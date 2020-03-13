@@ -275,8 +275,8 @@ public class Board {
 		String color = "";
 		int row = 0;
 		int col = 0;
+		char status = ' ';
 		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(player_txt), "UTF-8"));
-		int numPlayers = 0;
 		while((line= br.readLine()) != null) {
 		//player name
 			name = line;
@@ -298,10 +298,22 @@ public class Board {
 			} else {
 				col = Integer.parseInt(line);
 			}
+		//human or computer option:
+			if((line = br.readLine()) == null) {
+				System.out.println("File formatted wrong");
+			} else {
+				status = line.charAt(0);
+			}
 		//create that player object store in players array list
-			Player player = new Player(name,row,col,color);
-			players.add(player);
+			if(status == 'C') {
+				Player player = new ComputerPlayer(name,row,col,color);
+				players.add(player);
+			} else if(status == 'H') {
+				Player player = new HumanPlayer(name,row,col,"RED");
+				players.add(player);
+			}
 		}
+		br.close();
 	}
 	
 	public void loadWeaponConfig(String weapon_txt) throws IOException{
