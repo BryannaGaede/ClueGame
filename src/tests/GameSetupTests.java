@@ -135,7 +135,12 @@ public class GameSetupTests {
 		assertTrue(board.cardExists(CardType.PERSON, "PROFESSOR DINESH MEHTA"));
 		//make sure a weapon exists
 		assertTrue(board.cardExists(CardType.WEAPON, "LAZOR"));
-	}	
+		
+		//make sure the count for each type is right
+		assertEquals(board.cardCount(CardType.ROOM), 9);
+		assertEquals(board.cardCount(CardType.PERSON), 6);
+		assertEquals(board.cardCount(CardType.WEAPON), 6);
+	}
 	
 	
 	/*

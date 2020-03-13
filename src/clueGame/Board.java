@@ -454,4 +454,8 @@ public class Board {
 		return false;
 	}
 
+	public int cardCount(CardType type) {
+		return 0;
+	}
+
 }
