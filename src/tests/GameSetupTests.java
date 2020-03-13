@@ -41,6 +41,19 @@ public class GameSetupTests {
 		//the third player is Green, who is green and starts at 0,6
 		assertEquals(players.get(2).getName(), "MR. GREEN");
 	}
-	
+
+	@Test
+	public void testPlayerLocations() {
+		ArrayList<Player> players = board.getPlayers();
+		//the first player is Plum, who is purple and starts at 25,22
+		assertEquals(players.get(0).getRow(), 25);
+		assertEquals(players.get(0).getCol(), 22);
+		//the last player is Mustart, who is yellow and starts at 25,4
+		assertEquals(players.get(NUM_PLAYERS-1).getRow(), 25);
+		assertEquals(players.get(NUM_PLAYERS-1).getCol(), 4);
+		//the third player is Green, who is green and starts at 0,6
+		assertEquals(players.get(2).getRow(), 0);
+		assertEquals(players.get(2).getCol(), 6);
+	}
 
 }
