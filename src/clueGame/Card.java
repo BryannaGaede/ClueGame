@@ -13,4 +13,13 @@ public class Card {
 	public boolean equals() {
 		return true;
 	}
+
+	//used for testing
+	public CardType getType() {
+		return type;
+	}
+
+	public String getName() {
+		return name;
+	}
 }

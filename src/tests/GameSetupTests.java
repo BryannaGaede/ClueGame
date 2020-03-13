@@ -129,14 +129,12 @@ public class GameSetupTests {
 	//MAKE SURE EXPECTED CARDS ARE CONTAINED IN THE DECK
 	@Test
 	public void testDeckContents() {
-		HashSet<Card> cards = board.getCards();
 		//make sure a room exists
-		Card test = new Card(CardType.ROOM,"Garage");
-		assertTrue(cards.contains(test));
+		assertTrue(board.cardExists(CardType.ROOM,"Garage"));
 		//make sure a person exists
-		test = new Card(CardType.PERSON,"PROFESSOR DINESH MEHTA");
+		assertTrue(board.cardExists(CardType.PERSON, "PROFESSOR DINESH MEHTA"));
 		//make sure a weapon exists
-		test = new Card(CardType.WEAPON,"LAZOR");
+		assertTrue(board.cardExists(CardType.WEAPON, "LAZOR"));
 	}	
 	
 	

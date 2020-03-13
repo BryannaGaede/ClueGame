@@ -80,12 +80,12 @@ public class Board {
 	public void buildDeck() {
 		//make cards for all players
 		for(Player player: players) {
-			Card card = new Card(CardType.NONE,"");
+			Card card = new Card(CardType.PERSON, player.getName());
 			allCards.add(card);
 		}
 		//make cards for each weapon
 		for(Weapon weapon: weapons) {
-			Card card = new Card(CardType.NONE,"");
+			Card card = new Card(CardType.WEAPON, weapon.getName());
 			allCards.add(card);
 		}
 	}
@@ -359,9 +359,10 @@ public class Board {
 			char x = lines[0].charAt(0);
 			legend.put(x, lines[1]);
 			String type = lines[2];
+			
+			//add cards to deck
 			if(type.equals("Card")) {
-				System.out.println(type);
-				Card card = new Card(CardType.NONE,"");
+				Card card = new Card(CardType.ROOM,lines[1]);
 				allCards.add(card);
 			}
 		}
@@ -442,6 +443,15 @@ public class Board {
 
 	public HashSet<Card> getCards() {
 		return allCards;
+	}
+
+	public boolean cardExists(CardType type, String name) {
+		for(Card card : allCards) {
+			if(card.getType() == type && card.getName().equals(name)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
