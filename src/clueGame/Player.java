@@ -69,4 +69,8 @@ public class Player {
 		}
 		return false;
 		}
+
+	public int getCardCount() {
+		return myCards.size();
+	}
 	}

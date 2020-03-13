@@ -23,6 +23,7 @@ public class Board {
 	private String roomConfigFile;
 	private String playerConfigFile;
 	private String weaponConfigFile;
+	private boolean fullConfig = false;
 
 	private Map<BoardCell, Set<BoardCell>> adjMatrix = new HashMap<>();
 	private HashSet<BoardCell> targets = new HashSet<BoardCell>();
@@ -57,20 +58,24 @@ public class Board {
 		} catch (IOException e) {
 			System.out.println("Trouble loading boardConfigFile - csv");
 		}
-		try {
-			loadPlayerConfig(playerConfigFile);
-		} catch (IOException e) {
-			System.out.println("Trouble loading playerConfigFile");
-		}
-		try {
-			loadWeaponConfig(weaponConfigFile);
-		} catch (IOException e) {
-			System.out.println("Trouble loading weaponConfigFile");
+		if(fullConfig) {
+			try {
+				loadPlayerConfig(playerConfigFile);
+			} catch (IOException e) {
+				System.out.println("Trouble loading playerConfigFile");
+			}
+			try {
+				loadWeaponConfig(weaponConfigFile);
+			} catch (IOException e) {
+				System.out.println("Trouble loading weaponConfigFile");
+			}
 		}
 
 		calcAdjacencies();
-		buildDeck();
-		dealCards();
+		if(fullConfig) {
+			buildDeck();
+			dealCards();
+		}
 	}
 	
 	/*
@@ -279,7 +284,7 @@ public class Board {
 		}
 	}
 
-	// checks to see if the target haas the same initial as the origin cell
+	// checks to see if the target has the same initial as the origin cell
 	public boolean isSameRoom(BoardCell target, BoardCell origin) {
 		if (origin.getFirstInitial() == target.getFirstInitial()) {
 			return true;
@@ -301,13 +306,11 @@ public class Board {
 	 * ********************CONFIGURATION METHODS********************************
 	 */
 
-	public void setAllConfigFiles(String csv, String txtRoom, String txtPlayer, String txtWeapon) {
-		boardConfigFile = csv;
-		roomConfigFile = txtRoom;
+	public void setCardConfigFiles(String txtPlayer, String txtWeapon) {
+		fullConfig = true;
 		playerConfigFile = txtPlayer;
 		weaponConfigFile = txtWeapon;
 	}
-	//used for earlier testing
 	public void setConfigFiles(String csv, String txt) {
 		boardConfigFile = csv;
 		roomConfigFile = txt;
@@ -379,12 +382,14 @@ public class Board {
 			lines = line.split(splitBy);
 			char x = lines[0].charAt(0);
 			legend.put(x, lines[1]);
-			String type = lines[2];
 			
+			if(fullConfig) {
 			//add cards to deck
-			if(type.equals("Card")) {
-				Card card = new Card(CardType.ROOM,lines[1]);
-				allCards.add(card);
+				String type = lines[2];
+				if(type.equals("Card")) {
+					Card card = new Card(CardType.ROOM,lines[1]);
+					allCards.add(card);
+				}
 			}
 		}
 		br.close();
@@ -496,5 +501,4 @@ public class Board {
 			return false;
 		} else return true;
 	}
-
 }

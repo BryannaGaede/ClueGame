@@ -33,7 +33,8 @@ public class GameSetupTests {
 		// Board is singleton, get the only instance
 		board = Board.getInstance();
 		// set the file names to use my config files
-		board.setAllConfigFiles("CLUE_BOARD.csv", "ClueRooms.txt","CluePlayers.txt", "ClueWeapons.txt");		
+		board.setCardConfigFiles("CluePlayers.txt", "ClueWeapons.txt");
+		board.setConfigFiles("CLUE_BOARD.csv", "ClueRooms.txt");
 		// Initialize will load BOTH config files 
 		board.initialize();
 	}
@@ -162,7 +163,13 @@ public class GameSetupTests {
 		assertTrue(board.noDuplicates(cards.get(NUM_CARDS-1)));
 		assertTrue(board.noDuplicates(cards.get(NUM_CARDS/2 -4)));
 		assertTrue(board.noDuplicates(cards.get(NUM_CARDS/2 +4)));
+		
+		//all players should have roughly the same number of cards
+		ArrayList<Player> players = board.getPlayers();
+		int expected = NUM_CARDS/NUM_PLAYERS;
+		//there will never be more than one extra card dealt to a player
+		assertTrue(players.get(0).getCardCount()-expected < 2);
+		assertTrue(players.get(NUM_PLAYERS-1).getCardCount()-expected < 2);
+		assertTrue(players.get(3).getCardCount()-expected < 2);
 	}
-
-	//CHECK THAT NO CARD IS DEALT TWICE
 }
