@@ -1,3 +1,154 @@
+commit cefdf7d1ae9761691bcf5b11c2c90eb637a73164
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Thu Mar 12 23:10:51 2020 -0600
+
+    removed some print statements from a test file
+
+commit eafd7d9ec4ae0f6e8417d8d5b7a795c3e5d8ff0c
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Thu Mar 12 23:06:01 2020 -0600
+
+    All tests passing up to dealing cards
+
+commit f46883efd04c8d573f05234cf3dd844cd5bc1ea6
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Thu Mar 12 22:15:11 2020 -0600
+
+    PASSING TEST: check that all cards are dealt and not more than once
+
+commit 49973141f7e5ded28b5e2647836fc99145e8dacf
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Thu Mar 12 21:38:58 2020 -0600
+
+    FAILED TEST: check that all cards are being dealt and only once
+
+commit 568904ecdfe23d0d9bc727cba8d49f7a61c566b0
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Thu Mar 12 21:08:23 2020 -0600
+
+    PASSING TEST: make sure the right number of each card exist
+
+commit 12735f14edba5637ea0dd9417f03d142770df360
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Thu Mar 12 21:06:54 2020 -0600
+
+    FAILED TEST: check the number of each cards is right
+
+commit b99bb9a28c9f5bdd2e2ed45c4657ae0c91b2cb18
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Thu Mar 12 21:02:12 2020 -0600
+
+    PASSING TEST: check that cards of each type exist
+
+commit 04a79b6aea7db5312b3367b7064895ebf31d1fb3
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Thu Mar 12 20:30:47 2020 -0600
+
+    FAILING TEST: check that cards of each type exist in the deck
+
+commit 66702181923786a78a6f354014aebc4de30940d6
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Thu Mar 12 20:14:29 2020 -0600
+
+    PASSING TEST: confirm that the right number of cards are in the deck
+
+commit 8fa357aa9e8eece1f4079a0b15e12228c8d5d086
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Thu Mar 12 19:46:00 2020 -0600
+
+    FAILING TEST: check total number of cards
+
+commit 8b4984a59c3ae003da26e7c876a3dc6ba7f25414
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Thu Mar 12 19:19:06 2020 -0600
+
+    PASSING TEST: weapon file loading correctly
+
+commit fbaacaea3573aefab2894736c425b3dac7c2738f
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Thu Mar 12 19:18:29 2020 -0600
+
+    FAILING TEST: weapon file loading correctly
+
+commit cd79007a615fc9ba1562104a30dcbb54db45119f
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Thu Mar 12 18:53:00 2020 -0600
+
+    PASSING TEST: check if human or computer
+
+commit 86587466528504bd77b87e99113908178f1287f7
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Thu Mar 12 18:51:06 2020 -0600
+
+    FAILED TEST: check if player is human or computer
+
+commit 57906678b9b6507fba6aa77e81e2631f68a567d3
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Thu Mar 12 18:40:54 2020 -0600
+
+    PASSING TEST: check player color
+
+commit 9fccfbcbcd77085e6b9794492da39e3b0a3d3faa
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Thu Mar 12 18:40:29 2020 -0600
+
+    FAILING TEST: check player color
+
+commit 461036053255c146d8d6c3fd3ee565a89765aae7
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Thu Mar 12 18:08:13 2020 -0600
+
+    PASSING TEST: check player location
+
+commit 1919f303197a37f42f6db028e9f35546ad93802e
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Thu Mar 12 18:07:36 2020 -0600
+
+    FAILING TEST: check player location
+
+commit e410bb2e477615780a0afc04e42b2a1a14e22cb4
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Thu Mar 12 18:06:48 2020 -0600
+
+    PASSING TEST: check player names
+
+commit d1b60286d758cae609da314165bfa9c5e616eeba
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Thu Mar 12 17:58:12 2020 -0600
+
+    FAILING TEST: verify player names
+
+commit 48745d36525fd1f50dc28cddd21840c4775bbc7a
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Thu Mar 12 17:48:35 2020 -0600
+
+    Number of players test works
+
+commit 3d2856f9474ba131c70a8a231699bddac0186e2d
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Thu Mar 12 16:34:42 2020 -0600
+
+    created skeleton of classes according to givin UML
+
+commit 71c498a3f845a2e7dd9cef5e302fd7255f5bf660
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Thu Mar 12 16:03:49 2020 -0600
+
+    created a weapon file that need more detail and it loads sucessfully
+
+commit 5f99022a321e004bbed4971626fd4e00da2dc3e0
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Thu Mar 12 15:57:49 2020 -0600
+
+    created cluePlayers.txt, started a new test file called GameSetupTests and loading players is working
+
+commit 485e13af89d274067a42cf4b6c36079262d51b2e
+Author: Luke Valentine <lukevalentine@Lukes-MacBook-Pro-3.local>
+Date:   Thu Mar 12 14:31:14 2020 -0600
+
+    Modified log file
+
+commit b8f40e41a75bca21e8b1b9c76b41cc3753fb9833
 Author: Luke Valentine <lukevalentine@Lukes-MacBook-Pro-3.local>
 Date:   Thu Mar 12 14:29:09 2020 -0600
 
@@ -80,3 +231,156 @@ Author: Luke Valentine <lukevalentine@csm-wl-dhcp-200-127.mines.edu>
 Date:   Thu Mar 12 12:02:49 2020 -0600
 
     Spaces fixed
+
+commit 8ca8d54d013b040c092bdfafb82cecfed5f735d2
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Mon Mar 9 14:25:03 2020 -0600
+
+    fixed our adj tests
+
+commit 4f29752e50996d6ff7ad58770bb70552636f5162
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Mon Mar 9 13:09:57 2020 -0600
+
+    recent changes
+
+commit 0f5db8496e648f5f9182271421cad86b318f5938
+Merge: 31ac6fb d327c52
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Mon Mar 9 13:06:21 2020 -0600
+
+    commit prior to attempting to merge
+
+commit d327c520ac91834438b729d07991d32479af419e
+Merge: e2b8279 84f8ceb
+Author: Luke Valentine <lukevalentine@csm-wl-dhcp-196-37.mines.edu>
+Date:   Mon Mar 9 12:57:43 2020 -0600
+
+    Passing tests
+
+commit e2b82793f26f6806a1897bfe35b0492fadba1c5a
+Author: Luke Valentine <lukevalentine@Lukes-MacBook-Pro-3.local>
+Date:   Sun Mar 8 14:02:32 2020 -0600
+
+    testing
+
+commit 31ac6fb1612d6ed7c3400295937e8345a99cd115
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Sun Mar 8 13:53:39 2020 -0600
+
+    no errors
+
+commit 84f8ceb76aa58c2538b26dbdf75edb6d8a06b196
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Fri Mar 6 15:37:01 2020 -0700
+
+    fixed the test that was expecting 12, still working on leaving a room
+
+commit 4a6c4d48e4d3df5c11c5919e3c7b243987f51882
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Fri Mar 6 12:26:45 2020 -0700
+
+    updated game to most recent version
+
+commit 8d158be408c09499bf8f69fc68e2b6e85a004f11
+Author: Luke Valentine <lukevalentine@csm-wl-dhcp-202-39.mines.edu>
+Date:   Thu Mar 5 12:15:29 2020 -0700
+
+    Failing Tests
+
+commit 99b29cf0ebfcae3a448c588c8abf1376d0670a2a
+Merge: af2337e 78f88f7
+Author: Luke Valentine <lukevalentine@Lukes-MacBook-Pro-3.local>
+Date:   Wed Mar 4 17:09:14 2020 -0700
+
+    Failing Tests
+
+commit af2337e87fc80152b2500d2d5bda1fc6ed08a8d1
+Author: Luke Valentine <lukevalentine@Lukes-MacBook-Pro-3.local>
+Date:   Wed Mar 4 17:00:38 2020 -0700
+
+    Failing tests
+
+commit 78f88f7780431537fa0f503d741aeab96bd236e8
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Wed Mar 4 16:58:08 2020 -0700
+
+    Failing tests done for part 1 of assignment 14, testing adjacencies
+
+commit af564850ad358147596bac066e88a255b6d212a7
+Author: Luke Valentine <lukevalentine@csm-wl-dhcp-200-242.mines.edu>
+Date:   Tue Mar 3 13:16:06 2020 -0700
+
+    C13 green
+
+commit 0922c34832132ffc6232dc62b2b60756fc35f235
+Author: Luke Valentine <lukevalentine@Lukes-MBP-3.hitronhub.home>
+Date:   Fri Feb 28 22:52:36 2020 -0700
+
+    everything working except one test
+
+commit 9dd7de25c04c28cbd34173a3080922b65a31f890
+Author: Luke Valentine <lukevalentine@Lukes-MBP-3.hitronhub.home>
+Date:   Fri Feb 28 22:28:32 2020 -0700
+
+    try to get testNumberOfDoorways to work
+
+commit 5da800a2f5c6ce579c36c8b91cc3ecc056f10a68
+Author: Luke Valentine <lukevalentine@Lukes-MBP-3.hitronhub.home>
+Date:   Fri Feb 28 20:40:55 2020 -0700
+
+    Updated
+
+commit 77113621164127530e36893ed8868542391b359c
+Author: Luke Valentine <lukevalentine@Lukes-MBP-3.hitronhub.home>
+Date:   Thu Feb 27 22:55:08 2020 -0700
+
+    part 1
+
+commit 46dc519807da753babbcf699217a8ccce59cba8f
+Author: Luke Valentine <lukevalentine@csm-wl-dhcp-199-64.mines.edu>
+Date:   Tue Feb 25 13:49:46 2020 -0700
+
+    Board updated
+
+commit 8c4f3174dd85bae15dc285357f901ae3277075a9
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Tue Feb 25 13:43:40 2020 -0700
+
+    unknown changes
+
+commit f782b563611a60725f519fa011b3dd1045dcf175
+Author: Luke Valentine <lukevalentine@csm-wl-dhcp-199-64.mines.edu>
+Date:   Tue Feb 25 13:33:24 2020 -0700
+
+    Updated
+
+commit 1bcd6eccea32f6934bd97310510207bbc62e91b8
+Author: Luke Valentine <lukevalentine@csm-wl-dhcp-199-64.mines.edu>
+Date:   Mon Feb 24 14:52:01 2020 -0700
+
+    I want these tests to pass
+
+commit b3c677fb79429707b22ed932d6e0c69b84abcdb8
+Author: Luke Valentine <lukevalentine@csm-wl-dhcp-199-64.mines.edu>
+Date:   Mon Feb 24 14:51:21 2020 -0700
+
+    I want these tests to pass
+
+commit 8baa42950c6c4af28bd3ea9537803d3a155fd7f9
+Author: Luke Valentine <lukevalentine@csm-wl-dhcp-199-64.mines.edu>
+Date:   Mon Feb 24 12:15:03 2020 -0700
+
+    All tests failing
+
+commit 725e7a05c3518a561101bdc26afb12b2033ec937
+Author: Luke Valentine <lukevalentine@csm-wl-dhcp-199-64.mines.edu>
+Date:   Mon Feb 24 11:30:35 2020 -0700
+
+    Hello
+
+commit ca087f8433be8ce15df7516428c299b84b3182a8
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Mon Feb 24 11:00:02 2020 -0700
+
+    first commit
