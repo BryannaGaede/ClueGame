@@ -326,7 +326,7 @@ public class Board {
 		String line = "";
 		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(weapon_txt), "UTF-8"));	
 		while((line= br.readLine()) != null) {
-			Weapon weapon = new Weapon("");
+			Weapon weapon = new Weapon(line);
 			weapons.add(weapon);
 		}
 	}
