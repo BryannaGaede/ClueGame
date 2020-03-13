@@ -80,12 +80,12 @@ public class Board {
 	public void buildDeck() {
 		//make cards for all players
 		for(Player player: players) {
-			Card card = new Card();
+			Card card = new Card(CardType.NONE,"");
 			allCards.add(card);
 		}
 		//make cards for each weapon
 		for(Weapon weapon: weapons) {
-			Card card = new Card();
+			Card card = new Card(CardType.NONE,"");
 			allCards.add(card);
 		}
 	}
@@ -361,7 +361,7 @@ public class Board {
 			String type = lines[2];
 			if(type.equals("Card")) {
 				System.out.println(type);
-				Card card = new Card();
+				Card card = new Card(CardType.NONE,"");
 				allCards.add(card);
 			}
 		}

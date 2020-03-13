@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import clueGame.Board;
 import clueGame.Card;
+import clueGame.CardType;
 import clueGame.Player;
 import clueGame.Status;
 import clueGame.Weapon;
@@ -121,9 +122,23 @@ public class GameSetupTests {
 	@Test
 	public void testDeckSize() {
 		HashSet<Card> cards = board.getCards();
-		//make sure the right number of weapons is being noticed
+		//make sure the right number of cards is being noticed
 		assertEquals(NUM_CARDS, cards.size());
 	}	
+	
+	//MAKE SURE EXPECTED CARDS ARE CONTAINED IN THE DECK
+	@Test
+	public void testDeckContents() {
+		HashSet<Card> cards = board.getCards();
+		//make sure a room exists
+		Card test = new Card(CardType.ROOM,"Garage");
+		assertTrue(cards.contains(test));
+		//make sure a person exists
+		test = new Card(CardType.PERSON,"PROFESSOR DINESH MEHTA");
+		//make sure a weapon exists
+		test = new Card(CardType.WEAPON,"LAZOR");
+	}	
+	
 	
 	/*
 	 * *********TEST TO SEE THAT THE CARDS ARE DELT CORRECTLY****************
