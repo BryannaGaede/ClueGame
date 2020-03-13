@@ -30,6 +30,7 @@ public class Board {
 	public BoardCell board[][] = new BoardCell[numRows][numColumns];
 	
 	private ArrayList<Player> players = new ArrayList<Player>();
+	private ArrayList<Weapon> weapons = new ArrayList<Weapon>();
 
 	// variable used for singleton pattern
 	private static Board theInstance = new Board();
@@ -58,6 +59,11 @@ public class Board {
 			loadPlayerConfig(playerConfigFile);
 		} catch (IOException e) {
 			System.out.println("Trouble loading playerConfigFile");
+		}
+		try {
+			loadWeaponConfig(weaponConfigFile);
+		} catch (IOException e) {
+			System.out.println("Trouble loading weaponConfigFile");
 		}
 
 		calcAdjacencies();
@@ -317,7 +323,12 @@ public class Board {
 	}
 	
 	public void loadWeaponConfig(String weapon_txt) throws IOException{
+		String line = "";
 		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(weapon_txt), "UTF-8"));	
+		while((line= br.readLine()) != null) {
+			Weapon weapon = new Weapon("");
+			weapons.add(weapon);
+		}
 	}
 	
 	public void loadRoomConfig(String legend_txt) throws IOException {
@@ -400,6 +411,10 @@ public class Board {
 
 	public ArrayList<Player> getPlayers() {
 		return players;
+	}
+
+	public ArrayList<Weapon> getWeapons() {
+		return weapons;
 	}
 
 }
