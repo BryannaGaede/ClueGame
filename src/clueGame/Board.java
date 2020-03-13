@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -31,6 +32,7 @@ public class Board {
 	
 	private ArrayList<Player> players = new ArrayList<Player>();
 	private ArrayList<Weapon> weapons = new ArrayList<Weapon>();
+	private HashSet<Card> allCards = new HashSet<Card>();
 
 	// variable used for singleton pattern
 	private static Board theInstance = new Board();
@@ -67,11 +69,31 @@ public class Board {
 		}
 
 		calcAdjacencies();
+		buildDeck();
+		//dealCards();
 	}
 	
 	/*
 	 * ***********************SET UP CARDS AND PLAYERS***********************
 	 */
+	
+	public void buildDeck() {
+		//make cards for all rooms
+		for(String key : legend.values()) {
+			Card card = new Card();
+			allCards.add(card);
+		}
+		//make cards for all players
+		for(Player player: players) {
+			Card card = new Card();
+			allCards.add(card);
+		}
+		//make cards for each weapon
+		for(Weapon weapon: weapons) {
+			Card card = new Card();
+			allCards.add(card);
+		}
+	}
 	
 	public void selectAnswer() {
 		
@@ -415,6 +437,10 @@ public class Board {
 
 	public ArrayList<Weapon> getWeapons() {
 		return weapons;
+	}
+
+	public HashSet<Card> getCards() {
+		return allCards;
 	}
 
 }

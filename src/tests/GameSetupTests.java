@@ -5,11 +5,13 @@ import static org.junit.Assert.*;
 import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import clueGame.Board;
+import clueGame.Card;
 import clueGame.Player;
 import clueGame.Status;
 import clueGame.Weapon;
@@ -43,7 +45,7 @@ public class GameSetupTests {
 	@Test
 	public void testPlayerNames() {
 		ArrayList<Player> players = board.getPlayers();
-		//make sure the right number of player is being noticed
+		//make sure the right number of players is being noticed
 		assertEquals(NUM_PLAYERS, players.size());
 		//the first player is Yue
 		assertEquals(players.get(0).getName(), "DR. HUAN YUE");
@@ -101,6 +103,8 @@ public class GameSetupTests {
 	@Test
 	public void testWeapon() {
 		ArrayList<Weapon> weapons = board.getWeapons();
+		//make sure the right number of weapons is being noticed
+		assertEquals(NUM_WEAPONS, weapons.size());
 		//the first weapon is a computer
 		assertEquals(weapons.get(0).getName(), "COMPUTER");
 		//the last weapon is a time machine
@@ -114,6 +118,12 @@ public class GameSetupTests {
 	 */
 	
 	//CHECK THE NUMBER OF CARDS IS ACCURATE
+	@Test
+	public void testDeckSize() {
+		HashSet<Card> cards = board.getCards();
+		//make sure the right number of weapons is being noticed
+		assertEquals(NUM_CARDS, cards.size());
+	}	
 	
 	/*
 	 * *********TEST TO SEE THAT THE CARDS ARE DELT CORRECTLY****************
