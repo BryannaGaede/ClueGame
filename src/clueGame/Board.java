@@ -309,7 +309,7 @@ public class Board {
 				Player player = new ComputerPlayer(name,row,col,color);
 				players.add(player);
 			} else if(status == 'H') {
-				Player player = new HumanPlayer(name,row,col,"RED");
+				Player player = new HumanPlayer(name,row,col,color);
 				players.add(player);
 			}
 		}
