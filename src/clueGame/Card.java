@@ -28,4 +28,12 @@ public class Card {
 	public boolean getStatus() {
 		return dealt;
 	}
+
+	public boolean isDealt() {
+		return dealt;
+	}
+
+	public void setStatus(boolean dealt2) {
+		this.dealt = dealt2;
+	}
 }

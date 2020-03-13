@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 import clueGame.BoardCell;
@@ -90,8 +91,23 @@ public class Board {
 	}
 	
 	public void dealCards() {
-		HashSet<Integer> usedIndex = new HashSet<Integer>();
 		//give card at random index to players until all cards are used
+		int cardsLeftToDeal = allCards.size();
+		int currentPlayer = players.size();
+		//count down until all cards are dealt
+		while(cardsLeftToDeal > 0) {
+			Random rand = new Random();
+			int nextIndex = rand.nextInt(allCards.size());
+			if(allCards.get(nextIndex).isDealt()) {
+				continue;
+			} else {
+				//only increase the index of the player being dealt if the card gets dealt
+				currentPlayer = (currentPlayer+1) % players.size();
+				players.get(currentPlayer).myCards.add(allCards.get(nextIndex));
+				allCards.get(nextIndex).setStatus(true);
+				cardsLeftToDeal -= 1;
+			}
+		}
 		
 	}
 	
@@ -470,7 +486,15 @@ public class Board {
 	}
 
 	public boolean noDuplicates(Card card) {
-		return false;
+		int counter = 0;
+		for(Player player : players) {
+			if(player.hasCard(card)) {
+				counter += 1;
+			}
+		}
+		if(counter > 1) {
+			return false;
+		} else return true;
 	}
 
 }

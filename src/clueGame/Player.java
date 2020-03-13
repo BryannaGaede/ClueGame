@@ -3,14 +3,15 @@ package clueGame;
 import java.awt.Color;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 
 public class Player {
 	protected String playerName;
 	protected int row;
 	protected int column;
 	protected Color color;
-	protected Card[] myCards;
-	protected Card[] seenCards;
+	protected ArrayList<Card> myCards = new ArrayList<Card>();
+	protected ArrayList<Card> seenCards = new ArrayList<Card>();
 	protected Status status = Status.NONE;
 	
 	public Player(String name, int row2, int col, String color) {
@@ -58,5 +59,14 @@ public class Player {
 
 	public Status getStatus() {
 		return status;
-	} 
+	}
+
+	public boolean hasCard(Card test) {
+		for(Card card : myCards) {
+			if(card == test) {
+				return true;
+			}
+		}
+		return false;
+		}
 	}
