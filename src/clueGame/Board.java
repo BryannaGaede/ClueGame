@@ -455,7 +455,13 @@ public class Board {
 	}
 
 	public int cardCount(CardType type) {
-		return 0;
+		int counter = 0;
+		for(Card card : allCards) {
+			if(card.getType() == type) {
+				counter += 1;
+			}
+		}
+		return counter;
 	}
 
 }
