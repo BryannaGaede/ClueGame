@@ -101,7 +101,6 @@ public class CTest_FileInitTests {
 				if (cell.isDoorway())
 					numDoors++;
 			}
-		//System.out.println(numDoors);
 		Assert.assertEquals(16, numDoors);
 	}
 	
@@ -110,10 +109,6 @@ public class CTest_FileInitTests {
 	@Test
 	public void testRoomInitials() {
 		// Test first cell in room
-		System.out.println("XXXXXX");
-		
-		System.out.println(board.getCellAt(0, 0).getFirstInitial());
-		System.out.println(board.getCellAt(4, 8).getFirstInitial());
 		assertEquals('C', board.getCellAt(0, 0).getFirstInitial());
 		
 		assertEquals('R', board.getCellAt(4, 8).getFirstInitial());
