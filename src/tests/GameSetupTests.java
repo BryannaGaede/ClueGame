@@ -30,16 +30,17 @@ public class GameSetupTests {
 	}
 	
 	@Test
-	public void testPlayers() {
+	public void testPlayerNames() {
 		ArrayList<Player> players = board.getPlayers();
 		//make sure the right number of player is being noticed
 		assertEquals(NUM_PLAYERS, players.size());
 		//the first player is Plum, who is purple and starts at 25,22
 		assertEquals(players.get(0).getName(), "PROFESSOR PLUM");
 		//the last player is Mustart, who is yellow and starts at 25,4
-		assertEquals(players.get(0).getName(), "COLONEL MUSTARD");
+		assertEquals(players.get(NUM_PLAYERS-1).getName(), "COLONEL MUSTARD");
 		//the third player is Green, who is green and starts at 0,6
-		assertEquals(players.get(0).getName(), "MR. GREEN");
+		assertEquals(players.get(2).getName(), "MR. GREEN");
 	}
+	
 
 }

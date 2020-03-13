@@ -41,5 +41,13 @@ public class Player {
 	 */
 	public String getName() {
 		return this.playerName;
+	}
+
+	public int getRow() {
+		return row;
+	}
+
+	public int getCol() {
+		return column;
 	} 
 	}
