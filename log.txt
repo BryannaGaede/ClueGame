@@ -1,3 +1,39 @@
+commit a71616f6a19c7339e068fa4b806f5a01f59991d6
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Mon Mar 30 08:27:03 2020 -0600
+
+    PASSING TEST: setting the answer
+
+commit 20163adc38de045588636f8d7b7fe27f7cc03c62
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Mon Mar 30 07:07:46 2020 -0600
+
+    FAILING TEST: players weren't dealt solution cards
+
+commit c66d8860ded74d49ed554bca900e6665522bd405
+Author: Luke Valentine <lukevalentine@Lukes-MacBook-Pro-3.local>
+Date:   Mon Mar 30 00:30:04 2020 -0600
+
+    minor refactoring
+
+commit bdc2da772161a7a7e38db66b519662aad5481fee
+Author: Luke Valentine <lukevalentine@Lukes-MacBook-Pro-3.local>
+Date:   Mon Mar 30 00:21:53 2020 -0600
+
+    All tests passing
+
+commit a7d88ae4da608a203758329bc33fd678d3190cf9
+Author: Luke Valentine <lukevalentine@Lukes-MacBook-Pro-3.local>
+Date:   Mon Mar 30 00:07:07 2020 -0600
+
+    Failing Tests for solution
+
+commit a0e11f8261f7c11d36e9a4ef01a687943772fe50
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Thu Mar 12 23:12:21 2020 -0600
+
+    added log.txt
+
 commit cefdf7d1ae9761691bcf5b11c2c90eb637a73164
 Author: BryannaGaede <bpriddy@mymail.mines.edu>
 Date:   Thu Mar 12 23:10:51 2020 -0600
