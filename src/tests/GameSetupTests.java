@@ -179,7 +179,12 @@ public class GameSetupTests {
 		Solution theAnswer = board.getSolution(); 
 		//checking let's sysou
 		System.out.println(theAnswer.person + " " + theAnswer.weapon + " " + theAnswer.room);
-		assertEquals(1,2);
-		
+		//check to see not null
+		assertTrue(Solution.weapon!= null);
+		assertTrue(Solution.person!= null);
+		assertTrue(Solution.room!= null);
+		//check to see that they are in the deck
+		assertTrue(board.getPlayers().contains(Solution.person) == false);
+		assertTrue(board.getWeapons().contains(theAnswer.weapon) == false);
 	}
 }

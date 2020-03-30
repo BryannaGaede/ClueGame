@@ -110,9 +110,7 @@ public class Board {
 		//room
 		Random generator = new Random();
 		Object[] values = legend.values().toArray();
-		Solution.room = (String) values[generator.nextInt(values.length)];
-		
-		
+		Solution.room = (String) values[generator.nextInt(values.length)];	
 	}
 	
 	public void dealCards() {
