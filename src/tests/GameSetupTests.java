@@ -184,7 +184,19 @@ public class GameSetupTests {
 		assertTrue(Solution.person!= null);
 		assertTrue(Solution.room!= null);
 		//check to see that they are in the deck
-		assertTrue(board.getPlayers().contains(Solution.person) == false);
-		assertTrue(board.getWeapons().contains(theAnswer.weapon) == false);
+		boolean test = false;
+		for (Player x: board.getPlayers()) {
+			if (x.getName() == Solution.person) {
+				test = true;
+			}
+		}
+		assertTrue(test == true);
+		test = false;
+		for (Weapon x: board.getWeapons()) {
+			if (x.getName() == Solution.weapon) {
+				test = true;
+			}
+		}
+		assertTrue(test == true);
 	}
 }
