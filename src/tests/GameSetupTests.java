@@ -174,29 +174,54 @@ public class GameSetupTests {
 		assertTrue(players.get(3).getCardCount()-expected < 2);
 	}
 	
+	/*
+	 * **********TEST TO SEE SOLUTION IS CHOSEN AND STORED CORRECTLY***********
+	 */
+	
 	@Test
 	public void testSolution() {
-		Solution theAnswer = board.getSolution(); 
-		//checking let's sysou
-		System.out.println(theAnswer.person + " " + theAnswer.weapon + " " + theAnswer.room);
+		Solution theAnswer = board.getSolution();
+		ArrayList<Card> cards = board.getCards(); 
+		ArrayList<Player> players = board.getPlayers();
 		//check to see not null
 		assertTrue(Solution.weapon!= null);
 		assertTrue(Solution.person!= null);
 		assertTrue(Solution.room!= null);
-		//check to see that they are in the deck
-		boolean test = false;
-		for (Player x: board.getPlayers()) {
-			if (x.getName() == Solution.person) {
-				test = true;
+		//check to see that players don't have these cards
+		int duplicates = 0;
+		for(Player player: players) {
+			ArrayList<Card> playerCards = player.getMyCards();
+			for(Card card: playerCards) {
+				if(theAnswer.getPerson().equals(card.getName()) ||
+						theAnswer.getRoom().equals(card.getName()) ||
+							theAnswer.getWeapon().equals(card.getName())) {
+					duplicates += 1;
+				}
 			}
 		}
-		assertTrue(test == true);
-		test = false;
-		for (Weapon x: board.getWeapons()) {
-			if (x.getName() == Solution.weapon) {
-				test = true;
-			}
-		}
-		assertTrue(test == true);
+		assertTrue(duplicates == 0);
+		
+//		boolean test = false;
+//		for (Player x: board.getPlayers()) {
+//			if (x.getName() == Solution.person) {
+//				test = true;
+//			}
+//		}
+//		assertTrue(test == true);
+//		test = false;
+//		for (Weapon x: board.getWeapons()) {
+//			if (x.getName() == Solution.weapon) {
+//				test = true;
+//			}
+//		}
+//		assertTrue(test == true);
+	}
+	
+	@Test
+	public void testAnswer() {
+		Solution theAnswer = board.getSolution();
+		//make sure there is only one of each type
+		//make sure the cards were marked dealt 
+		//make sure the players weren't dealt the solution cards
 	}
 }

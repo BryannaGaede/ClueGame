@@ -1,7 +1,19 @@
 package clueGame;
 
 public class Solution {
-	public static String person;
-	public static String room;
-	public static String weapon;
+	public static String person = null;
+	public static String room = null;
+	public static String weapon = null;
+	
+	//used for testing
+	
+	public String getPerson() {
+		return person;
+	}
+	public String getRoom() {
+		return room;
+	}
+	public String getWeapon() {
+		return weapon;
+	}
 }

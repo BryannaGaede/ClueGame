@@ -76,8 +76,11 @@ public class Board {
 
 		calcAdjacencies();
 		if(fullConfig) {
+			//make cards from all card type objects
 			buildDeck();
+			//mark the solution as dealt before deal
 			solution();
+			//deal remaining cards to players as equal as possible
 			dealCards();
 		}
 	}
@@ -104,6 +107,7 @@ public class Board {
 		//player
 	    Random random = new Random();
 		Solution.person =players.get(random.nextInt(players.size())).getName();
+		
 		//weapon
 		random = new Random();
 		Solution.weapon = weapons.get(random.nextInt(weapons.size())).getName();

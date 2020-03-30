@@ -73,4 +73,8 @@ public class Player {
 	public int getCardCount() {
 		return myCards.size();
 	}
+
+	public ArrayList<Card> getMyCards() {
+		return myCards;
+	}
 	}
