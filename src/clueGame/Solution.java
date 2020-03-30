@@ -10,6 +10,11 @@ public class Solution {
 	public String getPerson() {
 		return person;
 	}
+	@Override
+	public String toString() {
+		return "Solution [getPerson()=" + getPerson() + ", getRoom()=" + getRoom() + ", getWeapon()=" + getWeapon()
+				+ "]";
+	}
 	public String getRoom() {
 		return room;
 	}

@@ -179,15 +179,15 @@ public class GameSetupTests {
 	 */
 	
 	@Test
-	public void testSolution() {
+	public void testAnswer() {
 		Solution theAnswer = board.getSolution();
 		ArrayList<Card> cards = board.getCards(); 
 		ArrayList<Player> players = board.getPlayers();
-		//check to see not null
-		assertTrue(Solution.weapon!= null);
-		assertTrue(Solution.person!= null);
-		assertTrue(Solution.room!= null);
-		//check to see that players don't have these cards
+		//make sure types are correct
+		assertTrue(board.getType(theAnswer.getRoom()) == CardType.ROOM);
+		assertTrue(board.getType(theAnswer.getPerson()) == CardType.PERSON);
+		assertTrue(board.getType(theAnswer.getWeapon()) == CardType.WEAPON);	
+		//players weren't dealt the solution cards 
 		int duplicates = 0;
 		for(Player player: players) {
 			ArrayList<Card> playerCards = player.getMyCards();
@@ -199,29 +199,6 @@ public class GameSetupTests {
 				}
 			}
 		}
-		assertTrue(duplicates == 0);
-		
-//		boolean test = false;
-//		for (Player x: board.getPlayers()) {
-//			if (x.getName() == Solution.person) {
-//				test = true;
-//			}
-//		}
-//		assertTrue(test == true);
-//		test = false;
-//		for (Weapon x: board.getWeapons()) {
-//			if (x.getName() == Solution.weapon) {
-//				test = true;
-//			}
-//		}
-//		assertTrue(test == true);
-	}
-	
-	@Test
-	public void testAnswer() {
-		Solution theAnswer = board.getSolution();
-		//make sure there is only one of each type
-		//make sure the cards were marked dealt 
-		//make sure the players weren't dealt the solution cards
-	}
+		assertTrue(duplicates == 0);	
+		}
 }

@@ -19,6 +19,7 @@ public class Board {
 	public final int MAX_BOARD_SIZE = 50;
 	private int numRows = 30;
 	private int numColumns = 30;
+	private int numRooms = 0;
 	private String boardConfigFile;
 	private String roomConfigFile;
 	private String playerConfigFile;
@@ -76,11 +77,7 @@ public class Board {
 
 		calcAdjacencies();
 		if(fullConfig) {
-			//make cards from all card type objects
 			buildDeck();
-			//mark the solution as dealt before deal
-			solution();
-			//deal remaining cards to players as equal as possible
 			dealCards();
 		}
 	}
@@ -102,24 +99,10 @@ public class Board {
 		}
 	}
 	
-	public void solution() {
-		//randomly select a person, weapon, and room from the deck
-		//player
-	    Random random = new Random();
-		Solution.person =players.get(random.nextInt(players.size())).getName();
-		
-		//weapon
-		random = new Random();
-		Solution.weapon = weapons.get(random.nextInt(weapons.size())).getName();
-		//room
-		Random generator = new Random();
-		Object[] values = legend.values().toArray();
-		Solution.room = (String) values[generator.nextInt(values.length)];	
-	}
-	
 	public void dealCards() {
+		selectAnswer();
 		//give card at random index to players until all cards are used
-		int cardsLeftToDeal = allCards.size();
+		int cardsLeftToDeal = allCards.size()-3;
 		int currentPlayer = players.size();
 		//count down until all cards are dealt
 		while(cardsLeftToDeal > 0) {
@@ -139,7 +122,20 @@ public class Board {
 	}
 	
 	public void selectAnswer() {
-		
+		//select a room (index 0 through numRooms)
+		Random rand = new Random();
+		int nextIndex = rand.nextInt(numRooms-1);
+		theAnswer.room = allCards.get(nextIndex).getName();
+		allCards.get(nextIndex).setStatus(true);
+		//select a person (index numRooms+1 through numRooms + numPeople)
+		nextIndex = rand.nextInt(players.size());
+		theAnswer.person = allCards.get(nextIndex+numRooms).getName();
+		allCards.get(nextIndex+numRooms).setStatus(true);
+		//select a weapon (index numRooms+numPeople +1 through numCards)
+		nextIndex = rand.nextInt(weapons.size());
+		theAnswer.weapon = allCards.get(nextIndex+numRooms+players.size()).getName();
+		allCards.get(nextIndex+numRooms+players.size()).setStatus(true);
+		System.out.println(theAnswer);
 	}
 	
 	public Card handleSuggestion() {
@@ -392,6 +388,7 @@ public class Board {
 			Weapon weapon = new Weapon(line);
 			weapons.add(weapon);
 		}
+		br.close();
 	}
 	
 	public void loadRoomConfig(String legend_txt) throws IOException {
@@ -411,6 +408,7 @@ public class Board {
 				if(type.equals("Card")) {
 					Card card = new Card(CardType.ROOM,lines[1]);
 					allCards.add(card);
+					numRooms += 1;
 				}
 			}
 		}
@@ -525,5 +523,15 @@ public class Board {
 		if(counter > 1) {
 			return false;
 		} else return true;
+	}
+
+	public CardType getType(String name) {
+		CardType type = CardType.NONE;
+		for(Card card : allCards) {
+			if(card.getName().equals(name)) {
+				type = card.getType();
+			}
+		}
+		return type;
 	}
 }
