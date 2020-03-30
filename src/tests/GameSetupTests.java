@@ -14,6 +14,7 @@ import clueGame.Board;
 import clueGame.Card;
 import clueGame.CardType;
 import clueGame.Player;
+import clueGame.Solution;
 import clueGame.Status;
 import clueGame.Weapon;
 
@@ -171,5 +172,14 @@ public class GameSetupTests {
 		assertTrue(players.get(0).getCardCount()-expected < 2);
 		assertTrue(players.get(NUM_PLAYERS-1).getCardCount()-expected < 2);
 		assertTrue(players.get(3).getCardCount()-expected < 2);
+	}
+	
+	@Test
+	public void testSolution() {
+		Solution theAnswer = board.getSolution(); 
+		//checking let's sysou
+		System.out.println(theAnswer.person + " " + theAnswer.weapon + " " + theAnswer.room);
+		assertEquals(1,2);
+		
 	}
 }

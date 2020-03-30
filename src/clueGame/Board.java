@@ -34,6 +34,9 @@ public class Board {
 	private ArrayList<Player> players = new ArrayList<Player>();
 	private ArrayList<Weapon> weapons = new ArrayList<Weapon>();
 	private ArrayList<Card> allCards = new ArrayList<Card>();
+	//new
+	private Solution theAnswer = new Solution();
+
 
 	// variable used for singleton pattern
 	private static Board theInstance = new Board();
@@ -74,6 +77,7 @@ public class Board {
 		calcAdjacencies();
 		if(fullConfig) {
 			buildDeck();
+			solution();
 			dealCards();
 		}
 	}
@@ -93,6 +97,22 @@ public class Board {
 			Card card = new Card(CardType.WEAPON, weapon.getName());
 			allCards.add(card);
 		}
+	}
+	
+	public void solution() {
+		//randomly select a person, weapon, and room from the deck
+		//player
+	    Random random = new Random();
+		Solution.person =players.get(random.nextInt(players.size())).getName();
+		//weapon
+		random = new Random();
+		Solution.weapon = weapons.get(random.nextInt(weapons.size())).getName();
+		//room
+		Random generator = new Random();
+		Object[] values = legend.values().toArray();
+		Solution.room = (String) values[generator.nextInt(values.length)];
+		
+		
 	}
 	
 	public void dealCards() {
@@ -465,6 +485,9 @@ public class Board {
 
 	public ArrayList<Weapon> getWeapons() {
 		return weapons;
+	}
+	public Solution getSolution() {
+		return (theAnswer);
 	}
 
 	public ArrayList<Card> getCards() {
