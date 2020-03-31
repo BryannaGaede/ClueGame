@@ -14,6 +14,7 @@ import clueGame.Board;
 import clueGame.BoardCell;
 import clueGame.CardType;
 import clueGame.Player;
+import clueGame.Solution;
 
 public class GameActionTests {
 	// Constants that I will use to test whether the file was loaded correctly
@@ -92,11 +93,19 @@ public class GameActionTests {
 	//check make an accusation - board
 	@Test
 	public void testAccusation() {
-		fail("Not yet implemented");
+		board.setAnswer("","","");
+		Solution test1 = new Solution("","","");
 		//solution is correct
+		assertTrue(board.checkAccusation(test1));
 		//solution with wrong person
+		Solution test2 = new Solution("","","");
+		assertTrue(!board.checkAccusation(test2));
 		//solution with wrong weapon
+		Solution test3 = new Solution("","","");
+		assertTrue(!board.checkAccusation(test3));
 		//solution with wrong room
+		Solution test4 = new Solution("","","");
+		assertTrue(!board.checkAccusation(test4));
 	}
 	
 	//create a suggestion - computer player

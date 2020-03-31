@@ -81,6 +81,15 @@ public class Player {
 
 	public void setLocation(Set<BoardCell> targets) {
 		// TODO Auto-generated method stub
+		//random choice no rooms
+		//unseen room must go
+		//just visited chosen random
 		
 	}
+
+	public void setLocation(int row, int col) {
+		this.row = row;
+		this.column = col;
+	}
+
 	}

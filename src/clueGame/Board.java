@@ -36,7 +36,7 @@ public class Board {
 	private ArrayList<Weapon> weapons = new ArrayList<Weapon>();
 	private ArrayList<Card> allCards = new ArrayList<Card>();
 	//new
-	private Solution theAnswer = new Solution();
+	private Solution theAnswer;
 	private Card disproveCard;
 	private boolean gameOver = false;
 
@@ -545,6 +545,11 @@ public class Board {
 	}
 
 	public void setCards(String player, String cardName, CardType type) {
+		
+	}
+
+	public void setAnswer(String person, String room, String weapon) {
+		// TODO Auto-generated method stub
 		
 	}
 }
