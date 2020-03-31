@@ -135,7 +135,6 @@ public class Board {
 		nextIndex = rand.nextInt(weapons.size());
 		theAnswer.weapon = allCards.get(nextIndex+numRooms+players.size()).getName();
 		allCards.get(nextIndex+numRooms+players.size()).setStatus(true);
-		System.out.println(theAnswer);
 	}
 	
 	public Card handleSuggestion() {
