@@ -92,4 +92,13 @@ public class Player {
 		this.column = col;
 	}
 
+	public void addCard(Card testCard) {
+		myCards.add(testCard);		
+	}
+
+	public Solution getSolution() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	}

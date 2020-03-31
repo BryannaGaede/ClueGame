@@ -144,7 +144,7 @@ public class Board {
 	}
 	
 	public boolean checkAccusation(Solution accusation) {
-		return true;
+		return false;
 	}
 	
 

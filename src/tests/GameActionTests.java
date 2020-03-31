@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import clueGame.Board;
 import clueGame.BoardCell;
+import clueGame.Card;
 import clueGame.CardType;
 import clueGame.Player;
 import clueGame.Solution;
@@ -111,8 +112,12 @@ public class GameActionTests {
 	//create a suggestion - computer player
 	@Test
 	public void testCreateSuggestion() {
-		fail("Not yet implemented");
+		Player testPlayer = new Player("",4,4,"red");
 		//room matches current location
+		Card audTest = new Card(CardType.ROOM,"Auditorium");
+		testPlayer.addCard(audTest);
+		Solution testSolution = testPlayer.getSolution();
+		//check that solution room is the same as room player is in
 		//if only one person not seen, it's selected(can be same test as weapon)
 		//if multiple weapons not seen, one of them is randomly selected
 		//if multiple persons not seen, one of them is randomly selected
