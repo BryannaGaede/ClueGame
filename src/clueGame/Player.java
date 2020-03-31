@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Set;
 
 public class Player {
 	protected String playerName;
@@ -76,5 +77,10 @@ public class Player {
 
 	public ArrayList<Card> getMyCards() {
 		return myCards;
+	}
+
+	public void setLocation(Set<BoardCell> targets) {
+		// TODO Auto-generated method stub
+		
 	}
 	}

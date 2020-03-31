@@ -37,6 +37,8 @@ public class Board {
 	private ArrayList<Card> allCards = new ArrayList<Card>();
 	//new
 	private Solution theAnswer = new Solution();
+	private Card disproveCard;
+	private boolean gameOver = false;
 
 
 	// variable used for singleton pattern
@@ -532,5 +534,17 @@ public class Board {
 			}
 		}
 		return type;
+	}
+
+	public void setSolution(String person, String room, String weapon) {
+				
+	}
+
+	public Object getDisproveCard() {
+		return disproveCard;
+	}
+
+	public void setCards(String player, String cardName, CardType type) {
+		
 	}
 }
