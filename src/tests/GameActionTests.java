@@ -94,29 +94,31 @@ public class GameActionTests {
 	//check make an accusation - board
 	@Test
 	public void testAccusation() {
-		board.setAnswer("","","");
-		Solution test1 = new Solution("","","");
-		//solution is correct
-		assertTrue(board.checkAccusation(test1));
-		//solution with wrong person
-		Solution test2 = new Solution("","","");
-		assertTrue(!board.checkAccusation(test2));
-		//solution with wrong weapon
-		Solution test3 = new Solution("","","");
-		assertTrue(!board.checkAccusation(test3));
-		//solution with wrong room
-		Solution test4 = new Solution("","","");
-		assertTrue(!board.checkAccusation(test4));
+		fail("Not implemented yet");
+//		board.setAnswer("","","");
+//		Solution test1 = new Solution("","","");
+//		//solution is correct
+//		assertTrue(board.checkAccusation(test1));
+//		//solution with wrong person
+//		Solution test2 = new Solution("","","");
+//		assertTrue(!board.checkAccusation(test2));
+//		//solution with wrong weapon
+//		Solution test3 = new Solution("","","");
+//		assertTrue(!board.checkAccusation(test3));
+//		//solution with wrong room
+//		Solution test4 = new Solution("","","");
+//		assertTrue(!board.checkAccusation(test4));
 	}
 	
 	//create a suggestion - computer player
 	@Test
 	public void testCreateSuggestion() {
-		Player testPlayer = new Player("",4,4,"red");
+		fail("Not yet implemented");
+//		Player testPlayer = new Player("",4,4,"red");
 		//room matches current location
-		Card audTest = new Card(CardType.ROOM,"Auditorium");
-		testPlayer.addCard(audTest);
-		Solution testSolution = testPlayer.getSolution();
+//		Card audTest = new Card(CardType.ROOM,"Auditorium");
+//		testPlayer.addCard(audTest);
+//		Solution testSolution = testPlayer.getSolution();
 		//check that solution room is the same as room player is in
 		//if only one person not seen, it's selected(can be same test as weapon)
 		//if multiple weapons not seen, one of them is randomly selected
@@ -135,10 +137,11 @@ public class GameActionTests {
 	//handle a suggestion - board
 	@Test
 	public void testHandleSuggestion() {
-		board.setSolution("","","");
-		board.setCards("","",CardType.ROOM);
+		fail("Not yet implemented");
+//		board.setSolution("","","");
+//		board.setCards("","",CardType.ROOM);
 		//suggestion no one can disprove returns null
-		assertTrue(board.getDisproveCard() == null);
+//		assertTrue(board.getDisproveCard() == null);
 		//suggestion only accusing player can disprove returns null
 		
 		//suggestion only human can disprove returns answer(i.e., card that disproves suggestion)

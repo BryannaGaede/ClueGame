@@ -31,7 +31,7 @@ public class Board {
 	private HashSet<BoardCell> visited = new HashSet<BoardCell>();
 	private Map<Character, String> legend;
 	public BoardCell board[][] = new BoardCell[numRows][numColumns];
-	
+
 	private ArrayList<Player> players = new ArrayList<Player>();
 	private ArrayList<Weapon> weapons = new ArrayList<Weapon>();
 	private ArrayList<Card> allCards = new ArrayList<Card>();
@@ -54,6 +54,7 @@ public class Board {
 	}
 
 	public void initialize() {
+		//I kept separate try catches so I could tell which file errored
 		try {
 			loadRoomConfig(roomConfigFile);
 		} catch (IOException e) {
@@ -64,6 +65,7 @@ public class Board {
 		} catch (IOException e) {
 			System.out.println("Trouble loading boardConfigFile - csv");
 		}
+		//if statement keeps old tests working
 		if(fullConfig) {
 			try {
 				loadPlayerConfig(playerConfigFile);
@@ -83,11 +85,11 @@ public class Board {
 			dealCards();
 		}
 	}
-	
+
 	/*
 	 * ***********************SET UP CARDS AND PLAYERS***********************
 	 */
-	
+
 	public void buildDeck() {
 		//make cards for all players
 		for(Player player: players) {
@@ -100,7 +102,7 @@ public class Board {
 			allCards.add(card);
 		}
 	}
-	
+
 	public void dealCards() {
 		selectAnswer();
 		//give card at random index to players until all cards are used
@@ -120,17 +122,15 @@ public class Board {
 				cardsLeftToDeal -= 1;
 			}
 		}
-		
+
 	}
-	
+
 	public void selectAnswer() {
 		//select a room (index 0 through numRooms)
 		Random rand = new Random();
 		int nextIndex1 = rand.nextInt(numRooms-1);
 		int nextIndex2 = rand.nextInt(players.size());
 		int nextIndex3 = rand.nextInt(weapons.size());
-		System.out.println(allCards.get(nextIndex1).getName());
-		
 		theAnswer = new Solution(allCards.get(nextIndex2+numRooms).getName(), 
 				allCards.get(nextIndex1).getName(), 
 				allCards.get(nextIndex3+numRooms+players.size()).getName());
@@ -141,15 +141,15 @@ public class Board {
 		//nextIndex = rand.nextInt(weapons.size());
 		allCards.get(nextIndex3+numRooms+players.size()).setStatus(true);
 	}
-	
+
 	public Card handleSuggestion() {
 		return null;
 	}
-	
+
 	public boolean checkAccusation(Solution accusation) {
 		return false;
 	}
-	
+
 
 	/*
 	 * ***********************SET UP BOARD*****************************
@@ -337,7 +337,7 @@ public class Board {
 		boardConfigFile = csv;
 		roomConfigFile = txt;
 	}
-	
+
 	public void loadPlayerConfig(String player_txt) throws IOException{
 		String line = "";
 		String name = "";
@@ -347,33 +347,33 @@ public class Board {
 		char status = ' ';
 		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(player_txt), "UTF-8"));
 		while((line= br.readLine()) != null) {
-		//player name
+			//player name
 			name = line;
-		//player color
+			//player color
 			if((line = br.readLine()) == null) {
 				System.out.println("File formatted wrong");
 			} else {
 				color = line;
 			}
-		//player start row
+			//player start row
 			if((line = br.readLine()) == null) {
 				System.out.println("File formatted wrong");
 			} else {
 				row = Integer.parseInt(line);
 			}
-		//player start column
+			//player start column
 			if((line = br.readLine()) == null) {
 				System.out.println("File formatted wrong");
 			} else {
 				col = Integer.parseInt(line);
 			}
-		//human or computer option:
+			//human or computer option:
 			if((line = br.readLine()) == null) {
 				System.out.println("File formatted wrong");
 			} else {
 				status = line.charAt(0);
 			}
-		//create that player object store in players array list
+			//create that player object store in players array list
 			if(status == 'C') {
 				Player player = new ComputerPlayer(name,row,col,color);
 				players.add(player);
@@ -384,7 +384,7 @@ public class Board {
 		}
 		br.close();
 	}
-	
+
 	public void loadWeaponConfig(String weapon_txt) throws IOException{
 		String line = "";
 		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(weapon_txt), "UTF-8"));	
@@ -394,7 +394,7 @@ public class Board {
 		}
 		br.close();
 	}
-	
+
 	public void loadRoomConfig(String legend_txt) throws IOException {
 		String line = "";
 		String splitBy = ", ";
@@ -405,9 +405,9 @@ public class Board {
 			lines = line.split(splitBy);
 			char x = lines[0].charAt(0);
 			legend.put(x, lines[1]);
-			
+
 			if(fullConfig) {
-			//add cards to deck
+				//add cards to deck
 				String type = lines[2];
 				if(type.equals("Card")) {
 					Card card = new Card(CardType.ROOM,lines[1]);
@@ -466,7 +466,7 @@ public class Board {
 	public Set<BoardCell> getTargets() {
 		return targets;
 	}
-	
+
 	/*
 	 * ***********************USED FOR TESTING***************************************
 	 */
@@ -540,7 +540,7 @@ public class Board {
 	}
 
 	public void setSolution(String person, String room, String weapon) {
-				
+
 	}
 
 	public Object getDisproveCard() {
@@ -548,11 +548,11 @@ public class Board {
 	}
 
 	public void setCards(String player, String cardName, CardType type) {
-		
+
 	}
 
 	public void setAnswer(String person, String room, String weapon) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
