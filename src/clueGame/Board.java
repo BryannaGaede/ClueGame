@@ -39,6 +39,7 @@ public class Board {
 	private Solution theAnswer;
 	private Card disproveCard;
 	private boolean gameOver = false;
+	private String answer; 
 
 
 	// variable used for singleton pattern
@@ -155,7 +156,15 @@ public class Board {
 	}
 
 	public boolean checkAccusation(Solution accusation) {
-		return false;
+		String accusationStr = accusation.person + accusation.room + accusation.weapon; 
+		System.out.println(accusationStr + " " + answer);
+		if (answer.contentEquals(accusationStr)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+		
 	}
 
 
@@ -562,7 +571,6 @@ public class Board {
 	}
 
 	public void setAnswer(String person, String room, String weapon) {
-		// TODO Auto-generated method stub
-
+		answer = person+room+weapon;
 	}
 }
