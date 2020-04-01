@@ -58,40 +58,50 @@ public class GameActionTests {
 					selectedTarget[3] += 2;
 				}
 		}
-		for(int i : selectedTarget) {
-			System.out.println(i);
-		}
 		assertTrue(selectedTarget[0] > 0);
 		assertTrue(selectedTarget[1] > 0);
 		assertTrue(selectedTarget[2] > 0);
 		assertTrue(selectedTarget[3] == 0);
+
 		//if room in list that was not just visited, must select it
-		Player testPlayer2 = new Player("test2",5,4, "red");
-		Set<BoardCell> targets2 = board.calcTargets(5,4,1);
-		testPlayer2.setLocation(targets2);
-		assertTrue(testPlayer2.getRow() == 4 && testPlayer2.getCol() == 4);
+		int unvisitedRoom[] = {0,0};
+		for(int i = 0; i < 10; ++i) {
+			Player test = new Player("test",5,4, "red");
+			Set<BoardCell> targets2 = board.calcTargets(5,4,1);
+			test.setLocation(targets2);
+			if(test.getRow() == 4 && test.getCol() == 4) {
+				unvisitedRoom[0] += 1;
+			} else {
+				unvisitedRoom[1] += 1;
+			}
+		}
+		assertTrue(unvisitedRoom[0] > 1);
+		assertTrue(unvisitedRoom[1] == 0);
+//		for(int i : selectedTarget) {
+//			i = 0;
+//		}
 		//if room just visited is in list, each target(including room) selected randomly
-		testPlayer2.setLocation(5,4);
-		targets2 = board.calcTargets(5,4,1);
-		for(int i : selectedTarget) {
-			i = 0;
-		}
-		for(int i = 0; i < 10; i++) {
-			testPlayer.setLocation(targets);
-			if(testPlayer.getRow() == 5 && testPlayer.getCol() == 5) {
-				selectedTarget[0] += 1;
-				} else if (testPlayer.getRow() == 5 && testPlayer.getCol() == 3) {
-					selectedTarget[1] += 1;
-				} else if (testPlayer.getRow() == 4 && testPlayer.getCol() == 4) {
-					selectedTarget[2] += 1;
-				} else {
-					selectedTarget[3] += 2;
-				}
-		}
-		assertTrue(selectedTarget[0] > 0);
-		assertTrue(selectedTarget[1] > 0);
-		assertTrue(selectedTarget[2] > 0);
-		assertTrue(selectedTarget[3] > 0);
+//		Player testPlayer2.setLocation(5,4);
+//		targets2 = board.calcTargets(5,4,1);
+//		for(int i : selectedTarget) {
+//			i = 0;
+//		}
+//		for(int i = 0; i < 10; i++) {
+//			testPlayer.setLocation(targets);
+//			if(testPlayer.getRow() == 5 && testPlayer.getCol() == 5) {
+//				selectedTarget[0] += 1;
+//				} else if (testPlayer.getRow() == 5 && testPlayer.getCol() == 3) {
+//					selectedTarget[1] += 1;
+//				} else if (testPlayer.getRow() == 4 && testPlayer.getCol() == 4) {
+//					selectedTarget[2] += 1;
+//				} else {
+//					selectedTarget[3] += 2;
+//				}
+//		}
+//		assertTrue(selectedTarget[0] > 0);
+//		assertTrue(selectedTarget[1] > 0);
+//		assertTrue(selectedTarget[2] > 0);
+//		assertTrue(selectedTarget[3] > 0);
 	}
 
 	//check make an accusation - board

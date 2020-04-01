@@ -58,7 +58,21 @@ public class Player {
 			column = givenCells.get(nextIndex).getColumn();
 		} else {
 			//unseen room must go
-			//just visited chosen random	
+			boolean unvisitedRoom = false;
+			for(BoardCell target : targets) {
+				if(target.isDoorway() || target.isRoom() && target.getFirstInitial() != lastVisitedRoom) {
+					row = target.getRow();
+					column = target.getColumn();
+					unvisitedRoom = true;
+				}
+			}
+			//just visited chosen random
+			if(!unvisitedRoom) {
+				Random rand = new Random();
+				int nextIndex = rand.nextInt(targets.size());
+				row = givenCells.get(nextIndex).getRow();
+				column = givenCells.get(nextIndex).getColumn();
+			}
 		}
 	}
 	
