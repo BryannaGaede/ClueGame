@@ -77,31 +77,38 @@ public class GameActionTests {
 		}
 		assertTrue(unvisitedRoom[0] > 1);
 		assertTrue(unvisitedRoom[1] == 0);
-//		for(int i : selectedTarget) {
-//			i = 0;
-//		}
+
+		/*
+		 * *************************FIX THIS********************
+		 */
 		//if room just visited is in list, each target(including room) selected randomly
-//		Player testPlayer2.setLocation(5,4);
-//		targets2 = board.calcTargets(5,4,1);
-//		for(int i : selectedTarget) {
-//			i = 0;
-//		}
-//		for(int i = 0; i < 10; i++) {
-//			testPlayer.setLocation(targets);
-//			if(testPlayer.getRow() == 5 && testPlayer.getCol() == 5) {
-//				selectedTarget[0] += 1;
-//				} else if (testPlayer.getRow() == 5 && testPlayer.getCol() == 3) {
-//					selectedTarget[1] += 1;
-//				} else if (testPlayer.getRow() == 4 && testPlayer.getCol() == 4) {
-//					selectedTarget[2] += 1;
-//				} else {
-//					selectedTarget[3] += 2;
-//				}
-//		}
-//		assertTrue(selectedTarget[0] > 0);
-//		assertTrue(selectedTarget[1] > 0);
-//		assertTrue(selectedTarget[2] > 0);
-//		assertTrue(selectedTarget[3] > 0);
+		Player testPlayer2 = new Player("test",5,4,"red");
+		Set<BoardCell> targets2 = board.calcTargets(5,4,1);
+		testPlayer2.setLocation(targets2);
+		targets2 = board.calcTargets(testPlayer2.getRow(), testPlayer2.getCol(), 1);
+		testPlayer2.setLocation(targets2);
+		//player should now have visited a room and left		
+		int randomWithRoom[] = {0,0,0,0,0};
+		targets2 = board.calcTargets(testPlayer2.getRow(), testPlayer2.getCol(), 1);		
+		for(int i = 0; i < 10; i++) {
+			testPlayer2.setLocation(targets2);
+			if(testPlayer2.getRow() == 4 && testPlayer2.getCol() == 4) {
+				randomWithRoom[0] += 1;
+				} else if (testPlayer2.getRow() == 5 && testPlayer2.getCol() == 3) {
+					randomWithRoom[1] += 1;
+				} else if (testPlayer2.getRow() == 5 && testPlayer2.getCol() == 5) {
+					randomWithRoom[2] += 1;
+				} else if(testPlayer2.getRow() == 6 && testPlayer2.getCol() == 4) {
+					randomWithRoom[3] += 1;
+				} else { 
+					randomWithRoom[4] += 1; 
+					}
+		}
+		assertTrue(randomWithRoom[0] > 0);
+		assertTrue(randomWithRoom[1] > 0);
+		assertTrue(randomWithRoom[2] > 0);
+		assertTrue(randomWithRoom[3] > 0);
+		assertTrue(randomWithRoom[4] == 0);
 	}
 
 	//check make an accusation - board

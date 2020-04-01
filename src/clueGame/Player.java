@@ -143,4 +143,8 @@ public class Player {
 		return null;
 	}
 
+	public Object getLastVisited() {
+		return lastVisitedRoom;
+	}
+
 	}
