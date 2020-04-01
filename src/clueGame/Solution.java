@@ -1,7 +1,9 @@
 package clueGame;
 
 public class Solution {
-	public String person = null;
+	protected String person = null;
+	protected String room = null;
+	protected String weapon = null;
 	
 	public Solution(String person, String room, String weapon) {
 		super();
@@ -10,9 +12,7 @@ public class Solution {
 		this.weapon = weapon;
 	}
 	
-	public String room = null;
-	public String weapon = null;
-	
+	 
 	//used for testing
 	
 	public String getPerson() {
@@ -29,4 +29,5 @@ public class Solution {
 	public String getWeapon() {
 		return weapon;
 	}
+
 }

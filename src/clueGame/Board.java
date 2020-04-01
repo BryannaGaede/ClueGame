@@ -126,17 +126,20 @@ public class Board {
 	public void selectAnswer() {
 		//select a room (index 0 through numRooms)
 		Random rand = new Random();
-		int nextIndex = rand.nextInt(numRooms-1);
-		theAnswer.room = allCards.get(nextIndex).getName();
-		allCards.get(nextIndex).setStatus(true);
+		int nextIndex1 = rand.nextInt(numRooms-1);
+		int nextIndex2 = rand.nextInt(players.size());
+		int nextIndex3 = rand.nextInt(weapons.size());
+		System.out.println(allCards.get(nextIndex1).getName());
+		
+		theAnswer = new Solution(allCards.get(nextIndex2+numRooms).getName(), 
+				allCards.get(nextIndex1).getName(), 
+				allCards.get(nextIndex3+numRooms+players.size()).getName());
+		allCards.get(nextIndex1).setStatus(true);
 		//select a person (index numRooms+1 through numRooms + numPeople)
-		nextIndex = rand.nextInt(players.size());
-		theAnswer.person = allCards.get(nextIndex+numRooms).getName();
-		allCards.get(nextIndex+numRooms).setStatus(true);
+		allCards.get(nextIndex2+numRooms).setStatus(true);
 		//select a weapon (index numRooms+numPeople +1 through numCards)
-		nextIndex = rand.nextInt(weapons.size());
-		theAnswer.weapon = allCards.get(nextIndex+numRooms+players.size()).getName();
-		allCards.get(nextIndex+numRooms+players.size()).setStatus(true);
+		//nextIndex = rand.nextInt(weapons.size());
+		allCards.get(nextIndex3+numRooms+players.size()).setStatus(true);
 	}
 	
 	public Card handleSuggestion() {
