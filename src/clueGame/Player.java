@@ -16,7 +16,7 @@ public class Player {
 	protected ArrayList<Card> seenCards = new ArrayList<Card>();
 	protected Status status = Status.NONE;
 	protected boolean isInRoom = false;
-	protected char lastVisitedRoom;
+	protected char lastVisitedRoom = ' ';
 	
 	public Player(String name, int row2, int col, String color) {
 		this.playerName = name;
@@ -56,14 +56,18 @@ public class Player {
 			int nextIndex = rand.nextInt(targets.size());
 			row = givenCells.get(nextIndex).getRow();
 			column = givenCells.get(nextIndex).getColumn();
-		} else {
+		} 
+		else {
 			//unseen room must go
 			boolean unvisitedRoom = false;
+
 			for(BoardCell target : targets) {
-				if(target.isDoorway() || target.isRoom() && target.getFirstInitial() != lastVisitedRoom) {
+				if((target.isDoorway()  || target.isRoom()) && target.getFirstInitial() != lastVisitedRoom) {
 					row = target.getRow();
 					column = target.getColumn();
+					lastVisitedRoom = target.getFirstInitial();
 					unvisitedRoom = true;
+					break;
 				}
 			}
 			//just visited chosen random
