@@ -58,6 +58,9 @@ public class GameActionTests {
 					selectedTarget[3] += 2;
 				}
 		}
+		for(int i : selectedTarget) {
+			System.out.println(i);
+		}
 		assertTrue(selectedTarget[0] > 0);
 		assertTrue(selectedTarget[1] > 0);
 		assertTrue(selectedTarget[2] > 0);

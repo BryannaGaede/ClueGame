@@ -17,9 +17,8 @@ import clueGame.BoardCell.DoorDirection;
 
 public class Board {
 	public final int MAX_BOARD_SIZE = 50;
-	private int numRows = 30;
-	private int numColumns = 30;
-	private int numRooms = 0;
+	private static int numRows = 30;
+	private static int numColumns = 30;
 	private String boardConfigFile;
 	private String roomConfigFile;
 	private String playerConfigFile;
@@ -30,10 +29,11 @@ public class Board {
 	private HashSet<BoardCell> targets = new HashSet<BoardCell>();
 	private HashSet<BoardCell> visited = new HashSet<BoardCell>();
 	private Map<Character, String> legend;
-	public BoardCell board[][] = new BoardCell[numRows][numColumns];
+	public static BoardCell board[][] = new BoardCell[numRows][numColumns];
 
 	private ArrayList<Player> players = new ArrayList<Player>();
 	private ArrayList<Weapon> weapons = new ArrayList<Weapon>();
+	private ArrayList<Room> rooms = new ArrayList<Room>();
 	private ArrayList<Card> allCards = new ArrayList<Card>();
 	//new
 	private Solution theAnswer;
@@ -91,6 +91,14 @@ public class Board {
 	 */
 
 	public void buildDeck() {
+		//make cards for all rooms
+
+		for(Room room : rooms) {
+			if(!room.getName().equals("Closet")) {
+				Card card = new Card(CardType.ROOM, room.getName());
+				allCards.add(card);
+			}
+		}
 		//make cards for all players
 		for(Player player: players) {
 			Card card = new Card(CardType.PERSON, player.getName());
@@ -128,18 +136,18 @@ public class Board {
 	public void selectAnswer() {
 		//select a room (index 0 through numRooms)
 		Random rand = new Random();
-		int nextIndex1 = rand.nextInt(numRooms-1);
+		int nextIndex1 = rand.nextInt(rooms.size()-1);
 		int nextIndex2 = rand.nextInt(players.size());
 		int nextIndex3 = rand.nextInt(weapons.size());
-		theAnswer = new Solution(allCards.get(nextIndex2+numRooms).getName(), 
+		theAnswer = new Solution(allCards.get(nextIndex2+rooms.size()).getName(), 
 				allCards.get(nextIndex1).getName(), 
-				allCards.get(nextIndex3+numRooms+players.size()).getName());
+				allCards.get(nextIndex3+rooms.size()+players.size()).getName());
 		allCards.get(nextIndex1).setStatus(true);
 		//select a person (index numRooms+1 through numRooms + numPeople)
-		allCards.get(nextIndex2+numRooms).setStatus(true);
+		allCards.get(nextIndex2+rooms.size()).setStatus(true);
 		//select a weapon (index numRooms+numPeople +1 through numCards)
 		//nextIndex = rand.nextInt(weapons.size());
-		allCards.get(nextIndex3+numRooms+players.size()).setStatus(true);
+		allCards.get(nextIndex3+rooms.size()+players.size()).setStatus(true);
 	}
 
 	public Card handleSuggestion() {
@@ -324,6 +332,16 @@ public class Board {
 		}
 	}
 
+
+	public static boolean isRoom(int row, int col) {
+		if(getCellAt(row,col).getFirstInitial() != 'X' && getCellAt(row,col).getFirstInitial() != 'W') {
+			return true;
+		} else {
+			return false;
+
+		}
+	}
+
 	/*
 	 * ********************CONFIGURATION METHODS********************************
 	 */
@@ -405,16 +423,8 @@ public class Board {
 			lines = line.split(splitBy);
 			char x = lines[0].charAt(0);
 			legend.put(x, lines[1]);
-
-			if(fullConfig) {
-				//add cards to deck
-				String type = lines[2];
-				if(type.equals("Card")) {
-					Card card = new Card(CardType.ROOM,lines[1]);
-					allCards.add(card);
-					numRooms += 1;
-				}
-			}
+			Room room = new Room(lines[0].charAt(0),lines[1], lines[2]);
+			rooms.add(room);
 		}
 		br.close();
 	}
@@ -458,7 +468,7 @@ public class Board {
 		return adjMatrix.get(getCellAt(row, col));
 	}
 
-	public BoardCell getCellAt(int row, int col) {
+	public static BoardCell getCellAt(int row, int col) {
 		// return the corresponding2D array
 		return board[row][col];
 	}
@@ -466,7 +476,7 @@ public class Board {
 	public Set<BoardCell> getTargets() {
 		return targets;
 	}
-
+	
 	/*
 	 * ***********************USED FOR TESTING***************************************
 	 */

@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Set;
 
 public class Player {
@@ -14,16 +15,51 @@ public class Player {
 	protected ArrayList<Card> myCards = new ArrayList<Card>();
 	protected ArrayList<Card> seenCards = new ArrayList<Card>();
 	protected Status status = Status.NONE;
+	protected boolean isInRoom = false;
+	protected char lastVisitedRoom;
 	
 	public Player(String name, int row2, int col, String color) {
 		this.playerName = name;
 		this.row = row2;
 		this.column = col;
 		this.color = convertColor(color);
+		this.isInRoom = roomState(row2,col);
+	}
+
+	private boolean roomState(int row, int col) {
+		if(Board.isRoom(row,col)) {
+			lastVisitedRoom = Board.getCellAt(row,col).getFirstInitial();
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public Card disproveSuggestion(Solution suggestion) {
 		return null;
+	}
+	
+
+	public void setLocation(Set<BoardCell> targets) {
+		boolean noRooms = true;
+		ArrayList<BoardCell> givenCells = new ArrayList<BoardCell>();
+		for(BoardCell target : targets) {
+			if(target.isDoorway() || target.isRoom()) {
+				noRooms = false;
+			}
+			givenCells.add(target);
+		}
+		//random choice no rooms
+		if(noRooms) {
+			Random rand = new Random();
+			int nextIndex = rand.nextInt(targets.size());
+			row = givenCells.get(nextIndex).getRow();
+			column = givenCells.get(nextIndex).getColumn();
+		} else {
+			//unseen room must go
+			//just visited chosen random	
+		}
 	}
 	
 	public Color convertColor(String strColor) {     
@@ -77,14 +113,6 @@ public class Player {
 
 	public ArrayList<Card> getMyCards() {
 		return myCards;
-	}
-
-	public void setLocation(Set<BoardCell> targets) {
-		// TODO Auto-generated method stub
-		//random choice no rooms
-		//unseen room must go
-		//just visited chosen random
-		
 	}
 
 	public void setLocation(int row, int col) {
