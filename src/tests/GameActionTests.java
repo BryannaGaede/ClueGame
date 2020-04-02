@@ -81,9 +81,6 @@ public class GameActionTests {
 		assertTrue(unvisitedRoom[0] > 1);
 		assertTrue(unvisitedRoom[1] == 0);
 
-		/*
-		 * *************************FIX THIS********************
-		 */
 		//if room just visited is in list, each target(including room) selected randomly
 		Player testPlayer2 = new Player("test",5,4,"red");
 		Set<BoardCell> targets2 = board.calcTargets(5,4,1);
@@ -93,7 +90,7 @@ public class GameActionTests {
 		//player should now have visited a room and left		
 		int randomWithRoom[] = {0,0,0,0,0};
 		targets2 = board.calcTargets(testPlayer2.getRow(), testPlayer2.getCol(), 1);		
-		for(int i = 0; i < 10; i++) {
+		for(int i = 0; i < 100; i++) {
 			testPlayer2.setLocation(targets2);
 			if(testPlayer2.getRow() == 4 && testPlayer2.getCol() == 4) {
 				randomWithRoom[0] += 1;
@@ -113,8 +110,8 @@ public class GameActionTests {
 		}
 		assertTrue(randomWithRoom[0] > 0);
 		assertTrue(randomWithRoom[1] > 0);
-		//assertTrue(randomWithRoom[2] > 0);
-		//assertTrue(randomWithRoom[3] > 0);
+		assertTrue(randomWithRoom[2] > 0);
+		assertTrue(randomWithRoom[3] > 0);
 		assertTrue(randomWithRoom[4] == 0);
 	}
 
@@ -127,13 +124,13 @@ public class GameActionTests {
 		//solution is correct
 		assertTrue(board.checkAccusation(test1));
 		//solution with wrong person
-		Solution test2 = new Solution("","","");
+		Solution test2 = new Solution("a","","");
 		assertTrue(!board.checkAccusation(test2));
 		//solution with wrong weapon
-		Solution test3 = new Solution("","","");
+		Solution test3 = new Solution("","a","");
 		assertTrue(!board.checkAccusation(test3));
 		//solution with wrong room
-		Solution test4 = new Solution("","","");
+		Solution test4 = new Solution("","","a");
 		assertTrue(!board.checkAccusation(test4));
 	}
 	
