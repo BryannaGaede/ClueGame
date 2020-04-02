@@ -144,6 +144,7 @@ public class GameActionTests {
 		//room matches current location
 		assertTrue(testSuggestion.getRoom().equals("Auditorium"));
 		//check that solution room is the same as room player is in
+		assertTrue(testPlayer.getRoom() == testSuggestion.getRoom());
 		//if only one person not seen, it's selected(can be same test as weapon)
 		
 		//if multiple weapons not seen, one of them is randomly selected

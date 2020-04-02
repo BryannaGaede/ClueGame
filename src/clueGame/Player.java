@@ -158,4 +158,8 @@ public class Player {
 	public Solution getSuggestion() {
 		return recentSuggestion;
 	}
+
+	public String getRoom() {
+		return Board.getRoomName(Board.getCellAt(row, column).getFirstInitial());
+	}
 	}
