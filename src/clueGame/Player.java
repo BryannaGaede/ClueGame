@@ -18,6 +18,7 @@ public class Player {
 	protected boolean isInRoom = false;
 	protected char lastVisitedRoom = ' ';
 	private Solution recentSuggestion = new Solution("","","");
+	private ArrayList<Card> allCards = Board.getCards();
 	
 	public Player(String name, int row2, int col, String color) {
 		this.playerName = name;
@@ -25,6 +26,10 @@ public class Player {
 		this.column = col;
 		this.color = convertColor(color);
 		this.isInRoom = roomState(row2,col);
+		//reset all cards to unseen
+		for(Card card : allCards) {
+			card.setStatus(false);
+		}
 	}
 
 	private boolean roomState(int row, int col) {

@@ -118,7 +118,6 @@ public class GameActionTests {
 	//check make an accusation - board
 	@Test
 	public void testAccusation() {
-		//fail("Not implemented yet");
 		board.setAnswer("","","");
 		Solution test1 = new Solution("","","");
 		//solution is correct
@@ -146,7 +145,6 @@ public class GameActionTests {
 		//check that solution room is the same as room player is in
 		assertTrue(testPlayer.getRoom() == testSuggestion.getRoom());
 		//if only one person not seen, it's selected(can be same test as weapon)
-		
 		//if multiple weapons not seen, one of them is randomly selected
 		//if multiple persons not seen, one of them is randomly selected
 	}

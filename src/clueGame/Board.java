@@ -34,11 +34,10 @@ public class Board {
 	private ArrayList<Player> players = new ArrayList<Player>();
 	private ArrayList<Weapon> weapons = new ArrayList<Weapon>();
 	private static ArrayList<Room> rooms = new ArrayList<Room>();
-	private ArrayList<Card> allCards = new ArrayList<Card>();
+	private static ArrayList<Card> allCards = new ArrayList<Card>();
 	//new
 	private Solution theAnswer;
 	private Card disproveCard;
-	private boolean gameOver = false;
 	private String answer; 
 
 
@@ -513,7 +512,7 @@ public class Board {
 		return (theAnswer);
 	}
 
-	public ArrayList<Card> getCards() {
+	public static ArrayList<Card> getCards() {
 		return allCards;
 	}
 
