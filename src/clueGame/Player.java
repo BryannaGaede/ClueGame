@@ -17,6 +17,7 @@ public class Player {
 	protected Status status = Status.NONE;
 	protected boolean isInRoom = false;
 	protected char lastVisitedRoom = ' ';
+	private Solution recentSuggestion = new Solution("","","");
 	
 	public Player(String name, int row2, int col, String color) {
 		this.playerName = name;
@@ -78,6 +79,10 @@ public class Player {
 				column = givenCells.get(nextIndex).getColumn();
 			}
 		}
+	}
+
+	public void createSuggestion() {
+		recentSuggestion.room = Board.getRoomName(Board.getCellAt(row, column).getFirstInitial());
 	}
 	
 	public Color convertColor(String strColor) {     
@@ -143,7 +148,6 @@ public class Player {
 	}
 
 	public Solution getSolution() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -151,4 +155,7 @@ public class Player {
 		return lastVisitedRoom;
 	}
 
+	public Solution getSuggestion() {
+		return recentSuggestion;
+	}
 	}

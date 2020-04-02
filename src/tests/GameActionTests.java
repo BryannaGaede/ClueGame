@@ -137,14 +137,15 @@ public class GameActionTests {
 	//create a suggestion - computer player
 	@Test
 	public void testCreateSuggestion() {
-		fail("Not yet implemented");
-//		Player testPlayer = new Player("",4,4,"red");
+		//set a player in room "Auditorium"
+		Player testPlayer = new Player("test",4,4,"red");
+		testPlayer.createSuggestion();
+		Solution testSuggestion = testPlayer.getSuggestion();
 		//room matches current location
-//		Card audTest = new Card(CardType.ROOM,"Auditorium");
-//		testPlayer.addCard(audTest);
-//		Solution testSolution = testPlayer.getSolution();
+		assertTrue(testSuggestion.getRoom().equals("Auditorium"));
 		//check that solution room is the same as room player is in
 		//if only one person not seen, it's selected(can be same test as weapon)
+		
 		//if multiple weapons not seen, one of them is randomly selected
 		//if multiple persons not seen, one of them is randomly selected
 	}

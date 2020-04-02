@@ -7,6 +7,7 @@ public class BoardCell {
 	private int row;
 	private int column;
 	private  String initial;
+	private String name;
 	private DoorDirection doorDirection;
 
 	public BoardCell(int row, int column, String initial) {

@@ -33,7 +33,7 @@ public class Board {
 
 	private ArrayList<Player> players = new ArrayList<Player>();
 	private ArrayList<Weapon> weapons = new ArrayList<Weapon>();
-	private ArrayList<Room> rooms = new ArrayList<Room>();
+	private static ArrayList<Room> rooms = new ArrayList<Room>();
 	private ArrayList<Card> allCards = new ArrayList<Card>();
 	//new
 	private Solution theAnswer;
@@ -573,4 +573,14 @@ public class Board {
 	public void setAnswer(String person, String room, String weapon) {
 		answer = person+room+weapon;
 	}
+
+	public static String getRoomName(char firstInitial) {
+		for(Room room : rooms) {
+			if(room.getInitial() == firstInitial) {
+				return room.getName();
+			}
+		}
+		return null;
+	}
+
 }
