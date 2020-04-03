@@ -43,7 +43,8 @@ public class Player {
 	}
 
 	public Card disproveSuggestion(Solution suggestion) {
-		return null;
+		Card temp = new Card(CardType.NONE,"");
+		return temp;
 	}
 	
 
@@ -88,25 +89,46 @@ public class Player {
 
 	public void createSuggestion() {
 		recentSuggestion.room = Board.getRoomName(Board.getCellAt(row, column).getFirstInitial());
-		recentSuggestion.weapon = getUnseenWeapon(seenCards);
-	}
-	
-	
-	public String getUnseenWeapon(ArrayList<Card> seenCards) {
-		ArrayList<Card> weaponCards = new ArrayList<>();
-		String unseen = "";
-		//get an unseen weaponCard
-		for ( int i = 0; i < allCards.size(); i++) {
-			//if the card is a weapon and unseen return it 
-			if (allCards.get(i).getType() == CardType.WEAPON && !(seenCards.contains(allCards.get(i)))) {
-				return (allCards.get(i).getName());
+		ArrayList<Card> possiblePlayers = new ArrayList<Card>();
+		ArrayList<Card> possibleWeapons = new ArrayList<Card>();
+		if(seenCards.size()>0) {
+			//mark seen cards as seen, my cards need to be marked too, but omitted for testing
+			for(Card seen : seenCards) {
+				for(Card all : allCards) {
+					if(seen.getName().equals(all.getName())) {
+						all.setStatus(true);
+					}
+				}
+			}
+			//store available cards:
+			for(Card all : allCards) {
+				if(all.getStatus() == false) {
+					if(all.getType() == CardType.PERSON) {
+						possiblePlayers.add(all);
+					} else if(all.getType() == CardType.WEAPON) {
+						possibleWeapons.add(all);
+					}
+				}
+			}
+		} else {
+			for(Card all : allCards) {
+				if(all.getType() == CardType.PERSON) {
+					possiblePlayers.add(all);
+				} else if(all.getType() == CardType.WEAPON) {
+					possibleWeapons.add(all);
+				}
 			}
 		}
-		return unseen;
-	}
-	
 
-	
+		//pick a weapon and a player
+		Random rand = new Random();
+		int nextIndex = rand.nextInt(possiblePlayers.size());
+		recentSuggestion.person = possiblePlayers.get(nextIndex).getName();
+		nextIndex = rand.nextInt(possibleWeapons.size());
+		recentSuggestion.weapon = possibleWeapons.get(nextIndex).getName();
+		
+	}
+		
 	public Color convertColor(String strColor) {     
 		Color color;      
 		try {              
@@ -178,6 +200,10 @@ public class Player {
 		myCards.add(testCard);		
 	}
 
+	public void viewCard(Card seen) {
+		seenCards.add(seen);
+	}
+
 	public Solution getSolution() {
 		return null;
 	}
@@ -201,4 +227,9 @@ public class Player {
 	public void setSeenCards(ArrayList<Card> seenCards) {
 		this.seenCards = seenCards;
 	}
+
+	public void clearSeen() {
+		seenCards = new ArrayList<Card>();
+	}
+
 	}

@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
@@ -27,6 +28,9 @@ public class GameActionTests {
 	// We make the Board static because we can load it one time and 
 	// then do all the tests. 
 	private static Board board;
+	private static ArrayList<Card> weapons = new ArrayList<Card>();
+	private static ArrayList<Card> players = new ArrayList<Card>();
+	private static ArrayList<Card> allCards = Board.getCards();
 	
 	@BeforeClass
 	public static void setUp() throws IOException {
@@ -37,6 +41,13 @@ public class GameActionTests {
 		board.setConfigFiles("CLUE_BOARD.csv", "ClueRooms.txt");
 		// Initialize will load BOTH config files 
 		board.initialize();
+		for(Card all : allCards) {
+			if(all.getType() == CardType.PERSON) {
+				players.add(all);
+			} else if(all.getType() == CardType.WEAPON) {
+				weapons.add(all);
+			}
+		}
 	}
 	//select a target location - computer player
 	@Test
@@ -46,7 +57,7 @@ public class GameActionTests {
 		board.calcTargets(8, 7, 1);
 		Set<BoardCell> targets = board.getTargets();
 		int selectedTarget[] = {0,0,0,0};
-		for(int i = 0; i < 10; i++) {
+		for(int i = 0; i < 100; i++) {
 			testPlayer.setLocation(targets);
 			if(testPlayer.getRow() == 7 && testPlayer.getCol() == 7) {
 				selectedTarget[0] += 1;
@@ -144,42 +155,60 @@ public class GameActionTests {
 		assertTrue(testSuggestion.getRoom().equals("Auditorium"));
 		//check that solution room is the same as room player is in
 		assertTrue(testPlayer.getRoom() == testSuggestion.getRoom());
-		
-		//////*****fix this test : for some reason it think auditorium is a weapon???***////
-		
-		//first need to make a list of weapon cards
-		ArrayList<Card> weaponCards = new ArrayList<>();
-		ArrayList<Card> seenTemp = new ArrayList<>();
-		//set all weapon cards to seen but 1
-		for ( int i = 0; i < Board.getCards().size(); i++) {
-			if (Board.getCards().get(i).getType() == CardType.WEAPON)
-				weaponCards.add(Board.getCards().get(i));
-		}
-		String weapon = "";
-		//adding all but one weapon card to seen cards
-		for (int i = 0; i < weaponCards.size()-1; i++) {
-			seenTemp.add(weaponCards.get(i));
-			weapon = weaponCards.get(i+1).getName();
-		}
-		testPlayer.setSeenCards(seenTemp);
-		testSuggestion = testPlayer.getSuggestion();
-		System.out.println("weapon suggestion should be "+ weapon+ ": " + testSuggestion.getWeapon());
-		//if only one person/weapon not seen, it's selected(can be same test as weapon)
-		assertTrue(testSuggestion.getWeapon().equals(weapon));
 		//room matches current location
 		
-		//if multiple weapons not seen, one of them is randomly selected
+		Card onePlayer = players.get(0);
+		Card oneWeapon = weapons.get(0);
+		ArrayList<Card> seenTemp = new ArrayList<Card>();
+		//add all but one player and weapon to seen cards
+		for(int i = 1; i < players.size(); ++i) {
+			seenTemp.add(players.get(i));
+		}
+		for(int i = 1; i < weapons.size(); ++i) {
+			seenTemp.add(weapons.get(i));
+		}
+		for(Card seen : seenTemp) {
+			testPlayer.viewCard(seen);
+		}
+		testPlayer.createSuggestion();
+		testSuggestion = testPlayer.getSuggestion();
+		//if only one person/weapon not seen, it's selected(can be same test as weapon)
+		assertTrue(testSuggestion.getPerson().equals(onePlayer.getName()));
+		assertTrue(testSuggestion.getWeapon().equals(oneWeapon.getName()));
 		
+		//if multiple weapons not seen, one of them is randomly selected	
 		//if multiple persons not seen, one of them is randomly selected
+		
 	}
 	
 	//disprove a suggestion - player
 	@Test
 	public void testDisproveSuggestion() {
-		fail("Not yet implemented");
-		//if player has only one matching card it should be returned
-		//if player has >1 matching card, returned card should be chosen randomly
+		Player testPlayer = new Player("",5,5,"red");
+		Card answerRoom = new Card(CardType.ROOM,"room");
+		Card answerPlayer = new Card(CardType.PERSON, "player");
+		Card answerWeapon = new Card(CardType.WEAPON, "weapon");
+		Solution testSuggestion = new Solution(answerRoom.getName(),answerPlayer.getName(),answerWeapon.getName());	
 		//if player has no matching card, null is returned
+		assertTrue(testPlayer.disproveSuggestion(testSuggestion) == null);
+		//if player has only one matching card it should be returned
+		testPlayer.addCard(answerRoom);
+		assertTrue(testPlayer.disproveSuggestion(testSuggestion) == answerRoom);
+		//if player has >1 matching card, returned card should be chosen randomly
+		testPlayer.addCard(answerPlayer);
+		int seen[] = {0,0,0};
+		for(int i = 0; i < 10; i++) {
+			if(testPlayer.disproveSuggestion(testSuggestion) == answerRoom) {
+				seen[0] += 1;
+			} else if(testPlayer.disproveSuggestion(testSuggestion) == answerPlayer) {
+				seen[1] += 1;
+			} else {
+				seen[2] += 1;
+			}
+		}
+		assertTrue(seen[0]>0);
+		assertTrue(seen[1]>0);
+		assertTrue(seen[2] == 0);
 	}
 
 	//handle a suggestion - board
