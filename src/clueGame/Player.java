@@ -43,8 +43,19 @@ public class Player {
 	}
 
 	public Card disproveSuggestion(Solution suggestion) {
-		Card temp = new Card(CardType.NONE,"");
-		return temp;
+		ArrayList<Card> possibleGives = new ArrayList<Card>();
+		for(Card mine : myCards) {
+			if(mine.getName().equals(suggestion.person) || mine.getName().equals(suggestion.room) || mine.getName().equals(suggestion.weapon)) {
+				possibleGives.add(mine);
+			}
+		}
+		if(possibleGives.size()>0) {
+			Random rand = new Random();
+			int nextIndex = rand.nextInt(possibleGives.size());
+			return possibleGives.get(nextIndex);
+		} else {
+			return null;
+		}
 	}
 	
 

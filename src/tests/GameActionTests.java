@@ -198,9 +198,10 @@ public class GameActionTests {
 		testPlayer.addCard(answerPlayer);
 		int seen[] = {0,0,0};
 		for(int i = 0; i < 10; i++) {
-			if(testPlayer.disproveSuggestion(testSuggestion) == answerRoom) {
+			Card contradiction = testPlayer.disproveSuggestion(testSuggestion);
+			if( contradiction == answerRoom) {
 				seen[0] += 1;
-			} else if(testPlayer.disproveSuggestion(testSuggestion) == answerPlayer) {
+			} else if(contradiction == answerPlayer) {
 				seen[1] += 1;
 			} else {
 				seen[2] += 1;
