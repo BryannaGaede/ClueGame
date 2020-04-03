@@ -88,6 +88,7 @@ public class Player {
 
 	public void createSuggestion() {
 		recentSuggestion.room = Board.getRoomName(Board.getCellAt(row, column).getFirstInitial());
+		recentSuggestion.weapon = Board.getUnseenWeapon();
 	}
 	
 	public Color convertColor(String strColor) {     
@@ -106,6 +107,15 @@ public class Player {
 	/*
 	 * ********************USED FOR TESTING*************************************
 	 */
+	
+	public void removeCard (Card card) {
+		for (Card x: myCards) {
+			if (x == card) {
+				myCards.remove(card);
+			}
+		}
+	}
+	
 	public String getName() {
 		return this.playerName;
 	}
@@ -133,7 +143,7 @@ public class Player {
 			}
 		}
 		return false;
-		}
+	}
 
 	public int getCardCount() {
 		return myCards.size();

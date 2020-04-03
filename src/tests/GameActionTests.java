@@ -145,6 +145,21 @@ public class GameActionTests {
 		//check that solution room is the same as room player is in
 		assertTrue(testPlayer.getRoom() == testSuggestion.getRoom());
 		//if only one person not seen, it's selected(can be same test as weapon)
+		Player testPlayer1 = new Player("test1", 4, 5, "red");
+		Card test1 = new Card(CardType.WEAPON,"test1");
+		testPlayer1.addCard(test1);
+		testPlayer.addCard(test1);
+		Player testPlayer2 = new Player("test2", 4, 6, "red");
+		//remove card from player 2 just in case it is in hand ra
+		testPlayer2.removeCard(test1);
+		testPlayer1.createSuggestion();
+		Solution testSuggestion1 = testPlayer1.getSuggestion();
+		System.out.println("weapon suggestion should be test1 but is :" + testSuggestion1.getWeapon());
+		System.out.println("weapon suggestion should be test1 but is :" + testSuggestion1.getRoom());
+		System.out.println("weapon suggestion should be test1 but is :" + testSuggestion1.getPerson());
+		assertTrue(testSuggestion1.getWeapon().equals("test1"));
+		//room matches current location
+		
 		//if multiple weapons not seen, one of them is randomly selected
 		//if multiple persons not seen, one of them is randomly selected
 	}

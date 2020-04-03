@@ -31,7 +31,7 @@ public class Board {
 	private Map<Character, String> legend;
 	public static BoardCell board[][] = new BoardCell[numRows][numColumns];
 
-	private ArrayList<Player> players = new ArrayList<Player>();
+	private static ArrayList<Player> players = new ArrayList<Player>();
 	private ArrayList<Weapon> weapons = new ArrayList<Weapon>();
 	private static ArrayList<Room> rooms = new ArrayList<Room>();
 	private static ArrayList<Card> allCards = new ArrayList<Card>();
@@ -156,7 +156,7 @@ public class Board {
 
 	public boolean checkAccusation(Solution accusation) {
 		String accusationStr = accusation.person + accusation.room + accusation.weapon; 
-		System.out.println(accusationStr + " " + answer);
+		//System.out.println(accusationStr + " " + answer);
 		if (answer.contentEquals(accusationStr)) {
 			return true;
 		}
@@ -580,6 +580,29 @@ public class Board {
 			}
 		}
 		return null;
+	}
+
+	public static String getUnseenWeapon() {
+		int[] cardCount = new int[allCards.size()];
+		for (Player y: players) {
+			for (Card x : y.myCards) {
+				for (int i = 0; i < allCards.size(); i++) {
+					Card z = allCards.get(i);
+					if (z.getName().contentEquals(x.getName()) && z.type == CardType.WEAPON) {
+						cardCount[i]++;
+					}
+				}
+			}
+			
+		}
+		for (int x : cardCount) {
+			if (x < players.size() -1) {
+				return allCards.get(x).getName();
+			}
+		}
+
+		return null;
+ 
 	}
 
 }
