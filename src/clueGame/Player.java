@@ -13,7 +13,7 @@ public class Player {
 	protected int column;
 	protected Color color;
 	protected ArrayList<Card> myCards = new ArrayList<Card>();
-	protected ArrayList<Card> seenCards = new ArrayList<Card>();
+	private ArrayList<Card> seenCards = new ArrayList<Card>();
 	protected Status status = Status.NONE;
 	protected boolean isInRoom = false;
 	protected char lastVisitedRoom = ' ';
@@ -88,8 +88,24 @@ public class Player {
 
 	public void createSuggestion() {
 		recentSuggestion.room = Board.getRoomName(Board.getCellAt(row, column).getFirstInitial());
-		recentSuggestion.weapon = Board.getUnseenWeapon();
+		recentSuggestion.weapon = getUnseenWeapon(seenCards);
 	}
+	
+	
+	public String getUnseenWeapon(ArrayList<Card> seenCards) {
+		ArrayList<Card> weaponCards = new ArrayList<>();
+		String unseen = "";
+		//get an unseen weaponCard
+		for ( int i = 0; i < allCards.size(); i++) {
+			//if the card is a weapon and unseen return it 
+			if (allCards.get(i).getType() == CardType.WEAPON && !(seenCards.contains(allCards.get(i)))) {
+				return (allCards.get(i).getName());
+			}
+		}
+		return unseen;
+	}
+	
+
 	
 	public Color convertColor(String strColor) {     
 		Color color;      
@@ -176,5 +192,13 @@ public class Player {
 
 	public String getRoom() {
 		return Board.getRoomName(Board.getCellAt(row, column).getFirstInitial());
+	}
+
+	public ArrayList<Card> getSeenCards() {
+		return seenCards;
+	}
+
+	public void setSeenCards(ArrayList<Card> seenCards) {
+		this.seenCards = seenCards;
 	}
 	}

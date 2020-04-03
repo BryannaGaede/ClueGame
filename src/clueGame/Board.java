@@ -582,27 +582,8 @@ public class Board {
 		return null;
 	}
 
-	public static String getUnseenWeapon() {
-		int[] cardCount = new int[allCards.size()];
-		for (Player y: players) {
-			for (Card x : y.myCards) {
-				for (int i = 0; i < allCards.size(); i++) {
-					Card z = allCards.get(i);
-					if (z.getName().contentEquals(x.getName()) && z.type == CardType.WEAPON) {
-						cardCount[i]++;
-					}
-				}
-			}
-			
-		}
-		for (int x : cardCount) {
-			if (x < players.size() -1) {
-				return allCards.get(x).getName();
-			}
-		}
+	
 
-		return null;
- 
-	}
+	
 
 }

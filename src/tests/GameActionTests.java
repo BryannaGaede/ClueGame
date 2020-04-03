@@ -144,23 +144,32 @@ public class GameActionTests {
 		assertTrue(testSuggestion.getRoom().equals("Auditorium"));
 		//check that solution room is the same as room player is in
 		assertTrue(testPlayer.getRoom() == testSuggestion.getRoom());
-		//if only one person not seen, it's selected(can be same test as weapon)
-		Player testPlayer1 = new Player("test1", 4, 5, "red");
-		Card test1 = new Card(CardType.WEAPON,"test1");
-		testPlayer1.addCard(test1);
-		testPlayer.addCard(test1);
-		Player testPlayer2 = new Player("test2", 4, 6, "red");
-		//remove card from player 2 just in case it is in hand ra
-		testPlayer2.removeCard(test1);
-		testPlayer1.createSuggestion();
-		Solution testSuggestion1 = testPlayer1.getSuggestion();
-		System.out.println("weapon suggestion should be test1 but is :" + testSuggestion1.getWeapon());
-		System.out.println("weapon suggestion should be test1 but is :" + testSuggestion1.getRoom());
-		System.out.println("weapon suggestion should be test1 but is :" + testSuggestion1.getPerson());
-		assertTrue(testSuggestion1.getWeapon().equals("test1"));
+		
+		//////*****fix this test : for some reason it think auditorium is a weapon???***////
+		
+		//first need to make a list of weapon cards
+		ArrayList<Card> weaponCards = new ArrayList<>();
+		ArrayList<Card> seenTemp = new ArrayList<>();
+		//set all weapon cards to seen but 1
+		for ( int i = 0; i < Board.getCards().size(); i++) {
+			if (Board.getCards().get(i).getType() == CardType.WEAPON)
+				weaponCards.add(Board.getCards().get(i));
+		}
+		String weapon = "";
+		//adding all but one weapon card to seen cards
+		for (int i = 0; i < weaponCards.size()-1; i++) {
+			seenTemp.add(weaponCards.get(i));
+			weapon = weaponCards.get(i+1).getName();
+		}
+		testPlayer.setSeenCards(seenTemp);
+		testSuggestion = testPlayer.getSuggestion();
+		System.out.println("weapon suggestion should be "+ weapon+ ": " + testSuggestion.getWeapon());
+		//if only one person/weapon not seen, it's selected(can be same test as weapon)
+		assertTrue(testSuggestion.getWeapon().equals(weapon));
 		//room matches current location
 		
 		//if multiple weapons not seen, one of them is randomly selected
+		
 		//if multiple persons not seen, one of them is randomly selected
 	}
 	
