@@ -215,14 +215,19 @@ public class GameActionTests {
 	//handle a suggestion - board
 	@Test
 	public void testHandleSuggestion() {
-		fail("Not yet implemented");
-//		board.setSolution("","","");
-//		board.setCards("","",CardType.ROOM);
+		Player testPlayer = new Player("",5,5,"red");
+		Solution fakeSuggestion = new Solution("","","");
+		Card result = Board.handleSuggestion(fakeSuggestion,testPlayer);
 		//suggestion no one can disprove returns null
-//		assertTrue(board.getDisproveCard() == null);
+		assertTrue(result == null);
 		//suggestion only accusing player can disprove returns null
-		
+		Card testCard = new Card(CardType.NONE,"");
+		testPlayer.addCard(testCard);
+		Board.addPlayer(testPlayer);
+		result = Board.handleSuggestion(fakeSuggestion,testPlayer);
+		assertTrue(result == null);
 		//suggestion only human can disprove returns answer(i.e., card that disproves suggestion)
+		
 		//suggestion only human can disprove, but human is accuser, returns null
 		//suggestion that two players can disprove, correct player based on starting with next player in list) returns answer
 		//suggestion that human and another player can disprove, other player is next in list, ensure other player returns answer

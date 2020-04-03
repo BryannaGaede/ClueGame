@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -47,7 +46,7 @@ public class GameSetupTests {
 	//CHECK IF NAMES ARE AS EXPECTED
 	@Test
 	public void testPlayerNames() {
-		ArrayList<Player> players = board.getPlayers();
+		ArrayList<Player> players = Board.getPlayers();
 		//make sure the right number of players is being noticed
 		assertEquals(NUM_PLAYERS, players.size());
 		//the first player is Yue
@@ -61,7 +60,7 @@ public class GameSetupTests {
 	//CHECK IF ROW AND COLUMN ARE AS EXPECTED
 	@Test
 	public void testPlayerLocations() {
-		ArrayList<Player> players = board.getPlayers();
+		ArrayList<Player> players = Board.getPlayers();
 		//the first player starts at 25,22
 		assertEquals(players.get(0).getRow(), 25);
 		assertEquals(players.get(0).getCol(), 22);
@@ -77,7 +76,7 @@ public class GameSetupTests {
 	//CHECK IF COLOR IS AS EXPECTED
 	@Test
 	public void testPlayerColor() {
-		ArrayList<Player> players = board.getPlayers();
+		ArrayList<Player> players = Board.getPlayers();
 		//the first player is orange
 		assertEquals(players.get(0).getColor(), Color.ORANGE);
 		//the last player is yellow
@@ -89,7 +88,7 @@ public class GameSetupTests {
 	//CHECK IF COMPUTER OR HUMAN IS SET RIGHT
 	@Test
 	public void testPlayerStatus() {
-		ArrayList<Player> players = board.getPlayers();
+		ArrayList<Player> players = Board.getPlayers();
 		//the first player human
 		assertEquals(players.get(0).getStatus(), Status.HUMAN);
 		//the last player is human
@@ -123,7 +122,7 @@ public class GameSetupTests {
 	//CHECK THE NUMBER OF CARDS IS ACCURATE
 	@Test
 	public void testDeckSize() {
-		ArrayList<Card> cards = board.getCards();
+		ArrayList<Card> cards = Board.getCards();
 		//make sure the right number of cards is being noticed
 		assertEquals(NUM_CARDS, cards.size());
 	}	
@@ -153,7 +152,7 @@ public class GameSetupTests {
 	@Test
 	public void testDeal() {
 		//check multiple cards to see status as being dealt
-		ArrayList<Card> cards = board.getCards();
+		ArrayList<Card> cards = Board.getCards();
 		assertTrue(cards.get(0).getStatus());
 		assertTrue(cards.get(NUM_CARDS-1).getStatus());
 		assertTrue(cards.get(NUM_CARDS/2 -4).getStatus());
@@ -166,7 +165,7 @@ public class GameSetupTests {
 		assertTrue(board.noDuplicates(cards.get(NUM_CARDS/2 +4)));
 		
 		//all players should have roughly the same number of cards
-		ArrayList<Player> players = board.getPlayers();
+		ArrayList<Player> players = Board.getPlayers();
 		int expected = NUM_CARDS/NUM_PLAYERS;
 		//there will never be more than one extra card dealt to a player
 		assertTrue(players.get(0).getCardCount()-expected < 2);
@@ -181,8 +180,7 @@ public class GameSetupTests {
 	@Test
 	public void testAnswer() {
 		Solution theAnswer = board.getSolution();
-		ArrayList<Card> cards = board.getCards(); 
-		ArrayList<Player> players = board.getPlayers();
+		ArrayList<Player> players = Board.getPlayers();
 		//make sure types are correct
 		assertTrue(board.getType(theAnswer.getRoom()) == CardType.ROOM);
 		assertTrue(board.getType(theAnswer.getPerson()) == CardType.PERSON);

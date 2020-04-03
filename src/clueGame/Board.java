@@ -36,7 +36,7 @@ public class Board {
 	private static ArrayList<Room> rooms = new ArrayList<Room>();
 	private static ArrayList<Card> allCards = new ArrayList<Card>();
 	//new
-	private Solution theAnswer;
+	private static Solution theAnswer;
 	private Card disproveCard;
 	private String answer; 
 
@@ -150,13 +150,17 @@ public class Board {
 		allCards.get(nextIndex3+rooms.size()+players.size()).setStatus(true);
 	}
 
-	public Card handleSuggestion() {
+	public static Card handleSuggestion(Solution playerSuggestion, Player currentPlayer) {
+		for(Player player : players) {
+			if(player.disproveSuggestion(playerSuggestion)!=null) {
+				return player.disproveSuggestion(playerSuggestion);
+			}
+		}
 		return null;
 	}
 
 	public boolean checkAccusation(Solution accusation) {
-		String accusationStr = accusation.person + accusation.room + accusation.weapon; 
-		//System.out.println(accusationStr + " " + answer);
+		String accusationStr = accusation.person + accusation.room + accusation.weapon;
 		if (answer.contentEquals(accusationStr)) {
 			return true;
 		}
@@ -501,7 +505,7 @@ public class Board {
 		return legend;
 	}
 
-	public ArrayList<Player> getPlayers() {
+	public static ArrayList<Player> getPlayers() {
 		return players;
 	}
 
@@ -580,6 +584,14 @@ public class Board {
 			}
 		}
 		return null;
+	}
+
+	public static void setAnswer(Solution fakeAnswer) {
+		theAnswer = fakeAnswer;		
+	}
+
+	public static void addPlayer(Player testPlayer) {
+		players.add(testPlayer);
 	}
 
 	
