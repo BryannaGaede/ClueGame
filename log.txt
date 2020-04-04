@@ -1,422 +1,127 @@
-commit a71616f6a19c7339e068fa4b806f5a01f59991d6
-Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Mon Mar 30 08:27:03 2020 -0600
-
-    PASSING TEST: setting the answer
-
-commit 20163adc38de045588636f8d7b7fe27f7cc03c62
-Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Mon Mar 30 07:07:46 2020 -0600
-
-    FAILING TEST: players weren't dealt solution cards
-
-commit c66d8860ded74d49ed554bca900e6665522bd405
+Lukes-MacBook-Pro-3:ClueGame lukevalentine$ git log
+commit ebdd2e7791c35fc7df9c83bb97dc60a3c2d440ac (HEAD -> master, origin/master, origin/HEAD)
 Author: Luke Valentine <lukevalentine@Lukes-MacBook-Pro-3.local>
-Date:   Mon Mar 30 00:30:04 2020 -0600
+Date:   Fri Apr 3 20:34:48 2020 -0600
 
-    minor refactoring
+    passing last test... finally
 
-commit bdc2da772161a7a7e38db66b519662aad5481fee
+commit 4b33dae88bbe99d00c705de5c92fafcf9e3f1f96
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Fri Apr 3 17:55:26 2020 -0600
+
+    working on handle suggestion tests
+
+commit 560215b48cd44033692e9b71fcddc13986ee15b9
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Fri Apr 3 16:15:46 2020 -0600
+
+    PASSING: handle suggestion
+
+commit 571a8bda70213c2b71730c6d4215016977260393
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Fri Apr 3 16:08:27 2020 -0600
+
+    FAILING: disprove suggestion
+
+commit a9d2ef7a73c89d48156480e4a3828efe6e8f0dc2
 Author: Luke Valentine <lukevalentine@Lukes-MacBook-Pro-3.local>
-Date:   Mon Mar 30 00:21:53 2020 -0600
+Date:   Fri Apr 3 13:14:00 2020 -0600
 
-    All tests passing
+    working on create suggestion
 
-commit a7d88ae4da608a203758329bc33fd678d3190cf9
+commit 8c9f3310afa99275ff174690f245f75ff0d2f584
 Author: Luke Valentine <lukevalentine@Lukes-MacBook-Pro-3.local>
-Date:   Mon Mar 30 00:07:07 2020 -0600
+Date:   Thu Apr 2 23:54:32 2020 -0600
 
-    Failing Tests for solution
+    working on suggestion test
 
-commit a0e11f8261f7c11d36e9a4ef01a687943772fe50
+commit 5e6d494c8dfe6da31a259f834fed0d36c92119a4
 Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Thu Mar 12 23:12:21 2020 -0600
+Date:   Thu Apr 2 16:55:46 2020 -0600
 
-    added log.txt
+    made a deck of not "dealt" cards in Player
 
-commit cefdf7d1ae9761691bcf5b11c2c90eb637a73164
+commit 8918bca8138917823dc60813a48158a61d86b610
 Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Thu Mar 12 23:10:51 2020 -0600
+Date:   Thu Apr 2 16:29:52 2020 -0600
 
-    removed some print statements from a test file
+    player location is same as room in suggestion
 
-commit eafd7d9ec4ae0f6e8417d8d5b7a795c3e5d8ff0c
+commit 65cc2ed1dcd91f4e9be08217bae084f4870d217d
 Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Thu Mar 12 23:06:01 2020 -0600
+Date:   Thu Apr 2 12:22:08 2020 -0600
 
-    All tests passing up to dealing cards
+    PASSING: suggestion is room currently in
 
-commit f46883efd04c8d573f05234cf3dd844cd5bc1ea6
+commit ff6230dfd327b5f0466482cd12e3b54997b37787
 Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Thu Mar 12 22:15:11 2020 -0600
+Date:   Thu Apr 2 11:08:06 2020 -0600
 
-    PASSING TEST: check that all cards are dealt and not more than once
+    PASSING TEST: check accusation
 
-commit 49973141f7e5ded28b5e2647836fc99145e8dacf
-Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Thu Mar 12 21:38:58 2020 -0600
-
-    FAILED TEST: check that all cards are being dealt and only once
-
-commit 568904ecdfe23d0d9bc727cba8d49f7a61c566b0
-Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Thu Mar 12 21:08:23 2020 -0600
-
-    PASSING TEST: make sure the right number of each card exist
-
-commit 12735f14edba5637ea0dd9417f03d142770df360
-Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Thu Mar 12 21:06:54 2020 -0600
-
-    FAILED TEST: check the number of each cards is right
-
-commit b99bb9a28c9f5bdd2e2ed45c4657ae0c91b2cb18
-Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Thu Mar 12 21:02:12 2020 -0600
-
-    PASSING TEST: check that cards of each type exist
-
-commit 04a79b6aea7db5312b3367b7064895ebf31d1fb3
-Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Thu Mar 12 20:30:47 2020 -0600
-
-    FAILING TEST: check that cards of each type exist in the deck
-
-commit 66702181923786a78a6f354014aebc4de30940d6
-Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Thu Mar 12 20:14:29 2020 -0600
-
-    PASSING TEST: confirm that the right number of cards are in the deck
-
-commit 8fa357aa9e8eece1f4079a0b15e12228c8d5d086
-Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Thu Mar 12 19:46:00 2020 -0600
-
-    FAILING TEST: check total number of cards
-
-commit 8b4984a59c3ae003da26e7c876a3dc6ba7f25414
-Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Thu Mar 12 19:19:06 2020 -0600
-
-    PASSING TEST: weapon file loading correctly
-
-commit fbaacaea3573aefab2894736c425b3dac7c2738f
-Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Thu Mar 12 19:18:29 2020 -0600
-
-    FAILING TEST: weapon file loading correctly
-
-commit cd79007a615fc9ba1562104a30dcbb54db45119f
-Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Thu Mar 12 18:53:00 2020 -0600
-
-    PASSING TEST: check if human or computer
-
-commit 86587466528504bd77b87e99113908178f1287f7
-Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Thu Mar 12 18:51:06 2020 -0600
-
-    FAILED TEST: check if player is human or computer
-
-commit 57906678b9b6507fba6aa77e81e2631f68a567d3
-Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Thu Mar 12 18:40:54 2020 -0600
-
-    PASSING TEST: check player color
-
-commit 9fccfbcbcd77085e6b9794492da39e3b0a3d3faa
-Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Thu Mar 12 18:40:29 2020 -0600
-
-    FAILING TEST: check player color
-
-commit 461036053255c146d8d6c3fd3ee565a89765aae7
-Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Thu Mar 12 18:08:13 2020 -0600
-
-    PASSING TEST: check player location
-
-commit 1919f303197a37f42f6db028e9f35546ad93802e
-Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Thu Mar 12 18:07:36 2020 -0600
-
-    FAILING TEST: check player location
-
-commit e410bb2e477615780a0afc04e42b2a1a14e22cb4
-Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Thu Mar 12 18:06:48 2020 -0600
-
-    PASSING TEST: check player names
-
-commit d1b60286d758cae609da314165bfa9c5e616eeba
-Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Thu Mar 12 17:58:12 2020 -0600
-
-    FAILING TEST: verify player names
-
-commit 48745d36525fd1f50dc28cddd21840c4775bbc7a
-Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Thu Mar 12 17:48:35 2020 -0600
-
-    Number of players test works
-
-commit 3d2856f9474ba131c70a8a231699bddac0186e2d
-Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Thu Mar 12 16:34:42 2020 -0600
-
-    created skeleton of classes according to givin UML
-
-commit 71c498a3f845a2e7dd9cef5e302fd7255f5bf660
-Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Thu Mar 12 16:03:49 2020 -0600
-
-    created a weapon file that need more detail and it loads sucessfully
-
-commit 5f99022a321e004bbed4971626fd4e00da2dc3e0
-Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Thu Mar 12 15:57:49 2020 -0600
-
-    created cluePlayers.txt, started a new test file called GameSetupTests and loading players is working
-
-commit 485e13af89d274067a42cf4b6c36079262d51b2e
+commit 2a493b4067278ef4ea512efbe4751c94b3210c99
 Author: Luke Valentine <lukevalentine@Lukes-MacBook-Pro-3.local>
-Date:   Thu Mar 12 14:31:14 2020 -0600
+Date:   Wed Apr 1 15:18:10 2020 -0600
 
-    Modified log file
+    passing some testAccusation tests but not all
 
-commit b8f40e41a75bca21e8b1b9c76b41cc3753fb9833
+commit 88f8e82a388cf756889119859c176eba282f10ae
 Author: Luke Valentine <lukevalentine@Lukes-MacBook-Pro-3.local>
-Date:   Thu Mar 12 14:29:09 2020 -0600
+Date:   Wed Apr 1 15:00:57 2020 -0600
 
-    Corrected all indentation (didn't save lastime hence the repetitive commit)
+    Passing the testSelectTarget test
 
-commit 376b4ac5f94ce727f09d9ccd5a02b116f6648ed9
+commit 2140f4e065ea93f5f52455b93b3b77e9c0243e70
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Wed Apr 1 12:36:31 2020 -0600
+
+    still working on checking last visited room
+
+commit 0e6bbd4b19e8e709fadf9055ae408ab90d2607c6
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Wed Apr 1 09:42:48 2020 -0600
+
+    PASSING: unvisited room being chosen
+
+commit 955a3c941406179e4a6f5a55e8d17bcceac7e34e
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Wed Apr 1 09:19:47 2020 -0600
+
+    PASSING PORTION: chooses random if no rooms exist
+
+commit 6d27c625ae9ed8615b16568c4cf2939990d97dec
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Wed Apr 1 08:24:11 2020 -0600
+
+    FAILED TEST: select target
+
+commit d63166da88252299a7528e07cb61f4bc36596533
 Author: Luke Valentine <lukevalentine@Lukes-MacBook-Pro-3.local>
-Date:   Thu Mar 12 14:28:32 2020 -0600
+Date:   Tue Mar 31 23:52:16 2020 -0600
 
-    fixed all indentation and formating
+    Old tests back to working (gameSetup)
 
-commit 8720b1f503579c608ef09f9e4dacfd56d09cc04f
+commit e70944cf770e2e741e87c5204bf1729913c304b2
 Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Thu Mar 12 14:23:06 2020 -0600
+Date:   Tue Mar 31 15:14:51 2020 -0600
 
-    git log and before and after file added to project
+    Next: make first failing test pass
 
-commit d6867183c6ef662c44281cb870f46bcbacd78ff8
+commit 22f7e5b2f85ca9b70b1c14994e01a6230a411f5c
 Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Thu Mar 12 14:21:23 2020 -0600
+Date:   Tue Mar 31 14:54:08 2020 -0600
 
-    increased max board size to 50, removed unnecessary comments, added brackets to all if statements, changed start_og to originalStart
+    FAILING TEST: test accusation
 
-commit e2e7fd94ee1015de3a9770c7d49c1971d1adc760
+commit f69119bb34d8f4b74f55bde3c58d987ada6f47ee
 Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Thu Mar 12 14:03:12 2020 -0600
+Date:   Tue Mar 31 14:42:30 2020 -0600
 
-    added brackets to all if statements in BoardCell.java and deleted any unnecessary comments
+    FAILED TESTS: selecting targets in game actions
 
-commit 1b8dbfc8a24ff9304232ec6e9f6af4215c6193ab
+commit 980a1bcaa3a9dd8a4d1f05724662334cecf0156b
 Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Thu Mar 12 13:55:39 2020 -0600
+Date:   Tue Mar 31 12:17:29 2020 -0600
 
-    removed unused imports
+    added example gui to experiment package
 
-commit 4a38d6692db92ca2043e99289d9ab778c6538bc3
-Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Thu Mar 12 13:39:04 2020 -0600
-
-    added back accidentally removed loadRoomConfig logic and closed buffer readers
-
-commit d2658f70c9f9009fd806ab562c728460dc2e3ce7
-Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Thu Mar 12 13:33:17 2020 -0600
-
-    added comments to isExitSquare function
-
-commit ae712f4c53fb1f10bd706e2904d730d5e8353c6d
-Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Thu Mar 12 13:26:52 2020 -0600
-
-    added comments to isGoodDoor function
-
-commit 187885871579ef59ec3b130f5dd9a21010fc9cbf
-Author: Luke Valentine <lukevalentine@csm-wl-dhcp-200-127.mines.edu>
-Date:   Thu Mar 12 12:23:13 2020 -0600
-
-    made comments on the very confusing adjHelp logic
-
-commit e1b25b76af44e9f688392dd9568173e5a4f33da6
-Author: Luke Valentine <lukevalentine@csm-wl-dhcp-200-127.mines.edu>
-Date:   Thu Mar 12 12:18:21 2020 -0600
-
-    spaces on operators for readability
-
-commit a637f83f5663aaddf6f4aa05d5714c02dc6688fd
-Author: Luke Valentine <lukevalentine@csm-wl-dhcp-200-127.mines.edu>
-Date:   Thu Mar 12 12:12:55 2020 -0600
-
-    renamed start_og variable
-
-commit 564d1462c2ad75e2999e7f561b64352c0c154174
-Author: Luke Valentine <lukevalentine@csm-wl-dhcp-200-127.mines.edu>
-Date:   Thu Mar 12 12:11:26 2020 -0600
-
-    got rid of unnecessary getters and setters
-
-commit 60d33a0a694e95fec493c1d00c858a84a2dd13d6
-Author: Luke Valentine <lukevalentine@csm-wl-dhcp-200-127.mines.edu>
-Date:   Thu Mar 12 12:02:49 2020 -0600
-
-    Spaces fixed
-
-commit 8ca8d54d013b040c092bdfafb82cecfed5f735d2
-Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Mon Mar 9 14:25:03 2020 -0600
-
-    fixed our adj tests
-
-commit 4f29752e50996d6ff7ad58770bb70552636f5162
-Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Mon Mar 9 13:09:57 2020 -0600
-
-    recent changes
-
-commit 0f5db8496e648f5f9182271421cad86b318f5938
-Merge: 31ac6fb d327c52
-Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Mon Mar 9 13:06:21 2020 -0600
-
-    commit prior to attempting to merge
-
-commit d327c520ac91834438b729d07991d32479af419e
-Merge: e2b8279 84f8ceb
-Author: Luke Valentine <lukevalentine@csm-wl-dhcp-196-37.mines.edu>
-Date:   Mon Mar 9 12:57:43 2020 -0600
-
-    Passing tests
-
-commit e2b82793f26f6806a1897bfe35b0492fadba1c5a
-Author: Luke Valentine <lukevalentine@Lukes-MacBook-Pro-3.local>
-Date:   Sun Mar 8 14:02:32 2020 -0600
-
-    testing
-
-commit 31ac6fb1612d6ed7c3400295937e8345a99cd115
-Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Sun Mar 8 13:53:39 2020 -0600
-
-    no errors
-
-commit 84f8ceb76aa58c2538b26dbdf75edb6d8a06b196
-Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Fri Mar 6 15:37:01 2020 -0700
-
-    fixed the test that was expecting 12, still working on leaving a room
-
-commit 4a6c4d48e4d3df5c11c5919e3c7b243987f51882
-Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Fri Mar 6 12:26:45 2020 -0700
-
-    updated game to most recent version
-
-commit 8d158be408c09499bf8f69fc68e2b6e85a004f11
-Author: Luke Valentine <lukevalentine@csm-wl-dhcp-202-39.mines.edu>
-Date:   Thu Mar 5 12:15:29 2020 -0700
-
-    Failing Tests
-
-commit 99b29cf0ebfcae3a448c588c8abf1376d0670a2a
-Merge: af2337e 78f88f7
-Author: Luke Valentine <lukevalentine@Lukes-MacBook-Pro-3.local>
-Date:   Wed Mar 4 17:09:14 2020 -0700
-
-    Failing Tests
-
-commit af2337e87fc80152b2500d2d5bda1fc6ed08a8d1
-Author: Luke Valentine <lukevalentine@Lukes-MacBook-Pro-3.local>
-Date:   Wed Mar 4 17:00:38 2020 -0700
-
-    Failing tests
-
-commit 78f88f7780431537fa0f503d741aeab96bd236e8
-Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Wed Mar 4 16:58:08 2020 -0700
-
-    Failing tests done for part 1 of assignment 14, testing adjacencies
-
-commit af564850ad358147596bac066e88a255b6d212a7
-Author: Luke Valentine <lukevalentine@csm-wl-dhcp-200-242.mines.edu>
-Date:   Tue Mar 3 13:16:06 2020 -0700
-
-    C13 green
-
-commit 0922c34832132ffc6232dc62b2b60756fc35f235
-Author: Luke Valentine <lukevalentine@Lukes-MBP-3.hitronhub.home>
-Date:   Fri Feb 28 22:52:36 2020 -0700
-
-    everything working except one test
-
-commit 9dd7de25c04c28cbd34173a3080922b65a31f890
-Author: Luke Valentine <lukevalentine@Lukes-MBP-3.hitronhub.home>
-Date:   Fri Feb 28 22:28:32 2020 -0700
-
-    try to get testNumberOfDoorways to work
-
-commit 5da800a2f5c6ce579c36c8b91cc3ecc056f10a68
-Author: Luke Valentine <lukevalentine@Lukes-MBP-3.hitronhub.home>
-Date:   Fri Feb 28 20:40:55 2020 -0700
-
-    Updated
-
-commit 77113621164127530e36893ed8868542391b359c
-Author: Luke Valentine <lukevalentine@Lukes-MBP-3.hitronhub.home>
-Date:   Thu Feb 27 22:55:08 2020 -0700
-
-    part 1
-
-commit 46dc519807da753babbcf699217a8ccce59cba8f
-Author: Luke Valentine <lukevalentine@csm-wl-dhcp-199-64.mines.edu>
-Date:   Tue Feb 25 13:49:46 2020 -0700
-
-    Board updated
-
-commit 8c4f3174dd85bae15dc285357f901ae3277075a9
-Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Tue Feb 25 13:43:40 2020 -0700
-
-    unknown changes
-
-commit f782b563611a60725f519fa011b3dd1045dcf175
-Author: Luke Valentine <lukevalentine@csm-wl-dhcp-199-64.mines.edu>
-Date:   Tue Feb 25 13:33:24 2020 -0700
-
-    Updated
-
-commit 1bcd6eccea32f6934bd97310510207bbc62e91b8
-Author: Luke Valentine <lukevalentine@csm-wl-dhcp-199-64.mines.edu>
-Date:   Mon Feb 24 14:52:01 2020 -0700
-
-    I want these tests to pass
-
-commit b3c677fb79429707b22ed932d6e0c69b84abcdb8
-Author: Luke Valentine <lukevalentine@csm-wl-dhcp-199-64.mines.edu>
-Date:   Mon Feb 24 14:51:21 2020 -0700
-
-    I want these tests to pass
-
-commit 8baa42950c6c4af28bd3ea9537803d3a155fd7f9
-Author: Luke Valentine <lukevalentine@csm-wl-dhcp-199-64.mines.edu>
-Date:   Mon Feb 24 12:15:03 2020 -0700
-
-    All tests failing
-
-commit 725e7a05c3518a561101bdc26afb12b2033ec937
-Author: Luke Valentine <lukevalentine@csm-wl-dhcp-199-64.mines.edu>
-Date:   Mon Feb 24 11:30:35 2020 -0700
-
-    Hello
-
-commit ca087f8433be8ce15df7516428c299b84b3182a8
-Author: BryannaGaede <bpriddy@mymail.mines.edu>
-Date:   Mon Feb 24 11:00:02 2020 -0700
-
-    first commit
