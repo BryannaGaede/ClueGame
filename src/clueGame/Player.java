@@ -243,4 +243,13 @@ public class Player {
 		seenCards = new ArrayList<Card>();
 	}
 
+	public void setStatus(char playerStatus) {
+		if (playerStatus == 'C') {
+			status = Status.COMPUTER;
+		}
+		else {
+			status = Status.HUMAN;
+		}
+	}
+
 	}

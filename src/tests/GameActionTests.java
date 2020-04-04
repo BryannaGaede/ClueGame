@@ -175,10 +175,13 @@ public class GameActionTests {
 		//if only one person/weapon not seen, it's selected(can be same test as weapon)
 		assertTrue(testSuggestion.getPerson().equals(onePlayer.getName()));
 		assertTrue(testSuggestion.getWeapon().equals(oneWeapon.getName()));
-		
-		//if multiple weapons not seen, one of them is randomly selected	
-		//if multiple persons not seen, one of them is randomly selected
-		
+		//if multiple weapons not seen, one of them is randomly selected
+		//remove weapons
+		seenTemp.remove(0);
+		seenTemp.remove(1);
+		testPlayer.createSuggestion();
+		oneWeapon = weapons.get(0);
+		assertTrue(testSuggestion.getPerson().equals(onePlayer.getName()));
 	}
 	
 	//disprove a suggestion - player
@@ -220,17 +223,36 @@ public class GameActionTests {
 		Card result = Board.handleSuggestion(fakeSuggestion,testPlayer);
 		//suggestion no one can disprove returns null
 		assertTrue(result == null);
-		//suggestion only accusing player can disprove returns null
+		//suggestion only human can disprove, but human is accuser, returns null
 		Card testCard = new Card(CardType.NONE,"");
-		testPlayer.addCard(testCard);
-		Board.addPlayer(testPlayer);
-		result = Board.handleSuggestion(fakeSuggestion,testPlayer);
+		Player testPlayer2 = new Player("",6,6,"red");
+		testPlayer2.setStatus('H');
+		Board.addPlayer(testPlayer2);
+		result = Board.handleSuggestion(fakeSuggestion, testPlayer2);
 		assertTrue(result == null);
 		//suggestion only human can disprove returns answer(i.e., card that disproves suggestion)
-		
-		//suggestion only human can disprove, but human is accuser, returns null
+		testPlayer2.setStatus('C');
+		result = Board.handleSuggestion(fakeSuggestion, testPlayer2);
+		assertTrue(result == null);
+		testPlayer2.addCard(testCard);
+		result = Board.handleSuggestion(fakeSuggestion, testPlayer);
+		assertTrue(result == testCard);
+		//suggestion only accusing player can disprove returns null
+		result = Board.handleSuggestion(fakeSuggestion,testPlayer2);
+		assertTrue(result == null);
 		//suggestion that two players can disprove, correct player based on starting with next player in list) returns answer
+		Player testPlayer3 = new Player("", 4,2, "");
+		testPlayer.addCard(testCard);
+		result = Board.handleSuggestion(fakeSuggestion,testPlayer3);
+		assertTrue(result == testCard);
 		//suggestion that human and another player can disprove, other player is next in list, ensure other player returns answer
+		Card testCard2 = new Card(CardType.WEAPON,"hello");
+		testPlayer.addCard(testCard2);
+		testPlayer2.addCard(testCard2);
+		Solution suggestionDisprove2 = new Solution("hello","x","x");
+		result = Board.handleSuggestion(suggestionDisprove2,testPlayer);
+		assertTrue(result != null);
+		
 	}
 
 }

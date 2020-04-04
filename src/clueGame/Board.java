@@ -152,7 +152,7 @@ public class Board {
 
 	public static Card handleSuggestion(Solution playerSuggestion, Player currentPlayer) {
 		for(Player player : players) {
-			if(player.disproveSuggestion(playerSuggestion)!=null) {
+			if(player.disproveSuggestion(playerSuggestion)!=null && player != currentPlayer) {
 				return player.disproveSuggestion(playerSuggestion);
 			}
 		}
