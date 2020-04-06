@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
-
+/*
 public class GUI_Example extends JPanel {
 	private JTextField name;
 
@@ -60,4 +60,79 @@ public class GUI_Example extends JPanel {
 	}
 
 
+}*/
+
+
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class GUI_Example extends JPanel {
+	private JTextField turn, guess, guessResult, roll;
+	private JButton next, accuse;
+	
+	public JPanel controlLabel() {
+		//making text field "Who's turn"
+		turn = new JTextField();
+		turn.setBorder(BorderFactory.createTitledBorder("Who's turn?"));
+		//new text field "Guess"
+		guess = new JTextField();
+		guess.setBorder(BorderFactory.createTitledBorder("Guess"));
+		//new Text field "guess result"
+		guessResult = new JTextField();
+		guessResult.setBorder(BorderFactory.createTitledBorder("Guess Result"));
+		//new text field "roll"
+		roll = new JTextField();
+		roll.setBorder(BorderFactory.createTitledBorder("Roll"));
+		//adding in the different text fields to "first row" upper
+		JPanel firstRow = new JPanel();
+		firstRow.setLayout(new BoxLayout(firstRow, BoxLayout.X_AXIS));
+		firstRow.add(roll);
+		firstRow.add(turn);
+		firstRow.add(guess);
+		firstRow.add(guessResult);
+		add(firstRow);
+		return firstRow;
+	}
+	
+	public JPanel controlButton() {
+		//adding buttons too "second row" (lower)
+		JPanel secondRow = new JPanel();
+		next = new JButton();
+		accuse = new JButton();
+		next.setText("Next Player");
+		accuse.setText("Make an accusation");
+		secondRow.add(next);
+		secondRow.add(accuse);
+		add(secondRow);
+		return secondRow;
+	}
+	
+	public static void main(String[] args) {
+		//build the jframe
+		JFrame frame = new JFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setTitle("GUI Example");
+		frame.setSize(500, 100);
+		//add the jpanels to the jframe
+		GUI_Example gui = new GUI_Example();
+		frame.add(gui.controlLabel(), BorderLayout.NORTH);// Now let's view it
+		frame.add(gui.controlButton(), BorderLayout.SOUTH);
+		frame.add(gui);
+		frame.setVisible(true);
+	}
+	
+	
+	
+	
 }
