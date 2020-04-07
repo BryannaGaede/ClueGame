@@ -1,4 +1,4 @@
-package experiment;
+package clueGame;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -77,7 +77,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class GUI_Example extends JPanel {
+public class GUIControl extends JPanel {
 	private JTextField turn, guess, guessResult, roll;
 	private JButton next, accuse;
 	
@@ -125,7 +125,7 @@ public class GUI_Example extends JPanel {
 		frame.setTitle("GUI Example");
 		frame.setSize(500, 100);
 		//add the jpanels to the jframe
-		GUI_Example gui = new GUI_Example();
+		GUIControl gui = new GUIControl();
 		frame.add(gui.controlLabel(), BorderLayout.NORTH);// Now let's view it
 		frame.add(gui.controlButton(), BorderLayout.SOUTH);
 		frame.add(gui);
