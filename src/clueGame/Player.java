@@ -1,13 +1,14 @@
 package clueGame;
 
 import java.awt.Color;
-
+import java.awt.Graphics;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Set;
 
 public class Player {
+	private static final int CIRCLE_DIMENSION = 2;
 	protected String playerName;
 	protected int row;
 	protected int column;
@@ -153,6 +154,16 @@ public class Player {
 		return color; 
 		}
 
+	public void drawArc(Graphics g, int cellSize) {
+		// TODO Auto-generated method stub
+		int x = row;
+		
+		int y = column;
+		
+		g.drawOval(y*cellSize, x*cellSize, cellSize, cellSize);
+		g.fillOval(y*cellSize, x*cellSize, cellSize, cellSize);
+		
+	}
 	/*
 	 * ********************USED FOR TESTING*************************************
 	 */
@@ -251,5 +262,15 @@ public class Player {
 			status = Status.HUMAN;
 		}
 	}
+	
+
+	public int getColumn() {
+		return column;
+	}
+	
+
+	
+
+
 
 	}

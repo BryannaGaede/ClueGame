@@ -1,6 +1,8 @@
 package clueGame;
 
+import java.awt.Graphics;
 import java.io.BufferedReader;
+
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -12,10 +14,12 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
+import javax.swing.JPanel;
+
 import clueGame.BoardCell;
 import clueGame.BoardCell.DoorDirection;
 
-public class Board {
+public class Board extends JPanel {
 	public final int MAX_BOARD_SIZE = 50;
 	private static int numRows = 30;
 	private static int numColumns = 30;
@@ -52,6 +56,44 @@ public class Board {
 	public static Board getInstance() {
 		return theInstance;
 	}
+	
+	//***************DRAWING THE BOARD *****************//
+	
+	//drawing rooms
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		int cellSize = 30;
+		// This whole loop is responsible for painting room names only once.
+		ArrayList<Character> roomsPainted = new ArrayList<Character>();
+		ArrayList<Room> paintLast = new ArrayList<Room>();
+		for(int i = 0; i < rooms.size(); i ++){
+			if(rooms.get(i) instanceof Room){
+				Room r = (Room) rooms.get(i);
+				if(!roomsPainted.contains(r.getInitial())){
+					paintLast.add(r);
+					roomsPainted.add(r.getInitial());
+				}
+				else{
+					rooms.get(i).draw(g, this, false, cellSize);
+				}
+			}
+			else{
+				rooms.get(i).draw(g, this, false, cellSize);
+			}			
+		}
+		for (Room r : paintLast) {
+			r.draw(g, this, true, cellSize);
+		}
+		
+		// This whole loop is responsible for drawing the players
+		Player arc = null;
+		for(Player p : players){
+				p.drawArc(g, cellSize);
+				break;
+
+		}
+	}
+	
 
 	public void initialize() {
 		//I kept separate try catches so I could tell which file errored
@@ -592,6 +634,11 @@ public class Board {
 
 	public static void addPlayer(Player testPlayer) {
 		players.add(testPlayer);
+	}
+
+	public Object getRooms() {
+		// TODO Auto-generated method stub
+		return rooms;
 	}
 
 	

@@ -3,6 +3,11 @@
 
 package clueGame;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
+import clueGame.BoardCell.DoorDirection;
+
 public class BoardCell {
 	private int row;
 	private int column;
@@ -77,6 +82,13 @@ public class BoardCell {
 	public String toString() {
 		return "BoardCell [row=" + row + ", column=" + column + ", Initial=" + initial + ", doorDirection="
 				+ doorDirection + "]";
+	}
+	
+	public void draw(Graphics g, Board board, boolean drawName, int cellSize) {
+			g.setColor(Color.BLUE);
+			g.fillRect(getColumn()*cellSize, getRow()*cellSize, cellSize, cellSize/4);
+			g.setColor(Color.gray);
+			g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
 	}
 
 	/*
