@@ -44,8 +44,6 @@ public class BoardGUI extends JFrame {
 	
 	
 	rooms.setBorder(BorderFactory.createTitledBorder("Rooms"));
-	Graphic g;
-	g.setFont();
 	
 	
 	}
