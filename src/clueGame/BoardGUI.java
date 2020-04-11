@@ -23,33 +23,32 @@ public class BoardGUI extends JPanel {
 	public BoardGUI() {
 	}
 	
+	private static Board board;
+	
 	@Override 
 	public void paintComponent(Graphics g)  {
 		super.paintComponent(g);
 		
 		//drawing for testing
-				g.setColor(Color.BLUE);
-				g.drawRect(50, 50, 5, 5);
-				
-		//initializing the board
-		/*
-		 * Board board1;
-		 
-		board1 = Board.getInstance();
-		board1.setConfigFiles("CTest_ClueLayout.csv", "CTest_ClueLegend.txt");		
-		board1.initialize();
-		//drawing for testing
 		g.setColor(Color.BLUE);
 		g.drawRect(50, 50, 5, 5);
+				
+		//initializing the board
+		// Board is singleton, get the only instance
+		board = Board.getInstance();
+		// set the file names to use my config files
+		board.setConfigFiles("CTest_ClueLayout.csv", "CTest_ClueLegend.txt");		
+		// Initialize will load BOTH config files 
+		board.initialize();
 		
-		BoardCell board[][] = new BoardCell[30][30];
-		board = board1.getBoard();
-	
-		for (int i = 0; i < board.length; i++) {
-			for (int j = 0; i < board[i].length; j++) {
-				board[i][j].draw(g, 2);
+		BoardCell[][] board1 = new BoardCell[30][30];
+		board1 = board.getBoard();
+		
+		for (int i = 0; i < board1.length; i++) {
+			for (int j = 0; i < board1[i].length; j++) {
+				board1[i][j].draw(g, 2);
 			}
-		}*/
+		}
 		
 	}
 	

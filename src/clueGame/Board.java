@@ -603,7 +603,7 @@ public class Board extends JPanel {
 		return rooms;
 	}
 
-	public static BoardCell[][] getBoard() {
+	public BoardCell[][] getBoard() {
 		return board;
 	}
 
