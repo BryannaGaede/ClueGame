@@ -56,44 +56,6 @@ public class Board extends JPanel {
 	public static Board getInstance() {
 		return theInstance;
 	}
-	
-	//***************DRAWING THE BOARD *****************//
-	
-	//drawing rooms
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		int cellSize = 30;
-		// This whole loop is responsible for painting room names only once.
-		ArrayList<Character> roomsPainted = new ArrayList<Character>();
-		ArrayList<Room> paintLast = new ArrayList<Room>();
-		for(int i = 0; i < rooms.size(); i ++){
-			if(rooms.get(i) instanceof Room){
-				Room r = (Room) rooms.get(i);
-				if(!roomsPainted.contains(r.getInitial())){
-					paintLast.add(r);
-					roomsPainted.add(r.getInitial());
-				}
-				else{
-					rooms.get(i).draw(g, this, false, cellSize);
-				}
-			}
-			else{
-				rooms.get(i).draw(g, this, false, cellSize);
-			}			
-		}
-		for (Room r : paintLast) {
-			r.draw(g, this, true, cellSize);
-		}
-		
-		// This whole loop is responsible for drawing the players
-		Player arc = null;
-		for(Player p : players){
-				p.drawArc(g, cellSize);
-				break;
-
-		}
-	}
-	
 
 	public void initialize() {
 		//I kept separate try catches so I could tell which file errored
@@ -636,9 +598,13 @@ public class Board extends JPanel {
 		players.add(testPlayer);
 	}
 
-	public Object getRooms() {
+	public ArrayList<Room> getRooms() {
 		// TODO Auto-generated method stub
 		return rooms;
+	}
+
+	public static BoardCell[][] getBoard() {
+		return board;
 	}
 
 	

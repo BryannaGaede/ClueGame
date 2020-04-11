@@ -84,11 +84,10 @@ public class BoardCell {
 				+ doorDirection + "]";
 	}
 	
-	public void draw(Graphics g, Board board, boolean drawName, int cellSize) {
+	public void draw(Graphics g, int cellSize) {
 			g.setColor(Color.BLUE);
 			g.fillRect(getColumn()*cellSize, getRow()*cellSize, cellSize, cellSize/4);
-			g.setColor(Color.gray);
-			g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
+			g.drawRect(50, 50, 5, 5);
 	}
 
 	/*
