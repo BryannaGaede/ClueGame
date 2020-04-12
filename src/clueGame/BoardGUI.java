@@ -34,19 +34,14 @@ public class BoardGUI extends JPanel {
 		g.drawRect(50, 50, 5, 5);
 				
 		//initializing the board
-		// Board is singleton, get the only instance
-		board = Board.getInstance();
-		// set the file names to use my config files
-		board.setConfigFiles("CTest_ClueLayout.csv", "CTest_ClueLegend.txt");		
-		// Initialize will load BOTH config files 
-		board.initialize();
+		
 		
 		BoardCell[][] board1 = new BoardCell[30][30];
 		board1 = board.getBoard();
 		
 		for (int i = 0; i < board1.length; i++) {
 			for (int j = 0; i < board1[i].length; j++) {
-				board1[i][j].draw(g, 2);
+				board1[i][j].paintComponent(g, 2);
 			}
 		}
 		
