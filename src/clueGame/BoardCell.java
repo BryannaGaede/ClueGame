@@ -88,6 +88,7 @@ public class BoardCell {
 	}
 	
 	public void draw(Graphics g, Board c, boolean drawName, int cellSize) {
+		//for some reason it thinks every room is grey(therefore drawing every initial, so check logic in board)
 		if(drawName){
 			g.setColor(Color.gray);
 			g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
