@@ -83,16 +83,13 @@ public class GUIControl extends JPanel {
 	private JButton next, accuse;
 	
 	public JPanel controlLabel() {
-		//making text field "Who's turn"
+		//make text fields
 		turn = new JTextField();
 		turn.setBorder(BorderFactory.createTitledBorder("Who's turn?"));
-		//new text field "Guess"
 		guess = new JTextField();
 		guess.setBorder(BorderFactory.createTitledBorder("Guess"));
-		//new Text field "guess result"
 		guessResult = new JTextField();
 		guessResult.setBorder(BorderFactory.createTitledBorder("Guess Result"));
-		//new text field "roll"
 		roll = new JTextField();
 		roll.setBorder(BorderFactory.createTitledBorder("Roll"));
 		//adding in the different text fields to "first row" upper

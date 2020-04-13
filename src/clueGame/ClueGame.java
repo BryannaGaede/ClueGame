@@ -11,7 +11,7 @@ public class ClueGame extends JFrame{
 	public ClueGame() {
 		board = Board.getInstance();
 		// set the file names to use my config files
-		board.setConfigFiles("CTest_ClueLayout.csv", "CTest_ClueLegend.txt");
+		board.setConfigFiles("CLUE_BOARD.csv", "ClueRooms.txt");
 		// Initialize will load BOTH config files 
 		board.initialize();
 		setSize(1200,900);
@@ -23,7 +23,7 @@ public class ClueGame extends JFrame{
 	
 	public static void main(String[] args) {
 		ClueGame frame = new ClueGame();
-		//frame.setTitle("GUI Example");
+		frame.setTitle("Clue Game");
 		frame.setVisible(true);
 	}
 	

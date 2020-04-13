@@ -20,9 +20,13 @@ import clueGame.BoardCell;
 import clueGame.BoardCell.DoorDirection;
 
 public class Board extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public final int MAX_BOARD_SIZE = 50;
-	private static int numRows = 30;
-	private static int numColumns = 30;
+	private static int numRows = 26;
+	private static int numColumns = 26;
 	private String boardConfigFile;
 	private String roomConfigFile;
 	private String playerConfigFile;
@@ -34,7 +38,7 @@ public class Board extends JPanel {
 	private HashSet<BoardCell> visited = new HashSet<BoardCell>();
 	private Map<Character, String> legend;
 	//was #rows and #colms
-	public static BoardCell board[][] = new BoardCell[22][23];
+	public static BoardCell board[][] = new BoardCell[numRows][numColumns];
 
 	private static ArrayList<Player> players = new ArrayList<Player>();
 	private ArrayList<Weapon> weapons = new ArrayList<Weapon>();
@@ -101,13 +105,13 @@ public class Board extends JPanel {
 		// This whole loop is responsible for painting room names only once.
 		ArrayList<Character> roomsPainted = new ArrayList<Character>();
 		
-		for(int i = 0; i < board.length; i ++){
-			for (int j = 0; j < board[i].length; j++) {
-				if(board[i][j].getInitials() != null && board[i][j].getInitials().length() < 2){
-					board[i][j].draw(g, this, true, 30);
+		for(int row = 0; row < board.length; row ++){
+			for (int col = 0; col < board[row].length; col++) {
+				if(board[row][col].getInitials() != null && board[row][col].getInitials().length() < 2){
+					board[row][col].draw(g, this, true, 30);
 				}
 				else{
-					board[i][j].draw(g, this, false, 30);
+					board[row][col].draw(g, this, false, 30);
 				}
 			}
 		}	
