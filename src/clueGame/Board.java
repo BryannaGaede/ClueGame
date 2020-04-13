@@ -100,18 +100,18 @@ public class Board extends JPanel {
 	 */
 
 	@Override
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
+	public void paintComponent(Graphics cell) {
+		super.paintComponent(cell);
 		// This whole loop is responsible for painting room names only once.
 		ArrayList<Character> roomsPainted = new ArrayList<Character>();
 		
 		for(int row = 0; row < board.length; row ++){
 			for (int col = 0; col < board[row].length; col++) {
 				if(board[row][col].getInitials() != null && board[row][col].getInitials().length() < 2){
-					board[row][col].draw(g, this, true, 30);
+					board[row][col].draw(cell, this, true, 30);
 				}
 				else{
-					board[row][col].draw(g, this, false, 30);
+					board[row][col].draw(cell, this, false, 30);
 				}
 			}
 		}	
@@ -476,30 +476,30 @@ public class Board extends JPanel {
 		// set up file reader for csv
 		BufferedReader in = new BufferedReader(new FileReader(layout_csv));
 		String line;
-		int row = 0;
-		int col = 0;
+		int current_row = 0;
+		int current_column = 0;
 		// used to make sure there are the same number of columns in each row
-		int checked = 0;
+		int number_of_itterations = 0;
 		int cols_seen = 0;
 		while ((line = in.readLine()) != null) {
 			String[] initials = line.split(",");
-			for (String i : initials) {
-				board[row][col] = new BoardCell(row, col, i);
-				col++;
+			for (String cell_initials : initials) {
+				board[current_row][current_column] = new BoardCell(current_row, current_column, cell_initials);
+				current_column++;
 			}
-			if (col != cols_seen) {
-				if (checked == 0) {
-					cols_seen = col;
-					checked += 1;
+			if (current_column != cols_seen) {
+				if (number_of_itterations == 0) {
+					cols_seen = current_column;
+					number_of_itterations += 1;
 				} else {
 					System.out.println("CSV file has columns of uneven length");
 				}
 			}
-			col = 0;
-			row++;
+			current_column = 0;
+			current_row++;
 		}
 		in.close();
-		numRows = row;
+		numRows = current_row;
 		numColumns = cols_seen;
 	}
 

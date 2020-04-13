@@ -14,15 +14,18 @@ import clueGame.BoardCell.DoorDirection;
 public class BoardCell {
 	private int row;
 	private int column;
-	private  String initial;
+	private  String initials;
 	private String name;
+	private boolean printFullName;
 	private DoorDirection doorDirection;
 
 	public BoardCell(int row, int column, String initial) {
 		super();
 		this.row = row;
 		this.column = column;
-		this.initial = initial;
+		this.initials = initial;
+		this.printFullName = false;
+		name = Board.getRoomName(initial.charAt(0));
 
 		if (initial.length() == 2) {
 			if (initial.charAt(1) == 'U') {
@@ -39,6 +42,9 @@ public class BoardCell {
 			}
 			else {
 				this.doorDirection = DoorDirection.NONE;
+				if(initial.charAt(1) == 'P') {
+					printFullName = true;
+				}
 			}
 		} else {
 			this.doorDirection = DoorDirection.NONE;
@@ -74,7 +80,7 @@ public class BoardCell {
 	}
 
 	public boolean isRoom() {
-		if(initial.charAt(0) != 'W' && initial.charAt(0) != 'F') {
+		if(initials.charAt(0) != 'W' && initials.charAt(0) != 'F') {
 			return true;
 		} else {
 			return false;
@@ -83,7 +89,7 @@ public class BoardCell {
 
 	@Override
 	public String toString() {
-		return "BoardCell [row=" + row + ", column=" + column + ", Initial=" + initial + ", doorDirection="
+		return "BoardCell [row=" + row + ", column=" + column + ", Initial=" + initials + ", doorDirection="
 				+ doorDirection + "]";
 	}
 	
@@ -144,16 +150,16 @@ public class BoardCell {
 	}
 
 	public char getFirstInitial() {
-		return initial.charAt(0);
+		return initials.charAt(0);
 	}
 
 	public String getInitials() {
-		return initial;
+		return initials;
 	}
 
 	public void setInitials(String letter) {
-		this.initial = new String();
-		this.initial = letter;
+		this.initials = new String();
+		this.initials = letter;
 	}
 
 	public int getRow() {
