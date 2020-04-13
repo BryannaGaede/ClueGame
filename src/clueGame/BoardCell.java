@@ -127,6 +127,57 @@ public class BoardCell {
 			g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
 		}
 	}
+
+	public void draw(Graphics g) {
+		int cellSize = 30;
+		if(this.isDoorway()) {
+			g.setColor(Color.BLUE);
+			switch(this.getDoorDirection()) {
+			case LEFT:
+				g.fillRect(getColumn()*cellSize, (getRow())*cellSize, cellSize/4, cellSize);
+				break;
+			case RIGHT:
+				g.fillRect(getColumn()*cellSize+cellSize - 7, (getRow())*cellSize, cellSize/4, cellSize);
+				break;
+			case UP:
+				g.fillRect(getColumn()*cellSize, getRow()*cellSize, cellSize, cellSize/4);
+				break;
+			case DOWN:
+				g.fillRect(getColumn()*cellSize, (getRow()+1)*cellSize-7, cellSize, cellSize/4);
+				break;
+			default:
+				break;
+			}
+			g.setColor(Color.gray);
+			switch(this.getDoorDirection()) {
+			case LEFT:
+				g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
+				break;
+			case RIGHT:
+				g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
+				break;
+			case UP:
+				g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
+				break;
+			case DOWN:
+				g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
+				break;
+			default:
+				break;
+			}
+		} else if(this.isRoom()) {
+			g.setColor(Color.gray);
+			g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
+			if(this.printFullName) {
+				g.setFont(new Font("TimesRoman", Font.BOLD, 10));
+				g.setColor(Color.black);
+				g.drawString(this.name, (getColumn()*cellSize) + 3, getRow()*cellSize+(int)(.5*cellSize));
+			}
+		} else {
+			g.setColor(Color.yellow);
+			g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
+		}
+	}
 	
 	/*
 	 * ***********************GETTERS AND SETTERS****************************

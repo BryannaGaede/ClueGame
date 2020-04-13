@@ -103,18 +103,23 @@ public class Board extends JPanel {
 	public void paintComponent(Graphics cell) {
 		super.paintComponent(cell);
 		// This whole loop is responsible for painting room names only once.
-		ArrayList<Character> roomsPainted = new ArrayList<Character>();
-		
-		for(int row = 0; row < board.length; row ++){
-			for (int col = 0; col < board[row].length; col++) {
-				if(board[row][col].getInitials() != null && board[row][col].getInitials().length() < 2){
-					board[row][col].draw(cell, this, true, 30);
-				}
-				else{
-					board[row][col].draw(cell, this, false, 30);
-				}
+		for(int row = 0; row < numRows; row ++) {
+			for(int col = 0; col < numColumns; col ++) {
+				board[row][col].draw(cell);
 			}
-		}	
+		}
+//		ArrayList<Character> roomsPainted = new ArrayList<Character>();
+//		
+//		for(int row = 0; row < board.length; row ++){
+//			for (int col = 0; col < board[row].length; col++) {
+//				if(board[row][col].getInitials() != null && board[row][col].getInitials().length() < 2){
+//					board[row][col].draw(cell, this, true, 30);
+//				}
+//				else{
+//					board[row][col].draw(cell, this, false, 30);
+//				}
+//			}
+//		}	
 	}
 	
 	/*
