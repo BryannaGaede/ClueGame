@@ -33,7 +33,8 @@ public class Board extends JPanel {
 	private HashSet<BoardCell> targets = new HashSet<BoardCell>();
 	private HashSet<BoardCell> visited = new HashSet<BoardCell>();
 	private Map<Character, String> legend;
-	public static BoardCell board[][] = new BoardCell[numRows][numColumns];
+	//was #rows and #colms
+	public static BoardCell board[][] = new BoardCell[22][23];
 
 	private static ArrayList<Player> players = new ArrayList<Player>();
 	private ArrayList<Weapon> weapons = new ArrayList<Weapon>();
@@ -49,7 +50,7 @@ public class Board extends JPanel {
 	private static Board theInstance = new Board();
 
 	// constructor is private to ensure only one copy
-	private Board() {
+	Board() {
 	}
 
 	// this method returns the only Board
@@ -89,7 +90,29 @@ public class Board extends JPanel {
 			dealCards();
 		}
 	}
+	
+	/*
+	 * ***********************Painting***********************
+	 */
 
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		// This whole loop is responsible for painting room names only once.
+		ArrayList<Character> roomsPainted = new ArrayList<Character>();
+		
+		for(int i = 0; i < board.length; i ++){
+			for (int j = 0; j < board[i].length; j++) {
+				if(board[i][j].getInitials() != null && board[i][j].getInitials().length() < 2){
+					board[i][j].draw(g, this, true, 30);
+				}
+				else{
+					board[i][j].draw(g, this, false, 30);
+				}
+			}
+		}	
+	}
+	
 	/*
 	 * ***********************SET UP CARDS AND PLAYERS***********************
 	 */

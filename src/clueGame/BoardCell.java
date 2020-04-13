@@ -4,7 +4,10 @@
 package clueGame;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Stroke;
+import java.text.AttributedCharacterIterator;
 
 import clueGame.BoardCell.DoorDirection;
 
@@ -84,12 +87,40 @@ public class BoardCell {
 				+ doorDirection + "]";
 	}
 	
-	public void draw(Graphics g, int cellSize) {
+	public void draw(Graphics g, Board c, boolean drawName, int cellSize) {
+		if(drawName){
+			g.setColor(Color.gray);
+			g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
+			g.setFont(new Font("TimesRoman", Font.BOLD, 10));
+			g.setColor(Color.black);
+			g.drawString(getInitials(), (getColumn()*cellSize) + 3, getRow()*cellSize+(int)(.5*cellSize));
+		}
+		else if(doorDirection == DoorDirection.LEFT){
+			g.setColor(Color.BLUE);
+			g.fillRect(getColumn()*cellSize, (getRow())*cellSize, cellSize/4, cellSize);
+			g.setColor(Color.gray);
+			g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
+		}
+		else if(doorDirection == DoorDirection.UP){
 			g.setColor(Color.BLUE);
 			g.fillRect(getColumn()*cellSize, getRow()*cellSize, cellSize, cellSize/4);
-			g.drawRect(50, 50, 5, 5);
+			g.setColor(Color.gray);
+			g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
+		}
+		else if(doorDirection == DoorDirection.DOWN){
+			g.setColor(Color.BLUE);
+			g.fillRect(getColumn()*cellSize, (getRow()+1)*cellSize-7, cellSize, cellSize/4);
+			g.setColor(Color.gray);
+			g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
+		}
+		else if(doorDirection == DoorDirection.RIGHT){
+			g.setColor(Color.BLUE);
+			g.fillRect(getColumn()*cellSize+cellSize - 7, (getRow())*cellSize, cellSize/4, cellSize);
+			g.setColor(Color.gray);
+			g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
+		}
 	}
-
+	
 	/*
 	 * ***********************GETTERS AND SETTERS****************************
 	 */
