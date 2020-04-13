@@ -86,12 +86,16 @@ public class GUIControl extends JPanel {
 		//make text fields
 		turn = new JTextField();
 		turn.setBorder(BorderFactory.createTitledBorder("Who's turn?"));
+		turn.setEditable(false);
 		guess = new JTextField();
 		guess.setBorder(BorderFactory.createTitledBorder("Guess"));
+		guess.setEditable(false);
 		guessResult = new JTextField();
 		guessResult.setBorder(BorderFactory.createTitledBorder("Guess Result"));
+		guessResult.setEditable(false);
 		roll = new JTextField();
 		roll.setBorder(BorderFactory.createTitledBorder("Roll"));
+		roll.setEditable(false);
 		//adding in the different text fields to "first row" upper
 		JPanel firstRow = new JPanel();
 		firstRow.setLayout(new BoxLayout(firstRow, BoxLayout.X_AXIS));
@@ -115,7 +119,7 @@ public class GUIControl extends JPanel {
 		add(secondRow);
 		return secondRow;
 	}
-	
+	/*
 	public static void main(String[] args) {
 		//build the jframe
 		JFrame frame = new JFrame();
@@ -129,6 +133,7 @@ public class GUIControl extends JPanel {
 		frame.add(gui);
 		frame.setVisible(true);
 	}
+	*/
 	
 	
 	

@@ -109,7 +109,12 @@ public class Board extends JPanel {
 			}
 		}
 //		ArrayList<Character> roomsPainted = new ArrayList<Character>();
-//		
+        System.out.println(players.size());
+		for (Player p: players) {
+			System.out.println("true");
+			p.draw(cell, 25);
+		}
+		
 //		for(int row = 0; row < board.length; row ++){
 //			for (int col = 0; col < board[row].length; col++) {
 //				if(board[row][col].getInitials() != null && board[row][col].getInitials().length() < 2){

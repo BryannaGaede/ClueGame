@@ -129,7 +129,7 @@ public class BoardCell {
 	}
 
 	public void draw(Graphics g) {
-		int cellSize = 30;
+		int cellSize = 25;
 		if(this.isDoorway()) {
 			g.setColor(Color.BLUE);
 			switch(this.getDoorDirection()) {

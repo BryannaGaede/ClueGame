@@ -154,13 +154,12 @@ public class Player {
 		return color; 
 		}
 
-	public void drawArc(Graphics g, int cellSize) {
+	public void draw(Graphics g, int cellSize) {
 		// TODO Auto-generated method stub
 		int x = row;
-		
 		int y = column;
-		
-		g.drawOval(y*cellSize, x*cellSize, cellSize, cellSize);
+		g.setColor(getColor());
+		g.drawOval(y*cellSize, x*cellSize, cellSize,cellSize);
 		g.fillOval(y*cellSize, x*cellSize, cellSize, cellSize);
 		
 	}
