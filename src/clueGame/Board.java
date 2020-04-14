@@ -111,6 +111,7 @@ public class Board extends JPanel {
 		if(!gameBegun) {
 			rollDie();
 			gameBegun = true;
+			System.out.println("first turn");
 			//otherwise check if a human player's turn is complete and go to next player
 		} else {
 			//move to next player
@@ -697,6 +698,10 @@ public class Board extends JPanel {
 
 	public BoardCell[][] getBoard() {
 		return board;
+	}
+
+	public static int getPlayerIndex() {
+		return playerIndex;
 	}
 
 

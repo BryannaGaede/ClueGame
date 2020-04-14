@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -20,7 +21,8 @@ public class ClueGame extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private static Board board;
 	private GUINotes notes;
-	private static Player human;
+	private static ArrayList<Player> players = Board.getPlayers();
+	private static int playerIndex = Board.getPlayerIndex();
 	
 	public ClueGame() {
 		board = Board.getInstance();
@@ -30,12 +32,12 @@ public class ClueGame extends JFrame{
 		// Initialize will load BOTH config files 
 		board.initialize();
 		
-		for (Player x: board.getPlayers()) {
-			if (x.status == Status.HUMAN) {
-				human = x;
-			}
-		}
-		
+//		for (Player x: board.getPlayers()) {
+//			if (x.status == Status.HUMAN) {
+//				human = x;
+//			}
+//		}
+//		
 		setSize(800,750);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Clue Game");
@@ -48,7 +50,7 @@ public class ClueGame extends JFrame{
 		inGameOptions.setLayout(new GridLayout(1,2));
 		inGameOptions.add(gui.controlLabel(),0,0);
 		inGameOptions.add(gui.controlButton(),1,0);
-		add(gui2.controlLabel(human.getMyCards()), BorderLayout.EAST);
+		add(gui2.controlLabel(players.get(playerIndex).getMyCards()), BorderLayout.EAST);
 		add(inGameOptions, BorderLayout.SOUTH);
 		JMenuBar menu = new JMenuBar();
 		setJMenuBar(menu);
@@ -91,7 +93,9 @@ public class ClueGame extends JFrame{
 		ClueGame frame = new ClueGame();
 		frame.setTitle("Clue Game");
 		frame.setVisible(true);
-		JOptionPane.showMessageDialog(board, "You are the "+ human.playerName +" . Press Next Player to begin play", "Welcome to Clue!", JOptionPane.INFORMATION_MESSAGE);
+		if(players.get(playerIndex).getStatus() == Status.HUMAN) {
+			JOptionPane.showMessageDialog(board, "You are the "+ players.get(playerIndex).getName() +" . Press Next Player to begin play", "Welcome to Clue!", JOptionPane.INFORMATION_MESSAGE);
+		}
 	}
 	
 }
