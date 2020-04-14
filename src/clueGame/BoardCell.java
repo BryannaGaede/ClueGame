@@ -99,7 +99,7 @@ public class BoardCell {
 
 	public void draw(Graphics g) {
 		if(this.isDoorway()) {
-			g.setColor(Color.LIGHT_GRAY);
+			g.setColor(new Color(228,183,245));
 			switch(this.getDoorDirection()) {
 			case LEFT:
 				g.fillRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
@@ -116,7 +116,7 @@ public class BoardCell {
 			default:
 				break;
 			}
-			g.setColor(Color.GREEN);
+			g.setColor(new Color(135,239,109));
 			switch(this.getDoorDirection()) {
 			case LEFT:
 				g.fillRect(getColumn()*cellSize-1, (getRow())*cellSize, cellSize/4-1, cellSize-1);
@@ -134,15 +134,15 @@ public class BoardCell {
 				break;
 			}
 		} else if(this.isRoom()) {
-				g.setColor(Color.LIGHT_GRAY);
+				g.setColor(new Color(228,183,245));
 				g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
 				g.fillRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
 		} else if(this.isWalkway) {
-			g.setColor(Color.PINK);
+			g.setColor(new Color(117,101,116));
 			g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
 			g.fillRect(getColumn()*cellSize-1, (getRow())*cellSize-1, cellSize-1, cellSize-1);
 		} else {
-			g.setColor(Color.GRAY);
+			g.setColor(new Color(71,146,212));
 			g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
 			g.fillRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
 		}
