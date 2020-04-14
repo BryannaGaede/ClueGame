@@ -1,3 +1,9 @@
+commit a724ac3de6faf7451a361834cfc6355987e2bd1b
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Mon Apr 13 21:36:37 2020 -0600
+
+    updated log.txt
+
 commit d62a43c4993c396573bfecf2d4c8fa8126438666
 Author: Luke Valentine <lukevalentine@Lukes-MacBook-Pro-3.local>
 Date:   Mon Apr 13 21:03:50 2020 -0600

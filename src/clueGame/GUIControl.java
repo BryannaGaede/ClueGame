@@ -14,8 +14,8 @@ public class GUIControl extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTextField turn, guess, guessResult, roll;
 	private JButton next, accuse;
-	Dimension buttonSize = new Dimension(200,100);
-	Font buttonFont = new Font("Arial", Font.BOLD, 15);
+	Dimension buttonSize = new Dimension(150,50);
+	Font buttonFont = new Font("Arial", Font.BOLD, 12);
 	
 	public JPanel controlLabel() {
 		//make text fields
@@ -48,7 +48,7 @@ public class GUIControl extends JPanel {
 		next = new JButton();
 		accuse = new JButton();
 		next.setText("Next Player");
-		accuse.setText("Make an accusation");
+		accuse.setText("Make Accusation");
 		next.setPreferredSize(buttonSize);
 		accuse.setPreferredSize(buttonSize);
 		next.setFont(buttonFont);

@@ -1,69 +1,95 @@
 
 package clueGame;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 
 public class GUIHumanCards extends JPanel {
+	
 	/**
 	 * 
 	 */
-	private JTextField people, room, weapon;
-	private JButton next, accuse;
-	Dimension buttonSize = new Dimension(200,100);
-	Font buttonFont = new Font("Arial", Font.BOLD, 15);
-	
+	private static final long serialVersionUID = 1L;
+
 	public JPanel controlLabel(ArrayList<Card> playerCards) {
-		Card personCard = new Card(CardType.NONE,"");
-		Card roomCard = new Card(CardType.NONE,""); 
-		Card weaponCard = new Card(CardType.NONE,"");
-		for (Card x : playerCards) {
-			if (x.type == CardType.PERSON) {
-				personCard = x;
+	
+		JPanel suspectCards = new JPanel();
+		suspectCards.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Suspects:"));
+		suspectCards.setLayout(new BoxLayout(suspectCards, BoxLayout.Y_AXIS));
+		JPanel weaponCards = new JPanel();
+		weaponCards.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Weapons:"));
+		weaponCards.setLayout(new BoxLayout(weaponCards, BoxLayout.Y_AXIS));
+		JPanel roomCards = new JPanel();
+		roomCards.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Rooms"));
+		roomCards.setLayout(new BoxLayout(roomCards, BoxLayout.Y_AXIS));
+		JPanel blankSpace = new JPanel();
+		blankSpace.setLayout(new BoxLayout(blankSpace, BoxLayout.Y_AXIS));
+		
+		int numCards = 0;
+		int[] typeConfirm = {0,0,0};
+		
+		for(Card card : playerCards) {
+			switch(card.getType()) {
+			case WEAPON:
+				weaponCards.add(makeCard(card.getName(),true));
+				numCards += 1;
+				typeConfirm[0] += 1;
+				break;
+			case ROOM:
+				roomCards.add(makeCard(card.getName(),true));
+				numCards += 1;
+				typeConfirm[1] += 1;
+				break;
+			case PERSON:
+				suspectCards.add(makeCard(card.getName(),true));
+				numCards += 1;
+				typeConfirm[2] += 1;
+				break;
+			default:
+				break;
 			}
-			else if (x.type == CardType.ROOM) {
-				roomCard = x;
-			}
-			else if (x.type == CardType.WEAPON) {
-				weaponCard = x;
-			}
 		}
-		//make text fields
-		people= new JTextField();
-		people.setBorder(BorderFactory.createTitledBorder("People Card"));
-		if (personCard.getName() != null) {
-			people.setText(personCard.getName());
+		while(numCards < 7) {
+			blankSpace.add(new JPanel());
+			numCards += 1;
 		}
-		people.setEditable(false);
-		people.setColumns(20);
-		room = new JTextField();
-		room.setBorder(BorderFactory.createTitledBorder("Room Card"));
-		room.setEditable(false);
-		room.setColumns(20);
-		if (roomCard.getName() != null) {
-			room.setText(roomCard.getName());
+		if(typeConfirm[0] == 0) {
+			weaponCards.add(new JPanel());
+		} else if(typeConfirm[1] == 0) {
+			roomCards.add(new JPanel());
+		} else if(typeConfirm[2] == 0) {
+			suspectCards.add(new JPanel());
 		}
-		weapon = new JTextField();
-		weapon.setBorder(BorderFactory.createTitledBorder("Weapon Card"));
-		weapon.setEditable(false);
-		weapon.setColumns(20);
-		if (weaponCard.getName() != null) {
-			weapon.setText(weaponCard.getName());
-		}
+		
 		//adding in the different text fields to "first row" upper
-		JPanel Column = new JPanel();
-		Column.setLayout(new BoxLayout(Column, BoxLayout.Y_AXIS));
-		Column.add(people);
-		Column.add(room);
-		Column.add(weapon);
-		add(Column);
-		return Column;
+		JPanel allPlayerCards = new JPanel();
+		allPlayerCards.setBorder(BorderFactory.createLineBorder(Color.black));
+		allPlayerCards.add(new JLabel("YOUR CARDS"));
+		allPlayerCards.setLayout(new BoxLayout(allPlayerCards, BoxLayout.Y_AXIS));
+		allPlayerCards.add(suspectCards);
+		allPlayerCards.add(roomCards);
+		allPlayerCards.add(weaponCards);
+		allPlayerCards.add(blankSpace);
+		add(allPlayerCards);
+		return allPlayerCards;	
+	}
+	
+	public JPanel makeCard(String name, boolean isCard) {
+		JPanel card = new JPanel();
+		card.setBorder(BorderFactory.createLineBorder(Color.black));
+		card.add(new JLabel(name));
+		if(isCard) {
+			card.setBackground(Color.white);
+		}
+		return card;
 	}
 		
 }

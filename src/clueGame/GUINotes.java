@@ -22,7 +22,7 @@ public class GUINotes extends JDialog {
 	public GUINotes() {
 		
 		setTitle("Detective Notes");
-		setSize(1000, 800);
+		setSize(700, 500);
 		myName = new JTextField(20);
 		add(myName);
 		
@@ -35,7 +35,6 @@ public class GUINotes extends JDialog {
 			roomChecks.add(option);
 		}
 		roomChecks.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Rooms:"));
-		playerNotes.add(roomChecks);
 
 		JPanel suspectChecks = new JPanel();
 		for(Player player : allPlayers) {
@@ -43,7 +42,6 @@ public class GUINotes extends JDialog {
 			suspectChecks.add(option);
 		}
 		suspectChecks.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Suspects:"));
-		playerNotes.add(suspectChecks);
 		
 		JPanel weaponChecks = new JPanel();
 		for(Weapon weapon : allWeapons) {
@@ -51,39 +49,40 @@ public class GUINotes extends JDialog {
 			weaponChecks.add(option);
 		}
 		weaponChecks.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Weapons:"));
-		playerNotes.add(weaponChecks);
 		
 		JPanel userRoomChoice = new JPanel();
 		userRoomChoice.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Player Room Choice:"));
-		JComboBox availableRooms = new JComboBox();
+		JComboBox<String> availableRooms = new JComboBox<String>();
 		availableRooms.addItem("UNSURE");
 		for(Room room : allRooms) {
 			availableRooms.addItem(room.getName());
 		}
 		userRoomChoice.add(availableRooms);
-		playerNotes.add(userRoomChoice);
-		
 		
 		JPanel userSuspectChoice = new JPanel();
 		userSuspectChoice.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Player Suspect Choice:"));
-		JComboBox availableSuspects = new JComboBox();
+		JComboBox<String> availableSuspects = new JComboBox<String>();
 		availableSuspects.addItem("UNSURE");
 		for(Player suspect : allPlayers) {
 			availableSuspects.addItem(suspect.getName());
 		}
 		userSuspectChoice.add(availableSuspects);
-		playerNotes.add(userSuspectChoice);
 		
 		JPanel userWeaponChoice = new JPanel();
 		userWeaponChoice.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Player Weapon Choice:"));
-		JComboBox availableWeapons = new JComboBox();
+		JComboBox<String> availableWeapons = new JComboBox<String>();
 		availableWeapons.addItem("UNSURE");
 		for(Weapon weapon : allWeapons) {
 			availableWeapons.addItem(weapon.getName());
 		}
 		userWeaponChoice.add(availableWeapons);
-		playerNotes.add(userWeaponChoice);
 		
+		playerNotes.add(suspectChecks);
+		playerNotes.add(userSuspectChoice);
+		playerNotes.add(roomChecks);
+		playerNotes.add(userRoomChoice);
+		playerNotes.add(weaponChecks);
+		playerNotes.add(userWeaponChoice);
 
 		add(playerNotes);
 	}
