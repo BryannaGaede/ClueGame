@@ -20,22 +20,42 @@ public class GUIHumanCards extends JPanel {
 	Font buttonFont = new Font("Arial", Font.BOLD, 15);
 	
 	public JPanel controlLabel(ArrayList<Card> playerCards) {
+		Card personCard = null;
+		Card roomCard = null; 
+		Card weaponCard = null;
+		for (Card x : playerCards) {
+			if (x.type == CardType.PERSON) {
+				personCard = x;
+			}
+			else if (x.type == CardType.ROOM) {
+				roomCard = x;
+			}
+			else if (x.type == CardType.WEAPON) {
+				weaponCard = x;
+			}
+		}
 		//make text fields
 		people= new JTextField();
 		people.setBorder(BorderFactory.createTitledBorder("People Card"));
-		people.setText(playerCards.get(0).getName());
+		if (personCard.getName() != null) {
+			people.setText(personCard.getName());
+		}
 		people.setEditable(false);
 		people.setColumns(20);
 		room = new JTextField();
 		room.setBorder(BorderFactory.createTitledBorder("Room Card"));
 		room.setEditable(false);
 		room.setColumns(20);
-		room.setText(playerCards.get(1).getName());
+		if (roomCard.getName() != null) {
+			room.setText(roomCard.getName());
+		}
 		weapon = new JTextField();
 		weapon.setBorder(BorderFactory.createTitledBorder("Weapon Card"));
 		weapon.setEditable(false);
 		weapon.setColumns(20);
-		weapon.setText(playerCards.get(2).getName());
+		if (weaponCard.getName() != null) {
+			weapon.setText(weaponCard.getName());
+		}
 		//adding in the different text fields to "first row" upper
 		JPanel Column = new JPanel();
 		Column.setLayout(new BoxLayout(Column, BoxLayout.Y_AXIS));
