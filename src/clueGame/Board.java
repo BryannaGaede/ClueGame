@@ -96,6 +96,19 @@ public class Board extends JPanel {
 	}
 	
 	/*
+	 * Play game using gui after gui is printed after board is initialized
+	 */
+	
+
+	public static void handleNextPlayer() {
+		System.out.println("Button Pressed for Next Player");
+	}
+	
+	public static void handleAccusationRequestFromHumanPlayer() {
+		System.out.println("Button Pressed to Accuse");	
+	}
+	
+	/*
 	 * ***********************Painting***********************
 	 */
 
@@ -108,6 +121,7 @@ public class Board extends JPanel {
 				board[row][col].draw(cell);
 			}
 		}
+		//paint names of rooms on top of colored room cells
 		for(int row = 0; row < numRows; row ++) {
 			for(int col = 0; col < numColumns; col ++) {
 				if(board[row][col].doPrint()) {
@@ -115,6 +129,7 @@ public class Board extends JPanel {
 				}
 			}
 		}
+		//paint players on top of board cells
 		for (Player p: players) {
 			p.draw(cell, 20);
 		}	
@@ -636,6 +651,8 @@ public class Board extends JPanel {
 	public BoardCell[][] getBoard() {
 		return board;
 	}
+
+
 
 	
 

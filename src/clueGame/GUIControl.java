@@ -1,6 +1,11 @@
 package clueGame;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -56,7 +61,54 @@ public class GUIControl extends JPanel {
 		secondRow.add(next);
 		secondRow.add(accuse);
 		add(secondRow);
+		next.addActionListener(new NextPlayerClicked());
+		accuse.addActionListener(new AccusationRequested());
 		return secondRow;
 	}
+	
+	private class NextPlayerClicked implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e){
+			{
+				Board.handleNextPlayer();
+				repaint();
+			}
+		}
+	}
+	private class AccusationRequested implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e){
+			{
+				Board.handleAccusationRequestFromHumanPlayer();
+				repaint();
+			}
+		}
+	}
+	
+	/*clicking next player does the following:
+	 * checks if human player turn is done
+	 * rolls dice
+	 * starts next player turn
+	 */
+	
+	/*starting next player turn does the following:
+	 * roll die
+	 * calc targets
+	 * check status
+	 */
+	
+	/*status is computer
+	 * accuse?
+	 * make move
+	 * suggest
+	 * disprove
+	 * 
+	 * status is human
+	 * prompt if accusation is wanted
+	 * show targets
+	 * take input for target
+	 * suggest
+	 * disprove
+	 */
 		
 }

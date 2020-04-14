@@ -98,50 +98,48 @@ public class BoardCell {
 
 
 	public void draw(Graphics g) {
+		//paint doors
 		if(this.isDoorway()) {
-			g.setColor(new Color(228,183,245));
 			switch(this.getDoorDirection()) {
 			case LEFT:
+				g.setColor(new Color(228,183,245));
 				g.fillRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
-				break;
-			case RIGHT:
-				g.fillRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
-				break;
-			case UP:
-				g.fillRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
-				break;
-			case DOWN:
-				g.fillRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
-				break;
-			default:
-				break;
-			}
-			g.setColor(new Color(135,239,109));
-			switch(this.getDoorDirection()) {
-			case LEFT:
+				g.setColor(new Color(135,239,109));
 				g.fillRect(getColumn()*cellSize-1, (getRow())*cellSize, cellSize/4-1, cellSize-1);
 				break;
 			case RIGHT:
+				g.setColor(new Color(228,183,245));
+				g.fillRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
+				g.setColor(new Color(135,239,109));
 				g.fillRect(getColumn()*cellSize+cellSize - 7, (getRow())*cellSize, cellSize/4, cellSize);
 				break;
 			case UP:
+				g.setColor(new Color(228,183,245));
+				g.fillRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
+				g.setColor(new Color(135,239,109));
 				g.fillRect(getColumn()*cellSize, getRow()*cellSize, cellSize, cellSize/4);
 				break;
 			case DOWN:
+				g.setColor(new Color(228,183,245));
+				g.fillRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
+				g.setColor(new Color(135,239,109));
 				g.fillRect(getColumn()*cellSize, (getRow()+1)*cellSize-7, cellSize, cellSize/4);
 				break;
 			default:
 				break;
 			}
+			//paint rooms
 		} else if(this.isRoom()) {
 				g.setColor(new Color(228,183,245));
 				g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
 				g.fillRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
 		} else if(this.isWalkway) {
+			//paint walkways
 			g.setColor(new Color(117,101,116));
 			g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
 			g.fillRect(getColumn()*cellSize-1, (getRow())*cellSize-1, cellSize-1, cellSize-1);
 		} else {
+			//paint closet
 			g.setColor(new Color(71,146,212));
 			g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
 			g.fillRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
@@ -150,11 +148,9 @@ public class BoardCell {
 
 
 	public void printName(Graphics cell) {
-
 		cell.setFont(new Font("Arial", Font.BOLD, 12));
 		cell.setColor(Color.black);
 		cell.drawString(this.name, (getColumn()*cellSize) + 3, getRow()*cellSize+(int)(.5*cellSize));
-
 	}
 
 	/*
