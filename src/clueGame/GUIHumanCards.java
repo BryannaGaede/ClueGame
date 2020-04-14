@@ -20,9 +20,9 @@ public class GUIHumanCards extends JPanel {
 	Font buttonFont = new Font("Arial", Font.BOLD, 15);
 	
 	public JPanel controlLabel(ArrayList<Card> playerCards) {
-		Card personCard = null;
-		Card roomCard = null; 
-		Card weaponCard = null;
+		Card personCard = new Card(CardType.NONE,"");
+		Card roomCard = new Card(CardType.NONE,""); 
+		Card weaponCard = new Card(CardType.NONE,"");
 		for (Card x : playerCards) {
 			if (x.type == CardType.PERSON) {
 				personCard = x;

@@ -1,3 +1,21 @@
+commit d62a43c4993c396573bfecf2d4c8fa8126438666
+Author: Luke Valentine <lukevalentine@Lukes-MacBook-Pro-3.local>
+Date:   Mon Apr 13 21:03:50 2020 -0600
+
+    can't figure out nullptr error in GUIHumanCards
+
+commit 1b196faef2226e567114c03f85746f708065a539
+Author: Luke Valentine <lukevalentine@Lukes-MacBook-Pro-3.local>
+Date:   Mon Apr 13 20:47:17 2020 -0600
+
+    just need to add correct cards to display
+
+commit 026e5b987f9174d22f2131b9c933b4981aa0870c
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Mon Apr 13 20:00:35 2020 -0600
+
+    updated log.txt
+
 commit 7058f47b4244f61e2bad22b48082c405a756fbf6
 Author: BryannaGaede <bpriddy@mymail.mines.edu>
 Date:   Mon Apr 13 19:55:19 2020 -0600
