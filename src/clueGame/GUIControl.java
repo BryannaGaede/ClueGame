@@ -83,32 +83,5 @@ public class GUIControl extends JPanel {
 				repaint();
 			}
 		}
-	}
-	
-	/*clicking next player does the following:
-	 * checks if human player turn is done
-	 * rolls dice
-	 * starts next player turn
-	 */
-	
-	/*starting next player turn does the following:
-	 * roll die
-	 * calc targets
-	 * check status
-	 */
-	
-	/*status is computer
-	 * accuse?
-	 * make move
-	 * suggest
-	 * disprove
-	 * 
-	 * status is human
-	 * prompt if accusation is wanted
-	 * show targets
-	 * take input for target
-	 * suggest
-	 * disprove
-	 */
-		
+	}		
 }

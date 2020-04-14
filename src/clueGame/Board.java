@@ -27,6 +27,7 @@ public class Board extends JPanel {
 	public final int MAX_BOARD_SIZE = 50;
 	private static int numRows = 26;
 	private static int numColumns = 26;
+	public final static int NUM_PLAYERS = 6;
 	private String boardConfigFile;
 	private String roomConfigFile;
 	private String playerConfigFile;
@@ -48,6 +49,11 @@ public class Board extends JPanel {
 	private static Solution theAnswer;
 	private Card disproveCard;
 	private String answer; 
+	
+	//variables to mark player turns
+	private static int playerIndex = 0;
+	private static boolean gameBegun = false;
+	private static int dieRoll;
 
 
 	// variable used for singleton pattern
@@ -101,9 +107,43 @@ public class Board extends JPanel {
 	
 
 	public static void handleNextPlayer() {
-		System.out.println("Button Pressed for Next Player");
+		//if this is the very first turn, roll the die and start the game
+		if(!gameBegun) {
+			rollDie();
+			gameBegun = true;
+			//otherwise check if a human player's turn is complete and go to next player
+		} else {
+			//move to next player
+			playerIndex = (playerIndex+1) % NUM_PLAYERS;
+			//update the gui to change to the next player
+		}
+		/*clicking next player does the following:
+		 * checks if human player turn is done
+		 * rolls dice
+		 * starts next player turn
+		 */
+		
+		/*starting next player turn does the following:
+		 * roll die
+		 * calc targets
+		 * check status
+		 */
+		
+		/*status is computer
+		 * accuse?
+		 * make move
+		 * suggest
+		 * disprove
+		 * 
+		 * status is human
+		 * prompt if accusation is wanted
+		 * show targets
+		 * take input for target
+		 * suggest
+		 * disprove
+		 */
 	}
-	
+
 	public static void handleAccusationRequestFromHumanPlayer() {
 		System.out.println("Button Pressed to Accuse");	
 	}
@@ -309,6 +349,13 @@ public class Board extends JPanel {
 	/*
 	 * *************************HELPER FUNCTIONS*************************************
 	 */
+	
+
+	private static void rollDie() {
+		Random rand = new Random();
+		dieRoll = rand.nextInt(6)+1;
+		
+	}
 
 	public boolean adjHelp(BoardCell testCell, BoardCell startCell) {
 		// if the cell is not a doorway and it has two initials don't enter
