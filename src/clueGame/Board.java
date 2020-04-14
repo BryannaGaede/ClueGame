@@ -41,7 +41,7 @@ public class Board extends JPanel {
 	public static BoardCell board[][] = new BoardCell[numRows][numColumns];
 
 	private static ArrayList<Player> players = new ArrayList<Player>();
-	private ArrayList<Weapon> weapons = new ArrayList<Weapon>();
+	private static ArrayList<Weapon> weapons = new ArrayList<Weapon>();
 	private static ArrayList<Room> rooms = new ArrayList<Room>();
 	private static ArrayList<Card> allCards = new ArrayList<Card>();
 	//new
@@ -102,29 +102,22 @@ public class Board extends JPanel {
 	@Override
 	public void paintComponent(Graphics cell) {
 		super.paintComponent(cell);
-		// This whole loop is responsible for painting room names only once.
+		//each board cell prints it out
 		for(int row = 0; row < numRows; row ++) {
 			for(int col = 0; col < numColumns; col ++) {
 				board[row][col].draw(cell);
 			}
 		}
-//		ArrayList<Character> roomsPainted = new ArrayList<Character>();
-        System.out.println(players.size());
-		for (Player p: players) {
-			System.out.println("true");
-			p.draw(cell, 25);
+		for(int row = 0; row < numRows; row ++) {
+			for(int col = 0; col < numColumns; col ++) {
+				if(board[row][col].doPrint()) {
+					board[row][col].printName(cell);
+				}
+			}
 		}
-		
-//		for(int row = 0; row < board.length; row ++){
-//			for (int col = 0; col < board[row].length; col++) {
-//				if(board[row][col].getInitials() != null && board[row][col].getInitials().length() < 2){
-//					board[row][col].draw(cell, this, true, 30);
-//				}
-//				else{
-//					board[row][col].draw(cell, this, false, 30);
-//				}
-//			}
-//		}	
+		for (Player p: players) {
+			p.draw(cell, 20);
+		}	
 	}
 	
 	/*
@@ -182,13 +175,13 @@ public class Board extends JPanel {
 		int nextIndex3 = rand.nextInt(weapons.size());
 		theAnswer = new Solution(allCards.get(nextIndex2+rooms.size()).getName(), 
 				allCards.get(nextIndex1).getName(), 
-				allCards.get(nextIndex3+rooms.size()+players.size()).getName());
+				allCards.get(nextIndex3+rooms.size()+players.size()-1).getName());
 		allCards.get(nextIndex1).setStatus(true);
 		//select a person (index numRooms+1 through numRooms + numPeople)
 		allCards.get(nextIndex2+rooms.size()).setStatus(true);
 		//select a weapon (index numRooms+numPeople +1 through numCards)
 		//nextIndex = rand.nextInt(weapons.size());
-		allCards.get(nextIndex3+rooms.size()+players.size()).setStatus(true);
+		allCards.get(nextIndex3+rooms.size()+players.size()-1).setStatus(true);
 	}
 
 	public static Card handleSuggestion(Solution playerSuggestion, Player currentPlayer) {
@@ -550,7 +543,7 @@ public class Board extends JPanel {
 		return players;
 	}
 
-	public ArrayList<Weapon> getWeapons() {
+	public static ArrayList<Weapon> getWeapons() {
 		return weapons;
 	}
 	public Solution getSolution() {
@@ -635,7 +628,7 @@ public class Board extends JPanel {
 		players.add(testPlayer);
 	}
 
-	public ArrayList<Room> getRooms() {
+	public static ArrayList<Room> getRooms() {
 		// TODO Auto-generated method stub
 		return rooms;
 	}

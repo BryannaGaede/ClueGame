@@ -6,10 +6,6 @@ package clueGame;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Stroke;
-import java.text.AttributedCharacterIterator;
-
-import clueGame.BoardCell.DoorDirection;
 
 public class BoardCell {
 	private int row;
@@ -18,6 +14,8 @@ public class BoardCell {
 	private String name;
 	private boolean printFullName;
 	private DoorDirection doorDirection;
+	private int cellSize = 20;
+	private boolean isWalkway;
 
 	public BoardCell(int row, int column, String initial) {
 		super();
@@ -25,8 +23,13 @@ public class BoardCell {
 		this.column = column;
 		this.initials = initial;
 		this.printFullName = false;
+		this.isWalkway = false;
 		name = Board.getRoomName(initial.charAt(0));
-
+		
+		if(this.initials.equals("W")) {
+			this.isWalkway = true;
+		}
+		
 		if (initial.length() == 2) {
 			if (initial.charAt(1) == 'U') {
 				this.doorDirection = DoorDirection.UP;
@@ -92,49 +95,31 @@ public class BoardCell {
 		return "BoardCell [row=" + row + ", column=" + column + ", Initial=" + initials + ", doorDirection="
 				+ doorDirection + "]";
 	}
-	
-	public void draw(Graphics g, Board c, boolean drawName, int cellSize) {
-		//for some reason it thinks every room is grey(therefore drawing every initial, so check logic in board)
-		if(drawName){
-			g.setColor(Color.gray);
-			g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
-			g.setFont(new Font("TimesRoman", Font.BOLD, 10));
-			g.setColor(Color.black);
-			g.drawString(getInitials(), (getColumn()*cellSize) + 3, getRow()*cellSize+(int)(.5*cellSize));
-		}
-		else if(doorDirection == DoorDirection.LEFT){
-			g.setColor(Color.BLUE);
-			g.fillRect(getColumn()*cellSize, (getRow())*cellSize, cellSize/4, cellSize);
-			g.setColor(Color.gray);
-			g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
-		}
-		else if(doorDirection == DoorDirection.UP){
-			g.setColor(Color.BLUE);
-			g.fillRect(getColumn()*cellSize, getRow()*cellSize, cellSize, cellSize/4);
-			g.setColor(Color.gray);
-			g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
-		}
-		else if(doorDirection == DoorDirection.DOWN){
-			g.setColor(Color.BLUE);
-			g.fillRect(getColumn()*cellSize, (getRow()+1)*cellSize-7, cellSize, cellSize/4);
-			g.setColor(Color.gray);
-			g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
-		}
-		else if(doorDirection == DoorDirection.RIGHT){
-			g.setColor(Color.BLUE);
-			g.fillRect(getColumn()*cellSize+cellSize - 7, (getRow())*cellSize, cellSize/4, cellSize);
-			g.setColor(Color.gray);
-			g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
-		}
-	}
+
 
 	public void draw(Graphics g) {
-		int cellSize = 25;
 		if(this.isDoorway()) {
-			g.setColor(Color.BLUE);
+			g.setColor(Color.LIGHT_GRAY);
 			switch(this.getDoorDirection()) {
 			case LEFT:
-				g.fillRect(getColumn()*cellSize, (getRow())*cellSize, cellSize/4, cellSize);
+				g.fillRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
+				break;
+			case RIGHT:
+				g.fillRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
+				break;
+			case UP:
+				g.fillRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
+				break;
+			case DOWN:
+				g.fillRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
+				break;
+			default:
+				break;
+			}
+			g.setColor(Color.GREEN);
+			switch(this.getDoorDirection()) {
+			case LEFT:
+				g.fillRect(getColumn()*cellSize-1, (getRow())*cellSize, cellSize/4-1, cellSize-1);
 				break;
 			case RIGHT:
 				g.fillRect(getColumn()*cellSize+cellSize - 7, (getRow())*cellSize, cellSize/4, cellSize);
@@ -148,37 +133,30 @@ public class BoardCell {
 			default:
 				break;
 			}
-			g.setColor(Color.gray);
-			switch(this.getDoorDirection()) {
-			case LEFT:
-				g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
-				break;
-			case RIGHT:
-				g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
-				break;
-			case UP:
-				g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
-				break;
-			case DOWN:
-				g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
-				break;
-			default:
-				break;
-			}
 		} else if(this.isRoom()) {
-			g.setColor(Color.gray);
+				g.setColor(Color.LIGHT_GRAY);
+				g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
+				g.fillRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
+		} else if(this.isWalkway) {
+			g.setColor(Color.PINK);
 			g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
-			if(this.printFullName) {
-				g.setFont(new Font("TimesRoman", Font.BOLD, 10));
-				g.setColor(Color.black);
-				g.drawString(this.name, (getColumn()*cellSize) + 3, getRow()*cellSize+(int)(.5*cellSize));
-			}
+			g.fillRect(getColumn()*cellSize-1, (getRow())*cellSize-1, cellSize-1, cellSize-1);
 		} else {
-			g.setColor(Color.yellow);
+			g.setColor(Color.GRAY);
 			g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
+			g.fillRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
 		}
 	}
-	
+
+
+	public void printName(Graphics cell) {
+
+		cell.setFont(new Font("Arial", Font.BOLD, 12));
+		cell.setColor(Color.black);
+		cell.drawString(this.name, (getColumn()*cellSize) + 3, getRow()*cellSize+(int)(.5*cellSize));
+
+	}
+
 	/*
 	 * ***********************GETTERS AND SETTERS****************************
 	 */
@@ -219,6 +197,13 @@ public class BoardCell {
 
 	public int getColumn() {
 		return column;
+	}
+
+	public boolean doPrint() {
+		if(this.printFullName) {
+			return true;
+		}
+		return false;
 	}
 
 }

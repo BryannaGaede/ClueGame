@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -8,9 +9,14 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 
 public class ClueGame extends JFrame{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static Board board;
 	private GUINotes notes;
 	
@@ -23,20 +29,21 @@ public class ClueGame extends JFrame{
 		board.initialize();
 		
 		
-		setSize(1200,900);
+		setSize(1000,800);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setTitle("GUI Example");
+		setTitle("Clue Game");
 		board = new Board();
 		add(board, BorderLayout.CENTER);
 		
 		GUIControl gui = new GUIControl();
-		add(gui.controlLabel(), BorderLayout.NORTH);// Now let's view it
-		add(gui.controlButton(), BorderLayout.SOUTH);
+		JPanel inGameOptions = new JPanel();
+		inGameOptions.setLayout(new GridLayout(1,2));
+		inGameOptions.add(gui.controlLabel(),0,0);
+		inGameOptions.add(gui.controlButton(),1,0);
+		add(inGameOptions, BorderLayout.SOUTH);
 		JMenuBar menu = new JMenuBar();
 		setJMenuBar(menu);
 		menu.add(createFileMenu());
-		add(menu, BorderLayout.EAST);
-		//add(gui);
 	}
 	
 	private JMenu createFileMenu() {

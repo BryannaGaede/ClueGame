@@ -8,7 +8,7 @@ import java.util.Random;
 import java.util.Set;
 
 public class Player {
-	private static final int CIRCLE_DIMENSION = 2;
+	private static final int CIRCLE_RADIUS = 7;
 	protected String playerName;
 	protected int row;
 	protected int column;
@@ -155,12 +155,11 @@ public class Player {
 		}
 
 	public void draw(Graphics g, int cellSize) {
-		// TODO Auto-generated method stub
 		int x = row;
 		int y = column;
 		g.setColor(getColor());
-		g.drawOval(y*cellSize, x*cellSize, cellSize,cellSize);
-		g.fillOval(y*cellSize, x*cellSize, cellSize, cellSize);
+		g.drawOval(y*cellSize, x*cellSize, CIRCLE_RADIUS*2,CIRCLE_RADIUS*2);
+		g.fillOval(y*cellSize, x*cellSize, CIRCLE_RADIUS*2,CIRCLE_RADIUS*2);
 		
 	}
 	/*
