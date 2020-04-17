@@ -21,7 +21,7 @@ public class GUIControl extends JPanel {
 	private JButton next, accuse;
 	Dimension buttonSize = new Dimension(150,50);
 	Font buttonFont = new Font("Arial", Font.BOLD, 12);
-	
+
 	public JPanel controlLabel() {
 		//make text fields
 		turn = new JTextField();
@@ -47,12 +47,14 @@ public class GUIControl extends JPanel {
 		return firstRow;
 	}
 	
+	
 	public JPanel controlButton() {
 		//adding buttons too "second row" (lower)
 		JPanel secondRow = new JPanel();
 		next = new JButton();
 		accuse = new JButton();
 		next.setText("Next Player");
+		
 		accuse.setText("Make Accusation");
 		next.setPreferredSize(buttonSize);
 		accuse.setPreferredSize(buttonSize);

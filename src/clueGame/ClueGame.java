@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -31,13 +33,7 @@ public class ClueGame extends JFrame{
 		board.setConfigFiles("CLUE_BOARD.csv", "ClueRooms.txt");
 		// Initialize will load BOTH config files 
 		board.initialize();
-		
-//		for (Player x: board.getPlayers()) {
-//			if (x.status == Status.HUMAN) {
-//				human = x;
-//			}
-//		}
-//		
+
 		setSize(800,750);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Clue Game");
@@ -64,6 +60,8 @@ public class ClueGame extends JFrame{
 		return menu;
 		
 	}
+	
+	
 	private JMenuItem createFileExitItem() {
 		JMenuItem item = new JMenuItem("Exit");
 		class MenuItemListener implements ActionListener {

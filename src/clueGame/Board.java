@@ -106,8 +106,12 @@ public class Board extends JPanel {
 	 */
 	
 
+	
 	public static void handleNextPlayer() {
 		//if this is the very first turn, roll the die and start the game
+		//for testing
+		
+		gameBegun = true;
 		if(!gameBegun) {
 			rollDie();
 			gameBegun = true;
@@ -116,8 +120,11 @@ public class Board extends JPanel {
 		} else {
 			//move to next player
 			playerIndex = (playerIndex+1) % NUM_PLAYERS;
+			System.out.println("player moved");
 			//update the gui to change to the next player
+			//highlight 
 		}
+		
 		/*clicking next player does the following:
 		 * checks if human player turn is done
 		 * rolls dice
@@ -129,6 +136,8 @@ public class Board extends JPanel {
 		 * calc targets
 		 * check status
 		 */
+		
+		
 		
 		/*status is computer
 		 * accuse?
@@ -156,6 +165,9 @@ public class Board extends JPanel {
 	@Override
 	public void paintComponent(Graphics cell) {
 		super.paintComponent(cell);
+		//here we will highlight the targets
+		
+		
 		//each board cell prints it out
 		for(int row = 0; row < numRows; row ++) {
 			for(int col = 0; col < numColumns; col ++) {
@@ -173,7 +185,10 @@ public class Board extends JPanel {
 		//paint players on top of board cells
 		for (Player p: players) {
 			p.draw(cell, 20);
-		}	
+		}
+		//adding the targets of the current player
+		//System.out.println(players.get(playerIndex).getRow() + " " + players.get(playerIndex).getCol());
+	    //targets.addAll(calcTargets(players.get(playerIndex).getRow(), players.get(playerIndex).getCol(), 0));
 	}
 	
 	/*
@@ -318,6 +333,7 @@ public class Board extends JPanel {
 
 	public HashSet<BoardCell> findAllTargets(BoardCell startCell, int stepsRemaining, BoardCell startingSquare) {
 		// go through every adj cell
+		System.out.println(startCell.getRow() + " " + startCell.getColumn());
 		for (BoardCell testCell : getAdjList(startCell.getRow(), startCell.getColumn())) {
 			if (testCell.getRow() == startingSquare.getRow() && testCell.getColumn() == startingSquare.getColumn()) {
 				visited.add(startingSquare);

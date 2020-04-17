@@ -99,6 +99,7 @@ public class BoardCell {
 
 	public void draw(Graphics g) {
 		//paint doors
+		
 		if(this.isDoorway()) {
 			switch(this.getDoorDirection()) {
 			case LEFT:
@@ -144,6 +145,7 @@ public class BoardCell {
 			g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
 			g.fillRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
 		}
+		
 	}
 
 
