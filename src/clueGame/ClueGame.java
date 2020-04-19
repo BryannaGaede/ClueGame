@@ -33,21 +33,15 @@ public class ClueGame extends JFrame{
 		board.setConfigFiles("CLUE_BOARD.csv", "ClueRooms.txt");
 		// Initialize will load BOTH config files 
 		board.initialize();
-
 		setSize(800,750);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Clue Game");
 		board = new Board();
 		add(board, BorderLayout.CENTER);
-		
 		GUIControl gui = new GUIControl();
 		GUIHumanCards gui2 = new GUIHumanCards();
-		JPanel inGameOptions = new JPanel();
-		inGameOptions.setLayout(new GridLayout(1,2));
-		inGameOptions.add(gui.controlLabel(),0,0);
-		inGameOptions.add(gui.controlButton(),1,0);
 		add(gui2.controlLabel(players.get(playerIndex).getMyCards()), BorderLayout.EAST);
-		add(inGameOptions, BorderLayout.SOUTH);
+		add(gui, BorderLayout.SOUTH);
 		JMenuBar menu = new JMenuBar();
 		setJMenuBar(menu);
 		menu.add(createFileMenu());
@@ -87,7 +81,6 @@ public class ClueGame extends JFrame{
 	}
 	
 	public static void main(String[] args) {
-		
 		ClueGame frame = new ClueGame();
 		frame.setTitle("Clue Game");
 		frame.setVisible(true);

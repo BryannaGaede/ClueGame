@@ -97,7 +97,7 @@ public class BoardCell {
 	}
 
 
-	public void draw(Graphics g) {
+	public void draw(Graphics g, boolean highLight) {
 		//paint doors
 		
 		if(this.isDoorway()) {
@@ -145,8 +145,15 @@ public class BoardCell {
 			g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
 			g.fillRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
 		}
+		if (highLight == true) {
+		g.setColor(Color.YELLOW);
+		g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
+		g.fillRect(getColumn()*cellSize-1, (getRow())*cellSize-1, cellSize-1, cellSize-1);
+		}
 		
 	}
+	
+	
 
 
 	public void printName(Graphics cell) {

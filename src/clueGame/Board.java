@@ -1,6 +1,9 @@
 package clueGame;
 
 import java.awt.Graphics;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 
 import java.io.FileInputStream;
@@ -34,9 +37,9 @@ public class Board extends JPanel {
 	private String weaponConfigFile;
 	private boolean fullConfig = false;
 
-	private Map<BoardCell, Set<BoardCell>> adjMatrix = new HashMap<>();
-	private HashSet<BoardCell> targets = new HashSet<BoardCell>();
-	private HashSet<BoardCell> visited = new HashSet<BoardCell>();
+	private static Map<BoardCell, Set<BoardCell>> adjMatrix = new HashMap<>();
+	private static HashSet<BoardCell> targets = new HashSet<BoardCell>();
+	private static HashSet<BoardCell> visited = new HashSet<BoardCell>();
 	private Map<Character, String> legend;
 	//was #rows and #colms
 	public static BoardCell board[][] = new BoardCell[numRows][numColumns];
@@ -53,7 +56,8 @@ public class Board extends JPanel {
 	//variables to mark player turns
 	private static int playerIndex = 0;
 	private static boolean gameBegun = false;
-	private static int dieRoll;
+	static int dieRoll;
+	static String paintName = " ";
 
 
 	// variable used for singleton pattern
@@ -61,6 +65,7 @@ public class Board extends JPanel {
 
 	// constructor is private to ensure only one copy
 	Board() {
+		
 	}
 
 	// this method returns the only Board
@@ -110,7 +115,7 @@ public class Board extends JPanel {
 	public static void handleNextPlayer() {
 		//if this is the very first turn, roll the die and start the game
 		//for testing
-		
+		Graphics g;
 		gameBegun = true;
 		if(!gameBegun) {
 			rollDie();
@@ -119,40 +124,70 @@ public class Board extends JPanel {
 			//otherwise check if a human player's turn is complete and go to next player
 		} else {
 			//move to next player
-			playerIndex = (playerIndex+1) % NUM_PLAYERS;
+			incrementPlayer();
+			paintName = players.get(playerIndex).getName();
+			rollDie();
+			//if you change targets paintComponent should paint them?
+			
+			int row = players.get(playerIndex).getRow();
+			int col = players.get(playerIndex).getCol();
+			targets = calcTargets(row, col, Board.dieRoll);
+			//I want to call repaint here after new target
+			
+			repaint();
+			for(BoardCell x : targets) {
+				System.out.println(x.getRow() + " " + x.getColumn());
+			}
+			System.out.println();
+				
+				//how do I call this correctly
+				//players.get(playerIndex).makeMove(targets, g);
+			}
+			//playerIndex = (playerIndex+1) % NUM_PLAYERS;
 			System.out.println("player moved");
 			//update the gui to change to the next player
 			//highlight 
 		}
-		
-		/*clicking next player does the following:
-		 * checks if human player turn is done
-		 * rolls dice
-		 * starts next player turn
-		 */
-		
-		/*starting next player turn does the following:
-		 * roll die
-		 * calc targets
-		 * check status
-		 */
-		
-		
-		
-		/*status is computer
-		 * accuse?
-		 * make move
-		 * suggest
-		 * disprove
-		 * 
-		 * status is human
-		 * prompt if accusation is wanted
-		 * show targets
-		 * take input for target
-		 * suggest
-		 * disprove
-		 */
+	
+	
+	/*clicking next player does the following:
+	 * checks if human player turn is done
+	 * rolls dice
+	 * starts next player turn
+	 */
+	
+	/*starting next player turn does the following:
+	 * roll die
+	 * calc targets
+	 * check status
+	 */
+	
+	
+	
+	/*status is computer
+	 * accuse?
+	 * make move
+	 * suggest
+	 * disprove
+	 * 
+	 * status is human
+	 * prompt if accusation is wanted
+	 * show targets
+	 * take input for target
+	 * suggest
+	 * disprove
+	 */
+	
+	//we have five players this was made to loops through the players
+	public static void incrementPlayer() {
+		if(playerIndex < 5) {
+			playerIndex+=1;
+		}
+		else {
+			playerIndex = 0;
+		}
 	}
+	
 
 	public static void handleAccusationRequestFromHumanPlayer() {
 		System.out.println("Button Pressed to Accuse");	
@@ -171,7 +206,7 @@ public class Board extends JPanel {
 		//each board cell prints it out
 		for(int row = 0; row < numRows; row ++) {
 			for(int col = 0; col < numColumns; col ++) {
-				board[row][col].draw(cell);
+				board[row][col].draw(cell, false);
 			}
 		}
 		//paint names of rooms on top of colored room cells
@@ -185,6 +220,10 @@ public class Board extends JPanel {
 		//paint players on top of board cells
 		for (Player p: players) {
 			p.draw(cell, 20);
+		}
+		
+		for (BoardCell z : targets) {
+			z.draw(cell, true);
 		}
 		//adding the targets of the current player
 		//System.out.println(players.get(playerIndex).getRow() + " " + players.get(playerIndex).getCol());
@@ -317,7 +356,7 @@ public class Board extends JPanel {
 		}
 	}
 
-	public HashSet<BoardCell> calcTargets(int row, int col, int dieRoll) {
+	public static HashSet<BoardCell> calcTargets(int row, int col, int dieRoll) {
 		// create new hashset
 		BoardCell startCell = getCellAt(row, col);
 		BoardCell originalStart = new BoardCell();
@@ -331,7 +370,7 @@ public class Board extends JPanel {
 		return (foundTargets);
 	}
 
-	public HashSet<BoardCell> findAllTargets(BoardCell startCell, int stepsRemaining, BoardCell startingSquare) {
+	public static HashSet<BoardCell> findAllTargets(BoardCell startCell, int stepsRemaining, BoardCell startingSquare) {
 		// go through every adj cell
 		System.out.println(startCell.getRow() + " " + startCell.getColumn());
 		for (BoardCell testCell : getAdjList(startCell.getRow(), startCell.getColumn())) {
@@ -418,7 +457,7 @@ public class Board extends JPanel {
 	}
 
 	// checks door direction and adds to targets if it works
-	public boolean isGoodDoor(BoardCell target, BoardCell origin) {
+	public static boolean isGoodDoor(BoardCell target, BoardCell origin) {
 		// a cell under a door, and door direction is up
 		if (origin.getRow() < target.getRow() && target.getDoorDirection() == DoorDirection.UP) {
 			return true;
@@ -589,7 +628,7 @@ public class Board extends JPanel {
 	 ************************** GETTERS AND SETTERS *********************************
 	 */
 
-	public Set<BoardCell> getAdjList(int row, int col) {
+	public static Set<BoardCell> getAdjList(int row, int col) {
 		return adjMatrix.get(getCellAt(row, col));
 	}
 
@@ -598,7 +637,7 @@ public class Board extends JPanel {
 		return board[row][col];
 	}
 
-	public Set<BoardCell> getTargets() {
+	public static Set<BoardCell> getTargets() {
 		return targets;
 	}
 	
@@ -719,6 +758,8 @@ public class Board extends JPanel {
 	public static int getPlayerIndex() {
 		return playerIndex;
 	}
+
+	
 
 
 
