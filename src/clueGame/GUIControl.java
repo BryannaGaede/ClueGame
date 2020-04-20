@@ -1,5 +1,6 @@
 package clueGame;
 import java.awt.Dimension;
+
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -65,19 +66,17 @@ GUIControl() {
 	add(secondRow,0,0);
 }
 
-
-
 	private class NextPlayerClicked implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e){
 			{
 				Board.handleNextPlayer();
-				turn.setText(Board.paintName);
-				roll.setText(String.valueOf(Board.dieRoll));
-				repaint();
+				//if (Board.turnOver == true) {
+					turn.setText(Board.paintName);
+					roll.setText(String.valueOf(Board.dieRoll));
+				//}
 			}
 		}
-
 	}
 	
 	private class AccusationRequested implements ActionListener

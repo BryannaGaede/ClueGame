@@ -100,6 +100,7 @@ public class BoardCell {
 	public void draw(Graphics g, boolean highLight) {
 		//paint doors
 		
+		
 		if(this.isDoorway()) {
 			switch(this.getDoorDirection()) {
 			case LEFT:
@@ -146,13 +147,18 @@ public class BoardCell {
 			g.fillRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
 		}
 		if (highLight == true) {
-		g.setColor(Color.YELLOW);
-		g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
-		g.fillRect(getColumn()*cellSize-1, (getRow())*cellSize-1, cellSize-1, cellSize-1);
+			g.setColor(Color.YELLOW);
+			g.drawRect(getColumn()*cellSize, (getRow())*cellSize, cellSize, cellSize);
+			g.fillRect(getColumn()*cellSize-1, (getRow())*cellSize-1, cellSize-1, cellSize-1);
 		}
-		
 	}
 	
+	public boolean containsClick(int x, int y) {
+		if ((x/cellSize <= row + 15) && (x/cellSize>= row - 15) && (y/cellSize <= column + 15) && (y/cellSize  >= column - 15) )
+			return true;
+		else 
+			return false;
+    }
 	
 
 
@@ -211,5 +217,6 @@ public class BoardCell {
 		return false;
 	}
 
+	
 }
 

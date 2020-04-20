@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.awt.BorderLayout;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,7 +37,7 @@ public class ClueGame extends JFrame{
 		setSize(800,750);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Clue Game");
-		board = new Board();
+		addMouseListener(new ChangeLocation());
 		add(board, BorderLayout.CENTER);
 		GUIControl gui = new GUIControl();
 		GUIHumanCards gui2 = new GUIHumanCards();
@@ -86,6 +87,40 @@ public class ClueGame extends JFrame{
 		frame.setVisible(true);
 		if(players.get(playerIndex).getStatus() == Status.HUMAN) {
 			JOptionPane.showMessageDialog(board, "You are the "+ players.get(playerIndex).getName() +" . Press Next Player to begin play", "Welcome to Clue!", JOptionPane.INFORMATION_MESSAGE);
+		}
+	}
+	
+	private class ChangeLocation implements MouseListener {
+		
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			Board.changeLocation(e);
+			repaint();
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
 		}
 	}
 	

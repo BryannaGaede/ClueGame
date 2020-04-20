@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Graphics;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -164,16 +165,9 @@ public class Player {
 		
 	}
 	
-	public void makeMove(BoardCell target, Graphics g) {
-	int cellSize = 25;
-	
-	int x = target.getRow();
-	int y = target.getColumn();
-	g.setColor(getColor());
-	g.drawOval(y*cellSize, x*cellSize, CIRCLE_RADIUS*2,CIRCLE_RADIUS*2);
-	g.fillOval(y*cellSize, x*cellSize, CIRCLE_RADIUS*2,CIRCLE_RADIUS*2);
-
-		
+	public void makeMove(BoardCell target) {
+		column = target.getColumn();
+		row = target.getRow();
 	}
 	/*
 	 * ********************USED FOR TESTING*************************************
@@ -278,7 +272,6 @@ public class Player {
 	public int getColumn() {
 		return column;
 	}
-	
 
 	
 

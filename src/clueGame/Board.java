@@ -1,9 +1,11 @@
 package clueGame;
 
 import java.awt.Graphics;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 
 import java.io.FileInputStream;
@@ -58,13 +60,14 @@ public class Board extends JPanel {
 	private static boolean gameBegun = false;
 	static int dieRoll;
 	static String paintName = " ";
+	static boolean turnOver = false;
 
 
 	// variable used for singleton pattern
 	private static Board theInstance = new Board();
 
 	// constructor is private to ensure only one copy
-	Board() {
+	private Board() {
 		
 	}
 
@@ -110,11 +113,9 @@ public class Board extends JPanel {
 	 * Play game using gui after gui is printed after board is initialized
 	 */
 	
-
-	
 	public static void handleNextPlayer() {
-		//if this is the very first turn, roll the die and start the game
-		//for testing
+		//turn is not over 
+		turnOver = false;
 		Graphics g;
 		gameBegun = true;
 		if(!gameBegun) {
@@ -122,32 +123,51 @@ public class Board extends JPanel {
 			gameBegun = true;
 			System.out.println("first turn");
 			//otherwise check if a human player's turn is complete and go to next player
-		} else {
-			//move to next player
+		}
+		else {
 			incrementPlayer();
 			paintName = players.get(playerIndex).getName();
 			rollDie();
 			//if you change targets paintComponent should paint them?
-			
 			int row = players.get(playerIndex).getRow();
 			int col = players.get(playerIndex).getCol();
 			targets = calcTargets(row, col, Board.dieRoll);
-			//I want to call repaint here after new target
-			
-			repaint();
-			for(BoardCell x : targets) {
-				System.out.println(x.getRow() + " " + x.getColumn());
+			if (players.get(playerIndex).status == Status.COMPUTER) {
+				BoardCell selectedTarget = null;
+				for (BoardCell target : targets) {
+						selectedTarget = target;
+					}
+				if (selectedTarget != null) {
+					players.get(playerIndex).makeMove(selectedTarget);
+					targets.remove(selectedTarget);
+				}
+				targets.clear();
+				//turn is over since its a computer otherwise u need to click
+				turnOver = true;
 			}
-			System.out.println();
-				
-				//how do I call this correctly
-				//players.get(playerIndex).makeMove(targets, g);
-			}
-			//playerIndex = (playerIndex+1) % NUM_PLAYERS;
-			System.out.println("player moved");
-			//update the gui to change to the next player
-			//highlight 
+			Board.getInstance().repaint();
 		}
+	}
+		
+	
+	
+	public static void changeLocation(MouseEvent e) {
+		if (players.get(playerIndex).getStatus() == Status.HUMAN) {
+		BoardCell selectedTarget = null;
+		for (BoardCell target : targets) {
+			if (target.containsClick(e.getX(), e.getY())){
+				selectedTarget = target;
+				break;
+			}
+		}
+		if (selectedTarget != null) {
+			players.get(playerIndex).makeMove(selectedTarget);
+			targets.clear();
+			turnOver = true;
+			}
+		}
+	}
+
 	
 	
 	/*clicking next player does the following:
