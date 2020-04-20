@@ -125,14 +125,17 @@ public class Board extends JPanel {
 			System.out.println("first turn");
 			//otherwise check if a human player's turn is complete and go to next player
 		}
+		//if everyting is good go ahead with next turn
 		else {
 			incrementPlayer();
 			paintName = players.get(playerIndex).getName();
 			rollDie();
-			//if you change targets paintComponent should paint them?
+			//getting local of players to calc the target
 			int row = players.get(playerIndex).getRow();
 			int col = players.get(playerIndex).getCol();
+			//calculating the targets
 			targets = calcTargets(row, col, Board.dieRoll);
+			//if it is a human player no need for clicking just move it
 			if (players.get(playerIndex).status == Status.COMPUTER) {
 				BoardCell selectedTarget = null;
 				for (BoardCell target : targets) {
@@ -146,26 +149,28 @@ public class Board extends JPanel {
 				//turn is over since its a computer otherwise u need to click
 				turnOver = true;
 			}
-			
+			//repaint
 			Board.getInstance().repaint();
 		}
 	}
-		
-	
 	
 	public static void changeLocation(MouseEvent e) {
+		//if it is a human listen for a mouse click
 		if (players.get(playerIndex).getStatus() == Status.HUMAN) {
-			BoardCell selectedTarget = null;
+			BoardCell selectTarget = null;
+			//look through the targets
 			for (BoardCell target : targets) {
+				//see if it is a click
 				if (target.isClick(e.getX(), e.getY())){
-					selectedTarget = target;
+					selectTarget = target;
 					//turnOver = true;
-					targets.clear();
 					break;
 				}
 			}
-			if (selectedTarget != null) {
-				players.get(playerIndex).makeMove(selectedTarget);
+			//if the target is not null update the local of the player
+			if (selectTarget != null) {
+				players.get(playerIndex).makeMove(selectTarget);
+				targets.clear();
 			}
 		}
 	}
