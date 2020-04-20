@@ -69,11 +69,13 @@ GUIControl() {
 	private class NextPlayerClicked implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e){
-			{
+			{	
+				//Board.turnOver = false;
 				Board.handleNextPlayer();
 				//if (Board.turnOver == true) {
 					turn.setText(Board.paintName);
 					roll.setText(String.valueOf(Board.dieRoll));
+					
 				//}
 			}
 		}

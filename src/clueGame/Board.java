@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.awt.BorderLayout;
 import java.awt.Graphics;
 
 import java.awt.GridLayout;
@@ -115,7 +116,7 @@ public class Board extends JPanel {
 	
 	public static void handleNextPlayer() {
 		//turn is not over 
-		turnOver = false;
+		
 		Graphics g;
 		gameBegun = true;
 		if(!gameBegun) {
@@ -136,7 +137,7 @@ public class Board extends JPanel {
 				BoardCell selectedTarget = null;
 				for (BoardCell target : targets) {
 						selectedTarget = target;
-					}
+				}
 				if (selectedTarget != null) {
 					players.get(playerIndex).makeMove(selectedTarget);
 					targets.remove(selectedTarget);
@@ -145,6 +146,7 @@ public class Board extends JPanel {
 				//turn is over since its a computer otherwise u need to click
 				turnOver = true;
 			}
+			
 			Board.getInstance().repaint();
 		}
 	}
@@ -153,17 +155,17 @@ public class Board extends JPanel {
 	
 	public static void changeLocation(MouseEvent e) {
 		if (players.get(playerIndex).getStatus() == Status.HUMAN) {
-		BoardCell selectedTarget = null;
-		for (BoardCell target : targets) {
-			if (target.containsClick(e.getX(), e.getY())){
-				selectedTarget = target;
-				break;
+			BoardCell selectedTarget = null;
+			for (BoardCell target : targets) {
+				if (target.isClick(e.getX(), e.getY())){
+					selectedTarget = target;
+					//turnOver = true;
+					targets.clear();
+					break;
+				}
 			}
-		}
-		if (selectedTarget != null) {
-			players.get(playerIndex).makeMove(selectedTarget);
-			targets.clear();
-			turnOver = true;
+			if (selectedTarget != null) {
+				players.get(playerIndex).makeMove(selectedTarget);
 			}
 		}
 	}
