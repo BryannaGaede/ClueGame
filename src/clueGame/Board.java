@@ -1,12 +1,7 @@
 package clueGame;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Graphics;
 
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 
@@ -21,7 +16,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import clueGame.BoardCell;
@@ -135,6 +129,10 @@ public class Board extends JPanel {
 				targets.remove(selectedTarget);
 			}
 			targets.clear();
+			//if the target was a room, computer make a suggestion
+			players.get(playerIndex).createSuggestion();
+			//handle the suggestion
+			handleSuggestion(players.get(playerIndex).getRecentSuggestion(),players.get(playerIndex));
 			//turn is over since its a computer otherwise u need to click
 		}
 		else {
@@ -169,35 +167,6 @@ public static boolean changeLocation(MouseEvent e) {
 	return true;
 }
 
-
-
-/*clicking next player does the following:
- * checks if human player turn is done
- * rolls dice
- * starts next player turn
- */
-
-/*starting next player turn does the following:
- * roll die
- * calc targets
- * check status
- */
-
-
-
-/*status is computer
- * accuse?
- * make move
- * suggest
- * disprove
- * 
- * status is human
- * prompt if accusation is wanted
- * show targets
- * take input for target
- * suggest
- * disprove
- */
 
 //we have five players this was made to loops through the players
 public static void incrementPlayer() {

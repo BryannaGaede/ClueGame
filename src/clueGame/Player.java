@@ -22,6 +22,7 @@ public class Player {
 	protected char lastVisitedRoom = ' ';
 	private Solution recentSuggestion = new Solution("","","");
 	private ArrayList<Card> allCards = Board.getCards();
+
 	
 	public Player(String name, int row2, int col, String color) {
 		this.playerName = name;
@@ -276,6 +277,10 @@ public class Player {
 	public boolean getRoomStatus() {
 		
 		return false;
+	}
+
+	public Solution getRecentSuggestion() {
+		return recentSuggestion;
 	}
 
 	

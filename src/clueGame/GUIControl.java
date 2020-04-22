@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.BorderFactory;
@@ -81,7 +82,11 @@ GUIControl() {
 	private class AccusationRequested implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e){
-			{
+			{	
+
+				AccusationHandler accusation = new AccusationHandler();
+				accusation.setVisible(true);
+				JOptionPane.showMessageDialog(accusation, "Make an Auggestion");
 				Board.handleAccusationRequestFromHumanPlayer();
 				repaint();
 			}
