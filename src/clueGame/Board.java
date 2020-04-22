@@ -122,10 +122,9 @@ public class Board extends JPanel {
 		if(!gameBegun) {
 			rollDie();
 			gameBegun = true;
-			System.out.println("first turn");
 			//otherwise check if a human player's turn is complete and go to next player
 		}
-		//if everyting is good go ahead with next turn
+		//if everything is good go ahead with next turn
 		if (turnOver == true) {
 			incrementPlayer();
 			paintName = players.get(playerIndex).getName();
@@ -169,9 +168,9 @@ public class Board extends JPanel {
 				//see if it is a click
 				if (x == target.getColumn() && y == target.getRow()){
 					selectTarget = target;
-					//turnOver = true;
 				}
 			}
+			
 			//if the target is not null update the local of the player
 			if (selectTarget != null) {
 				players.get(playerIndex).makeMove(selectTarget);
@@ -215,6 +214,8 @@ public class Board extends JPanel {
 	 * disprove
 	 */
 	
+	
+
 	//we have five players this was made to loops through the players
 	public static void incrementPlayer() {
 		if(playerIndex < 5) {
@@ -238,7 +239,6 @@ public class Board extends JPanel {
 	public void paintComponent(Graphics cell) {
 		super.paintComponent(cell);
 		//here we will highlight the targets
-		
 		
 		//each board cell prints it out
 		for(int row = 0; row < numRows; row ++) {
