@@ -75,6 +75,8 @@ GUIControl() {
 				Board.handleNextPlayer();
 					turn.setText(Board.paintName);
 					roll.setText(String.valueOf(Board.dieRoll));
+					guessResult.setText(Board.guessResult);
+					guess.setText(Board.guess);
 			}
 		}
 	}

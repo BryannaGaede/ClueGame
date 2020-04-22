@@ -50,7 +50,7 @@ public class Board extends JPanel {
 	//new
 	private static Solution theAnswer;
 	private Card disproveCard;
-	private String answer; 
+	private static String answer; 
 
 	//variables to mark player turns
 	private static int playerIndex = 0;
@@ -58,6 +58,8 @@ public class Board extends JPanel {
 	static int dieRoll;
 	static String paintName = " ";
 	static boolean turnOver = true;
+	public static String guessResult = " ";
+	public static String guess = " ";
 
 	// variable used for singleton pattern
 	private static Board theInstance = new Board();
@@ -121,13 +123,16 @@ public class Board extends JPanel {
 		//if it is a human player no need for clicking just move it
 		if (players.get(playerIndex).status == Status.COMPUTER) {
 			BoardCell selectedTarget = null;
-			for (BoardCell target : targets) {
-				selectedTarget = target;
-			}
-			if (selectedTarget != null) {
-				players.get(playerIndex).makeMove(selectedTarget);
-				targets.remove(selectedTarget);
-			}
+			
+			//for (BoardCell target : targets) {
+			//	selectedTarget = target;
+			//}
+			//if (selectedTarget != null) {
+				//players.get(playerIndex).makeMove(selectedTarget);
+				//targets.remove(selectedTarget);
+			//}
+			//setLocation makes smart decsions for computer player
+			players.get(playerIndex).setLocation(targets);
 			targets.clear();
 			//if the target was a room, computer make a suggestion
 			players.get(playerIndex).createSuggestion();
@@ -147,7 +152,7 @@ public static boolean changeLocation(MouseEvent e) {
 	if (players.get(playerIndex).getStatus() == Status.HUMAN) {
 		BoardCell selectTarget = null;
 		int x = e.getX()/20;
-		int y = (e.getY()/20) - 3;
+		int y = (e.getY()/20) - 2;
 		//look through the targets
 		for (BoardCell target : targets) {
 			if (x == target.getColumn() && y == target.getRow()){
@@ -215,9 +220,6 @@ public void paintComponent(Graphics cell) {
 	for (BoardCell z : targets) {
 		z.draw(cell, true);
 	}
-	//adding the targets of the current player
-	//System.out.println(players.get(playerIndex).getRow() + " " + players.get(playerIndex).getCol());
-	//targets.addAll(calcTargets(players.get(playerIndex).getRow(), players.get(playerIndex).getCol(), 0));
 }
 
 /*
@@ -287,13 +289,15 @@ public void selectAnswer() {
 public static Card handleSuggestion(Solution playerSuggestion, Player currentPlayer) {
 	for(Player player : players) {
 		if(player.disproveSuggestion(playerSuggestion)!=null && player != currentPlayer) {
+			guessResult = (player.disproveSuggestion(playerSuggestion).getName());
+			guess = playerSuggestion.getPerson();
 			return player.disproveSuggestion(playerSuggestion);
 		}
 	}
 	return null;
 }
 
-public boolean checkAccusation(Solution accusation) {
+public static boolean checkAccusation(Solution accusation) {
 	String accusationStr = accusation.person + accusation.room + accusation.weapon;
 	if (answer.contentEquals(accusationStr)) {
 		return true;
