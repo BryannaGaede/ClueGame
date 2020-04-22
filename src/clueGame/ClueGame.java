@@ -97,6 +97,16 @@ public class ClueGame extends JFrame{
 			boolean window = Board.changeLocation(e);
 			if (window == false) {
 				JOptionPane.showMessageDialog(board, "Wrong", "Invalid Click!", JOptionPane.INFORMATION_MESSAGE);
+			} else {
+				if(Board.playerInRoom()) {
+					//have player make suggestion from that room
+					SuggestionGetter suggestion = new SuggestionGetter();
+					suggestion.setVisible(true);
+					JOptionPane.showMessageDialog(suggestion, "Make a Suggestion");
+				} else {
+					//player doesn't need to suggest
+					Board.turnOver = true;
+				}
 			}
 			repaint();
 		}

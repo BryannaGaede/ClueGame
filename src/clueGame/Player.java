@@ -273,6 +273,11 @@ public class Player {
 		return column;
 	}
 
+	public boolean getRoomStatus() {
+		
+		return false;
+	}
+
 	
 
 
