@@ -72,11 +72,10 @@ GUIControl() {
 			{	
 				//Board.turnOver = false;
 				Board.handleNextPlayer();
-				//if (Board.turnOver == true) {
+				if (Board.turnOver == true) {
 					turn.setText(Board.paintName);
 					roll.setText(String.valueOf(Board.dieRoll));
-					
-				//}
+				}
 			}
 		}
 	}
@@ -98,6 +97,7 @@ GUIControl() {
 	public JButton getAccuse() {
 		return accuse;
 	}
+	
 	public JTextField getTurn() {
 		return turn;
 	}

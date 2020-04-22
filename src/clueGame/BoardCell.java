@@ -153,14 +153,6 @@ public class BoardCell {
 		}
 	}
 	
-	public boolean isClick(int x, int y) {
-		if ((y/cellSize <= row + 3) && (y/cellSize>= row - 3) && (x/cellSize <= column + 3) && (x/cellSize  >= column - 3) )
-			return true;
-		
-		else 
-			return false;
-    }
-	
 	public void printName(Graphics cell) {
 		cell.setFont(new Font("Arial", Font.BOLD, 12));
 		cell.setColor(Color.black);

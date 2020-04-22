@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import clueGame.BoardCell;
@@ -61,8 +62,7 @@ public class Board extends JPanel {
 	private static boolean gameBegun = false;
 	static int dieRoll;
 	static String paintName = " ";
-	static boolean turnOver = false;
-
+	static boolean turnOver = true;
 
 	// variable used for singleton pattern
 	private static Board theInstance = new Board();
@@ -118,7 +118,7 @@ public class Board extends JPanel {
 		//turn is not over 
 		
 		Graphics g;
-		gameBegun = true;
+		
 		if(!gameBegun) {
 			rollDie();
 			gameBegun = true;
@@ -126,7 +126,7 @@ public class Board extends JPanel {
 			//otherwise check if a human player's turn is complete and go to next player
 		}
 		//if everyting is good go ahead with next turn
-		else {
+		if (turnOver == true) {
 			incrementPlayer();
 			paintName = players.get(playerIndex).getName();
 			rollDie();
@@ -149,22 +149,27 @@ public class Board extends JPanel {
 				//turn is over since its a computer otherwise u need to click
 				turnOver = true;
 			}
+			else {
+				turnOver = false;
+			}
 			//repaint
 			Board.getInstance().repaint();
 		}
 	}
 	
-	public static void changeLocation(MouseEvent e) {
+	public static boolean changeLocation(MouseEvent e) {
+		turnOver = false;
 		//if it is a human listen for a mouse click
 		if (players.get(playerIndex).getStatus() == Status.HUMAN) {
 			BoardCell selectTarget = null;
+			int x = e.getX()/20;
+			int y = (e.getY()/20) - 2;
 			//look through the targets
 			for (BoardCell target : targets) {
 				//see if it is a click
-				if (target.isClick(e.getX(), e.getY())){
+				if (x == target.getColumn() && y == target.getRow()){
 					selectTarget = target;
 					//turnOver = true;
-					break;
 				}
 			}
 			//if the target is not null update the local of the player
@@ -172,7 +177,12 @@ public class Board extends JPanel {
 				players.get(playerIndex).makeMove(selectTarget);
 				targets.clear();
 			}
+			else if (selectTarget == null) {
+				return false;
+			}
 		}
+		turnOver = true;
+		return true;
 	}
 
 	
@@ -399,7 +409,6 @@ public class Board extends JPanel {
 
 	public static HashSet<BoardCell> findAllTargets(BoardCell startCell, int stepsRemaining, BoardCell startingSquare) {
 		// go through every adj cell
-		System.out.println(startCell.getRow() + " " + startCell.getColumn());
 		for (BoardCell testCell : getAdjList(startCell.getRow(), startCell.getColumn())) {
 			if (testCell.getRow() == startingSquare.getRow() && testCell.getColumn() == startingSquare.getColumn()) {
 				visited.add(startingSquare);

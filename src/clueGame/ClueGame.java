@@ -85,9 +85,8 @@ public class ClueGame extends JFrame{
 		ClueGame frame = new ClueGame();
 		frame.setTitle("Clue Game");
 		frame.setVisible(true);
-		if(players.get(playerIndex).getStatus() == Status.HUMAN) {
-			JOptionPane.showMessageDialog(board, "You are the "+ players.get(playerIndex).getName() +" . Press Next Player to begin play", "Welcome to Clue!", JOptionPane.INFORMATION_MESSAGE);
-		}
+		JOptionPane.showMessageDialog(board, "You are the "+ players.get(1).getName() +" . Press Next Player to begin play", "Welcome to Clue!", JOptionPane.INFORMATION_MESSAGE);
+		
 	}
 	
 	private class ChangeLocation implements MouseListener {
@@ -95,8 +94,17 @@ public class ClueGame extends JFrame{
 		@Override
 		public void mousePressed(MouseEvent e) {
 			// TODO Auto-generated method stub
-			Board.changeLocation(e);
+			boolean window = Board.changeLocation(e);
+			if (window == false) {
+				JOptionPane.showMessageDialog(board, "Wrong", "Invalid Click!", JOptionPane.INFORMATION_MESSAGE);
+			}
 			repaint();
+		}
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
 		}
 
 		@Override
@@ -116,12 +124,5 @@ public class ClueGame extends JFrame{
 			// TODO Auto-generated method stub
 			
 		}
-
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
 	}
-	
 }
