@@ -110,113 +110,6 @@ public class Board extends JPanel {
 	 */
 
 	public static void handleNextPlayer() {
-<<<<<<< HEAD
-		//turn is not over 
-		
-		Graphics g;
-		
-		if(!gameBegun) {
-			rollDie();
-			gameBegun = true;
-			//otherwise check if a human player's turn is complete and go to next player
-		}
-		//if everything is good go ahead with next turn
-		if (turnOver == true) {
-			incrementPlayer();
-			paintName = players.get(playerIndex).getName();
-			rollDie();
-			//getting local of players to calc the target
-			int row = players.get(playerIndex).getRow();
-			int col = players.get(playerIndex).getCol();
-			//calculating the targets
-			targets = calcTargets(row, col, Board.dieRoll);
-			//if it is a human player no need for clicking just move it
-			if (players.get(playerIndex).status == Status.COMPUTER) {
-				BoardCell selectedTarget = null;
-				for (BoardCell target : targets) {
-						selectedTarget = target;
-				}
-				if (selectedTarget != null) {
-					players.get(playerIndex).makeMove(selectedTarget);
-					targets.remove(selectedTarget);
-				}
-				targets.clear();
-				//turn is over since its a computer otherwise u need to click
-				turnOver = true;
-			}
-			else {
-				turnOver = false;
-			}
-			//repaint
-			Board.getInstance().repaint();
-		}
-	}
-	
-	public static boolean changeLocation(MouseEvent e) {
-		turnOver = false;
-		//if it is a human listen for a mouse click
-		if (players.get(playerIndex).getStatus() == Status.HUMAN) {
-			BoardCell selectTarget = null;
-			int x = e.getX()/20;
-			int y = (e.getY()/20) - 2;
-			//look through the targets
-			for (BoardCell target : targets) {
-				//see if it is a click
-				if (x == target.getColumn() && y == target.getRow()){
-					selectTarget = target;
-				}
-			}
-			
-			//if the target is not null update the local of the player
-			if (selectTarget != null) {
-				players.get(playerIndex).makeMove(selectTarget);
-				targets.clear();
-			}
-			else if (selectTarget == null) {
-				return false;
-			}
-		}
-		turnOver = true;
-		return true;
-	}
-
-	
-	
-	/*clicking next player does the following:
-	 * checks if human player turn is done
-	 * rolls dice
-	 * starts next player turn
-	 */
-	
-	/*starting next player turn does the following:
-	 * roll die
-	 * calc targets
-	 * check status
-	 */
-	
-	
-	
-	/*status is computer
-	 * accuse?
-	 * make move
-	 * suggest
-	 * disprove
-	 * 
-	 * status is human
-	 * prompt if accusation is wanted
-	 * show targets
-	 * take input for target
-	 * suggest
-	 * disprove
-	 */
-	
-	
-
-	//we have five players this was made to loops through the players
-	public static void incrementPlayer() {
-		if(playerIndex < 5) {
-			playerIndex+=1;
-=======
 		incrementPlayer();
 		paintName = players.get(playerIndex).getName();
 		rollDie();
@@ -241,7 +134,6 @@ public class Board extends JPanel {
 			//handle the suggestion
 			handleSuggestion(players.get(playerIndex).getRecentSuggestion(),players.get(playerIndex));
 			//turn is over since its a computer otherwise u need to click
->>>>>>> ae4248b52e9f3fd4451f39e74f69b16342b24a8b
 		}
 		else {
 			//player is human, handled in gui
@@ -250,25 +142,6 @@ public class Board extends JPanel {
 		Board.getInstance().repaint();
 }
 
-<<<<<<< HEAD
-	@Override
-	public void paintComponent(Graphics cell) {
-		super.paintComponent(cell);
-		//here we will highlight the targets
-		
-		//each board cell prints it out
-		for(int row = 0; row < numRows; row ++) {
-			for(int col = 0; col < numColumns; col ++) {
-				board[row][col].draw(cell, false);
-			}
-		}
-		//paint names of rooms on top of colored room cells
-		for(int row = 0; row < numRows; row ++) {
-			for(int col = 0; col < numColumns; col ++) {
-				if(board[row][col].doPrint()) {
-					board[row][col].printName(cell);
-				}
-=======
 public static boolean changeLocation(MouseEvent e) {
 	//if it is a human listen for a mouse click
 	if (players.get(playerIndex).getStatus() == Status.HUMAN) {
@@ -279,7 +152,6 @@ public static boolean changeLocation(MouseEvent e) {
 		for (BoardCell target : targets) {
 			if (x == target.getColumn() && y == target.getRow()){
 				selectTarget = target;
->>>>>>> ae4248b52e9f3fd4451f39e74f69b16342b24a8b
 			}
 		}
 		//if the target is not null update the local of the player
