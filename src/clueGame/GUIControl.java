@@ -83,17 +83,18 @@ GUIControl() {
 	
 	private class AccusationRequested implements ActionListener
 	{
-		public void actionPerformed(ActionEvent e){
-			{	
-
-				AccusationHandler accusation = new AccusationHandler();
-				accusation.setVisible(true);
-				JOptionPane.showMessageDialog(accusation, "Make an Auggestion");
-				Board.handleAccusationRequestFromHumanPlayer();
+		public void actionPerformed(ActionEvent e){	
+				if(Board.getPlayers().get(Board.getPlayerIndex()).getStatus() == Status.HUMAN) {
+					AccusationHandler accusation = new AccusationHandler();
+					accusation.setVisible(true);
+					JOptionPane.showMessageDialog(accusation, "Make an Auggestion");
+					Board.handleAccusationRequestFromHumanPlayer();
+				} else {
+					JOptionPane.showMessageDialog(Board.getInstance(), "WAIT YOUR TURN!");
+				}
 				repaint();
 			}
-		}
-	}	
+		}	
 	
 	public JButton getNext() {
 		return next;
