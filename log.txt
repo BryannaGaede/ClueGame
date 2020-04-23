@@ -1,3 +1,112 @@
+commit f5669f7f784aec2521185a337917563935f573d7
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Wed Apr 22 18:34:22 2020 -0600
+
+    pop up for accusation off turn
+
+commit 5d93724019983ce1a99ba7a02492cb90e593a09b
+Author: Luke Valentine <lukevalentine@Lukes-MacBook-Pro-3.local>
+Date:   Wed Apr 22 16:46:39 2020 -0600
+
+    need to fix theAnswer
+
+commit eaa8acb74498690ce236a9e71546add4362fb702
+Author: Luke Valentine <lukevalentine@Lukes-MacBook-Pro-3.local>
+Date:   Wed Apr 22 13:25:33 2020 -0600
+
+    should be able to pull now
+
+commit d3c657842839b5a8b443e4275d1a1e3629572fdf
+Merge: 4c01fa9 ae4248b
+Author: Luke Valentine <lukevalentine@Lukes-MacBook-Pro-3.local>
+Date:   Wed Apr 22 13:22:01 2020 -0600
+
+    fixing conflict
+
+commit 4c01fa9bc8b1ac2eb5e7a8b5dc595cdbbf11173d
+Author: Luke Valentine <lukevalentine@Lukes-MacBook-Pro-3.local>
+Date:   Wed Apr 22 13:20:47 2020 -0600
+
+    minor changes
+
+commit ae4248b52e9f3fd4451f39e74f69b16342b24a8b
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Wed Apr 22 13:19:06 2020 -0600
+
+    pop ups for accusations and suggestions
+
+commit 229d4377013f96b053f798a3ba65ccaaecf9af7a
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Wed Apr 22 12:39:35 2020 -0600
+
+    Window pops up to take suggestion
+
+commit e63cccac8021fbf83403fd69d3ae5f1b85506b60
+Author: Luke Valentine <lukevalentine@Lukes-MacBook-Pro-3.local>
+Date:   Tue Apr 21 20:42:46 2020 -0600
+
+    working player movement
+
+commit 0a5b01efd0e310f75e224321cf9cb1a2fbeeae68
+Author: Luke Valentine <lukevalentine@Lukes-MacBook-Pro-3.local>
+Date:   Mon Apr 20 10:21:00 2020 -0600
+
+    submitted version
+
+commit 72e59e04ffacce3b24226f64359332ad49547e0b
+Author: Luke Valentine <lukevalentine@Lukes-MacBook-Pro-3.local>
+Date:   Sun Apr 19 23:04:53 2020 -0600
+
+    minor changes
+
+commit 45d83dad3f03ea62b82b56d0adfe8e50ffdc354f
+Author: Luke Valentine <lukevalentine@Lukes-MacBook-Pro-3.local>
+Date:   Sun Apr 19 20:38:04 2020 -0600
+
+    need to fix selecting targets
+
+commit 85eb58a43d50d8ca19e6c996484e9be3c0b96802
+Author: Luke Valentine <lukevalentine@Lukes-MacBook-Pro-3.local>
+Date:   Sun Apr 19 16:58:25 2020 -0600
+
+    trying to get the board to print
+
+commit 1e8b63d4d090b944053c04e7cfbb402255862579
+Author: Luke Valentine <lukevalentine@Lukes-MacBook-Pro-3.local>
+Date:   Fri Apr 17 16:05:45 2020 -0600
+
+    trying to get player tiles highlighted
+
+commit 6981b34f61079c1f6f3a935c57062210b0185e6c
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Tue Apr 14 15:45:14 2020 -0600
+
+    made array list of player in cluegame file
+
+commit 1d48edbf65ae9415ec5516d322b14960c0029448
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Tue Apr 14 14:32:50 2020 -0600
+
+    die rolls for initial turn, player index changes otherwise when next player button is pressed
+
+commit c42a687bcef46b83702ccf7fb2e0b38866cef882
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Tue Apr 14 14:11:04 2020 -0600
+
+    buttons can be clicked with call functtion in board.java that don't have any functionality yet
+
+commit 22cec878f0eb9acbded4d5857cfae1b2f02d6071
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Mon Apr 13 23:14:20 2020 -0600
+
+    submitted CA22
+
+commit 74e9628ffb99b211db2744b6ddb2572cede1aea0
+Author: BryannaGaede <bpriddy@mymail.mines.edu>
+Date:   Mon Apr 13 22:54:33 2020 -0600
+
+    cleaned up
+
 commit a724ac3de6faf7451a361834cfc6355987e2bd1b
 Author: BryannaGaede <bpriddy@mymail.mines.edu>
 Date:   Mon Apr 13 21:36:37 2020 -0600

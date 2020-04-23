@@ -1,4 +1,5 @@
 package clueGame;
+import java.awt.Dialog;
 import java.awt.Dimension;
 
 import java.awt.Font;
@@ -71,7 +72,9 @@ GUIControl() {
 	{
 		public void actionPerformed(ActionEvent e){
 			{	
-				//Board.turnOver = false;
+				Solution suggestion = Board.getSuggestion();
+				String printGuess = suggestion.person +","+","+ suggestion.weapon + suggestion.weapon;
+				boolean disproved = Board.disproved();
 				Board.handleNextPlayer();
 					turn.setText(Board.paintName);
 					roll.setText(String.valueOf(Board.dieRoll));
@@ -92,6 +95,7 @@ GUIControl() {
 				} else {
 					JOptionPane.showMessageDialog(Board.getInstance(), "WAIT YOUR TURN!");
 				}
+				setVisible(false);
 				repaint();
 			}
 		}	

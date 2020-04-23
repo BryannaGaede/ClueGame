@@ -769,6 +769,18 @@ public static String getPlayerRoom() {
 			
 }
 
+public static Solution getSuggestion() {
+		return players.get(playerIndex).getRecentSuggestion();
+}
+
+public static boolean disproved() {
+	if(handleSuggestion(players.get(playerIndex).getRecentSuggestion(),players.get(playerIndex)) == null) {
+		return false;
+	} else {
+	return false;
+	}
+}
+
 
 
 
